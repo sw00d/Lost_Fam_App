@@ -23,6 +23,10 @@
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
-    "react-native-double-click": "^1.0.3"
+    "react-native-double-click": "^1.0.3",
+    "react-navigation": "^1.2.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }

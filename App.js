@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
-import CameraDiv from './components/camera.js'
+import Thunk from 'redux-thunk';
+import Camera from './src/components/camera.js';
 
-export default class App extends React.Component {
+const createStoreWithMiddleware = applyMiddleware(Thunk)(createStore)(reducers);
+
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        < CameraDiv />
-      </View>
+      <Provider store={ createStoreWithMiddleware }>
+        <View style={styles.container}>
+          <Camera />
+        </View>
+      </Provider>
     );
   }
 }
