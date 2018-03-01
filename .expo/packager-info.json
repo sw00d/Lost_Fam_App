@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 9127,
-  "expoServerNgrokUrl": "https://j2-w8v.samuelote.lostfam.exp.direct",
-  "packagerNgrokUrl": "https://packager.j2-w8v.samuelote.lostfam.exp.direct",
-  "ngrokPid": 9192
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
