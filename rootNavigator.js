@@ -1,0 +1,29 @@
+import { StackNavigator } from "react-navigation";
+import Camera from './src/components/camera/cameraView';
+import Login from './src/components/login/index';
+
+export const InnerStack = StackNavigator({
+  camera: {
+    screen: Camera,
+    navigationOptions: {}
+  }
+});
+
+const rootNavigator = StackNavigator({
+  login: {
+    screen: Login,
+  },
+  mainScreens: {
+    screen: InnerStack,
+    navigationOptions: {
+      gesturesEnabled: false,
+      headerLeft: null
+    }
+  }
+},
+{
+  initialRouteName: 'login',
+  headerMode: 'none'
+});
+
+export default rootNavigator;
