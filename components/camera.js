@@ -49,21 +49,24 @@ export default class CameraExample extends React.Component {
     }
   };
 
-  reset = async () => {
+  reset() {
     this.setState({bool: false});
-
   }
 
-  typeConfig = async () => {
+  typeConfig(e) {
+    if (e.target === 28){
+      if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
+      else {this.setState({type: Camera.Constants.Type.back})}
+    }
     if (this.state.dblClick){
       if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
       else {this.setState({type: Camera.Constants.Type.back})}
     }
     else {
       this.setState({dblClick: true});
-
     }
-    setTimeout(() => this.setState({dblClick: false}), 400);
+    //detect touble tap below
+    if (e.target === 16) setTimeout(() => this.setState({dblClick: false}), 400);
   }
   render() {
     const { hasCameraPermission } = this.state;
@@ -73,13 +76,14 @@ export default class CameraExample extends React.Component {
 
     if (hasCameraPermission === null) {
       return <View />;
-    } else if (hasCameraPermission === false) {
+    }
+    else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     }
     else if (hasCameraPermission === true && this.state.bool){
       return (
         <View>
-          <TouchableOpacity onPress={this.reset} underlayColor="white">
+          <TouchableOpacity onPress={this.reset.bind(this)} underlayColor="white">
             <Image
               style={{width: width, height: height}}
               source={{uri: this.state.photo}}
@@ -91,20 +95,20 @@ export default class CameraExample extends React.Component {
     else if (hasCameraPermission === true){
       return (
         <View>
-          <TouchableHighlight onPress={this.typeConfig} activeOpacity={1}>
-            <Camera onPress={this.typeConfig} style={{ width: width, height: height }} type= { type } ref={(camera) => { this.camera = camera; }}>
+          <TouchableHighlight onPress={this.typeConfig.bind(this)} activeOpacity={1}>
+            <Camera style={{ width: width, height: height }} type= { type } ref={(camera) => { this.camera = camera; }}>
               <View style={styles.topBanner}>
-                <TouchableOpacity onPress={this.typeConfig} style={styles.settingsIcon} underlayColor='white'>
-                  <Ionicons name="md-return-left" size={32} color="white" />
+                <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
+                  <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.arrowDown} underlayColor='white'>
+                <TouchableOpacity underlayColor='white'>
                   <Text style={styles.text} >Feb 2018 &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.settingsIcon} underlayColor='white'>
+                <TouchableOpacity style={styles.icon} underlayColor='white'>
                   <Ionicons name="ios-settings" size={32} color="white" />
                 </TouchableOpacity>
 
@@ -133,13 +137,8 @@ const miniCircleDiam = height/13
 
 
 const styles = StyleSheet.create({
-  settingsIcon: {
-    // position: 'absolute',
-    // justifyContent: 'flex-start'
-  },
-  arrowDown: {
-    // position: 'absolute',
-    // alignSelf: 'center'
+  icon: {
+    paddingTop: height/50
   },
   topBanner: {
     height: topBannerHeight,
