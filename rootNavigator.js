@@ -7,6 +7,10 @@ export const InnerStack = StackNavigator({
     screen: Camera,
     navigationOptions: {}
   }
+},
+{
+  initialRouteName: 'camera',
+  headerMode: 'none'
 });
 
 const rootNavigator = StackNavigator({

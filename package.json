@@ -28,6 +28,9 @@
     "react-navigation": "^1.2.1",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "react-native-expo-image-cache": "^1.1.0",
+    "react-native-fs-cache-manager": "^1.1.0",
+    "react-native-library": "^1.0.25"
   }
 }
