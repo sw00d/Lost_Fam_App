@@ -14,23 +14,18 @@ export default class LoginView extends Component {
   login() {
     // this.props.authenticate();
     //if this state is authenticated
-    this.props.flipASwitch();
     this.props.navigation.navigate('mainScreens');
   }
 
   render() {
     return(
       <View style={styles.container}>
-        <Text
-          style={styles.loginBtnText}
-        >BRIEF DESCRIPTION {this.props.test}</Text>
+        <Text style={styles.loginBtnText}>BRIEF DESCRIPTION</Text>
         <TouchableOpacity
           style={styles.signUpBtn}
           onPress={ () => this.navToRegister() }
         >
-          <Text
-            style={styles.signUpBtnText}
-          >SIGN UP</Text>
+          <Text style={styles.signUpBtnText}>SIGN UP</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={ () => this.login() }

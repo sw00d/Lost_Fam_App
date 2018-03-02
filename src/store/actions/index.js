@@ -1,7 +1,13 @@
-export const TEST_PERSIST = 'TEST_PERSIST';
+export const ADD_ALBUM = 'ADD_ALBUM';
 
-export const flipASwitch = () => {
+export const addAlbum = (name) => {
+  const newAlbum = {
+    picsTaken: 0,
+    capacity: 24,
+    name
+  }
   return {
-    TEST_PERSIST
+    ADD_ALBUM,
+    newAlbum
   }
 }

@@ -37,7 +37,7 @@ export default class CameraDiv extends React.Component {
     } catch (error) {
       Alert.alert('Error. Try Again');
     }
-  }gi
+  }
   _shoot = async () => {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
@@ -101,7 +101,7 @@ export default class CameraDiv extends React.Component {
                   <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
                 </TouchableOpacity>
 
-                <TouchableOpacity underlayColor='white'>
+                <TouchableOpacity onPress={ () => this.props.navigation.navigate('library') } underlayColor='white'>
                   <Text style={styles.text} >Feb 2018 &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>

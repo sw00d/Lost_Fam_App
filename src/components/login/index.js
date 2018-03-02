@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import LoginView from './loginView';
-import { flipASwitch } from '../../actions';
 
 const mapStateToProps = state => {
   const { test } = state;
@@ -9,8 +8,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    authenticate: () => alert('Autheincate'),
-    flipASwitch
+    authenticate: () => alert('Autheincate')
   }
 }
 
