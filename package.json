@@ -20,13 +20,18 @@
   },
   "dependencies": {
     "expo": "^25.0.0",
-    "i": "^0.3.6",
+    "prop-types": "^15.6.1",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
     "react-native-double-click": "^1.0.3",
     "react-native-expo-image-cache": "^1.1.0",
     "react-native-fs-cache-manager": "^1.1.0",
-    "react-native-library": "^1.0.25"
+    "react-native-library": "^1.0.25",
+    "react-navigation": "^1.2.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.9.1",
+    "redux-thunk": "^2.2.0"
   }
 }

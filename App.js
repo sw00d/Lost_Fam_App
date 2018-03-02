@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+// import { createStore, applyMiddleware } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
-import CameraDiv from './components/camera.js';
-import Library from './components/library/library.js';
+
+// import Thunk from 'redux-thunk';
+import RootNavigator from './rootNavigator'
+import { store, persistor } from './src/store';
+// const createStoreWithMiddleware = applyMiddleware(Thunk)(createStore)(reducers);
 
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
+    // TODO: need to add Loading view component
     return (
-      <View style={styles.container}>
-        < Library />
-      </View>
+      <Provider store={ store }>
+        <PersistGate loading={() => <Text>Loading!</Text>} persistor={persistor}>
+          <RootNavigator />
+        </PersistGate>
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
