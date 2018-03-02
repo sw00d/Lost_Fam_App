@@ -6,7 +6,7 @@ import {Ionicons} from '@expo/vector-icons';
 import {Entypo} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
 
-export default class CameraExample extends React.Component {
+export default class CameraDiv extends React.Component {
   state = {
     hasCameraPermission: true,
     type: Camera.Constants.Type.back,
@@ -133,8 +133,7 @@ const {height, width} = Dimensions.get('window');
 const bottomBannerHeight = height/8;
 const topBannerHeight = height/9;
 const circleDiam = height/10;
-const miniCircleDiam = height/13
-
+const miniCircleDiam = height/13;
 
 const styles = StyleSheet.create({
   icon: {
