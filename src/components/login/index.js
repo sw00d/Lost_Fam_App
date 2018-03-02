@@ -1,13 +1,16 @@
 import { connect } from 'react-redux';
 import LoginView from './loginView';
+import { flipASwitch } from '../../actions';
 
 const mapStateToProps = state => {
-  return { shit: 'shit'};
+  const { test } = state;
+  return { test };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    authenticate: () => alert('Autheincate')
+    authenticate: () => alert('Autheincate'),
+    flipASwitch
   }
 }
 
