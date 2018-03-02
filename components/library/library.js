@@ -8,29 +8,21 @@ import {Ionicons} from '@expo/vector-icons';
 export default class Library extends React.Component {
 
 
-  createAlbum() {
-    const newAlbum = React.createElement(
-        Text,
-        {styles.albText},
-        'AlbumName'
-      );
-      this.setState({albumName: newAlbum})
-      // <View style={styles.row}>
-      //   <Text style={styles.albText}>Album Name</Text>
-      //   <Text style={styles.albText}>0/10</Text>
-      // </View>
-  }
   render(){
     return(
       <View style={styles.container} >
           <View style={styles.topBanner}>
             <Text style={styles.title}>LIBRARY</Text>
-            <TouchableOpacity onPress={this.createAlbum.bind(this)} style={styles.icon} underlayColor='white'>
+            <TouchableOpacity style={styles.icon} underlayColor='white'>
               <Ionicons name="md-add" size={32} color="white" />
             </TouchableOpacity>
           </View>
 
-        <View style={styles.row}>{this.state.albumName}</View>
+        <View style={styles.row}>
+          <Text style={styles.albText}>Album Name</Text>
+          <Text style={styles.albText}>0/10</Text>
+        </View>
+
         <View style={styles.bottomBanner}>
         </View>
       </View>);

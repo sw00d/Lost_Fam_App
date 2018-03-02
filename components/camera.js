@@ -37,8 +37,7 @@ export default class CameraDiv extends React.Component {
     } catch (error) {
       Alert.alert('Error. Try Again');
     }
-  }
-
+  }gi
   _shoot = async () => {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
@@ -122,7 +121,6 @@ export default class CameraDiv extends React.Component {
                 </View>
             </Camera>
           </TouchableHighlight>
-
         </View>
       );
     }
