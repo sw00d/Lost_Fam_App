@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-// import { createStore, applyMiddleware } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
-
-// import Thunk from 'redux-thunk';
 import RootNavigator from './rootNavigator'
-import { store, persistor } from './src/store';
-// const createStoreWithMiddleware = applyMiddleware(Thunk)(createStore)(reducers);
+import { store, persistor } from './src/store/index';
 
 
 export default class App extends Component {
   render() {
     // TODO: need to add Loading view component
+    console.log(store)
     return (
       <Provider store={ store }>
-        <PersistGate persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor}>
           <RootNavigator />
         </PersistGate>
       </Provider>

@@ -1,12 +1,17 @@
-import { TEST_PERSIST } from '../actions';
+import { ADD_ALBUM, ACTIVE_ALBUM } from '../actions';
 
-export default (state = {}, action) => {
+export default (state = {
+  albums: []
+}, action) => {
   switch(action.type) {
-    case TEST_PERSIST:
-      const test = !state.test;
+    case ADD_ALBUM:
+      state.albums.push(action.newAlbum)
+      return { ...state }
+    case ACTIVE_ALBUM:
+      const activeAlbum = state.albums[action.idx];
       return {
         ...state,
-        test
+        activeAlbum
       }
     default:
       return state;

@@ -100,11 +100,15 @@ export default class CameraDiv extends React.Component {
       return (
         <View>
 
+<<<<<<< HEAD
         <View style={styles.topBanner}>
           <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
             <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
               </TouchableOpacity>
                 <TouchableOpacity underlayColor='white'>
+=======
+                <TouchableOpacity onPress={ () => this.props.navigation.navigate('library') } underlayColor='white'>
+>>>>>>> 872aac476d2f9627c816252875a5d985aedb25a4
                   <Text style={styles.text} >Feb 2018 &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>

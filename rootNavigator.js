@@ -1,11 +1,19 @@
 import { StackNavigator } from "react-navigation";
 import Camera from './src/components/camera/index';
 import Login from './src/components/login/index';
-import library from './src/components/library/libraryView';
+import Library from './src/components/library/index';
+import NewAlbum from '././src/components/newAlbum/index';
+
 export const InnerStack = StackNavigator({
   camera: {
     screen: Camera,
     navigationOptions: {}
+  },
+  library: {
+    screen: Library
+  },
+  newAlbum: {
+    screen: NewAlbum
   }
 },
 {

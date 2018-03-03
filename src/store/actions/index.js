@@ -1,11 +1,21 @@
-export const SEND_PHOTO = 'SEND_PHOTO';
-import { Camera } from 'expo';
-import {CacheManager} from "react-native-expo-image-cache";
+export const ADD_ALBUM = 'ADD_ALBUM';
+export const ACTIVE_ALBUM = 'ACTIVE_ALBUM';
 
-export function sendPhoto(cam) {
-  
+export const addAlbum = (name) => {
+  const newAlbum = {
+    picsTaken: 0,
+    capacity: 24,
+    name
+  }
   return {
-    type: SEND_PHOTO,
-    payload:
+    type: ADD_ALBUM,
+    newAlbum
+  }
+}
+
+export const activeAlbum = (idx) => {
+  return {
+    type: ACTIVE_ALBUM,
+    idx
   }
 }

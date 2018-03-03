@@ -20,16 +20,12 @@ export default class LoginView extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <Text
-          style={styles.loginBtnText}
-        >BRIEF DESCRIPTION {this.props.test}</Text>
+        <Text style={styles.loginBtnText}>BRIEF DESCRIPTION</Text>
         <TouchableOpacity
           style={styles.signUpBtn}
           onPress={ () => this.navToRegister() }
         >
-          <Text
-            style={styles.signUpBtnText}
-          >SIGN UP</Text>
+          <Text style={styles.signUpBtnText}>SIGN UP</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={ () => this.login() }
