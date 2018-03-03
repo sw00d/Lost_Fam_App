@@ -13,9 +13,10 @@ export default (state = {
         ...state,
         activeAlbum
       }
-    // case DELETE_ALBUM:
-    //   state.albums.shift()
-    //   return { ...state }
+    case DELETE_ALBUM:
+      state.albums.shift();
+      const albs = state.albums;
+      return { ...state, albs }
     default:
       return state;
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {Text, View, TouchableOpacity, Dimensions, StyleSheet} from 'react-native';
+import {Text, View, TouchableOpacity, Dimensions, StyleSheet, Button} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
+import Swipeout from 'react-native-swipeout';
+
 
 export default class LibraryView extends Component {
 
@@ -10,15 +12,25 @@ export default class LibraryView extends Component {
     navigate('camera');
     activeAlbum(idx);
   }
-  deleteAlbum() {
+  deleteSomeAlbum(e) {
+    console.log(e.value);
     this.props.deleteAlbum();
+    this.forceUpdate();
   }
 
   render() {
     const { navigation: { navigate }, albums } = this.props;
+    let swipeBtns = [
+      {
+        text: 'Delete',
+        backgroundColor: 'red',
+        underlayColor: 'transparent',
+        onPress: () => {this.deleteSomeAlbum(this)}
+      }
+    ]
     return(
       <View style={styles.container}>
-        <View style={styles.topBanner} onPress={this.deleteAlbum.bind(this)}>
+        <View style={styles.topBanner} >
           <Text style={styles.title}>LIBRARY</Text>
           <TouchableOpacity onPress={() => navigate('newAlbum')} style={styles.icon} underlayColor='white'>
             <Ionicons name="md-add" size={32} color="white"/>
@@ -29,10 +41,14 @@ export default class LibraryView extends Component {
           albums.map((album, i) => {
             const { picsTaken, capacity, name } = album;
             return(
-              <TouchableOpacity onPress={ () => this.updateActiveAlbum(i) } key={name} style={styles.row}>
-                <Text style={styles.albText}>{ name }</Text>
-                <Text style={styles.albText}>{ `${picsTaken} / ${capacity}` }</Text>
-              </TouchableOpacity>
+              <Swipeout value={'swipe'} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
+                <TouchableOpacity value={'swipe'} activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }  >
+                  <View>
+                    <Text style={styles.albText}>{ name }</Text>
+                    <Text style={styles.albText}>{ `${picsTaken} / ${capacity}` }</Text>
+                  </View>
+                </TouchableOpacity>
+              </Swipeout>
             )
           })
         }
@@ -42,3 +58,6 @@ export default class LibraryView extends Component {
     );
   }
 }
+
+
+// <Button title='Delete' testId={name}  />

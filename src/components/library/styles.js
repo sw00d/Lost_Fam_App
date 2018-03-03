@@ -5,6 +5,12 @@ const bottomBannerHeight = height/10;
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  swipeCont: {
+    width: width,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   icon: {
     paddingTop: height/50,
     paddingRight: width/15
