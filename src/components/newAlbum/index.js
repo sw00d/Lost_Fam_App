@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import NewAlbumView from './newAlbumView';
-import { addItem } from '../../store/actions';
+import { addAlbum } from '../../store/actions';
+
+const mapStateToProps = (state) => {
+  const { albums } = state;
+  return { albums }
+}
 
 const NewAlbum = connect(
-  null,
-  { addItem }
+  mapStateToProps,
+  { addAlbum }
 )(NewAlbumView);
 
 export default NewAlbum;

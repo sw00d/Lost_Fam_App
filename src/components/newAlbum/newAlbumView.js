@@ -8,17 +8,22 @@ export default class NewAlbumView extends Component {
     this.state = { text: '' }
   }
 
-  render() {
+  createAlbum(text) {
     const { addAlbum, navigation: { navigate } } = this.props;
+    addAlbum(text);
+    navigate('library')
+  }
+
+  render() {
     return(
-      <View>
+      <View style={styles.container}>
         <TextInput
           placeholder="Enter Roll Name."
           onChangeText={ (text) => this.setState({ text }) }
           value={ this.state.text }
         />
         <TouchableOpacity
-          onPress={ () => addAlbum(this.state.text) }
+          onPress={ () => this.createAlbum(this.state.text) }
         >
           <Text>Create New Album</Text>
         </TouchableOpacity>
