@@ -19,7 +19,7 @@ export default class LibraryView extends Component {
     navigate('camera');
     activeAlbum(idx);
   }
-  deleteSomeAlbum(evt) {
+  deleteAndUpdate(evt) {
     const selectedAlb = this.state.selectedAlb;
     this.props.deleteAlbum(selectedAlb);
     this.forceUpdate();
@@ -32,7 +32,7 @@ export default class LibraryView extends Component {
         text: 'Delete',
         backgroundColor: 'red',
         underlayColor: 'transparent',
-        onPress: () => {this.deleteSomeAlbum()}
+        onPress: (e) => this.deleteAndUpdate(e)
       }
     ]
     return(
@@ -49,7 +49,7 @@ export default class LibraryView extends Component {
             const { picsTaken, capacity, name } = album;
             return(
               <Swipeout onOpen={() => this.setState({selectedAlb: name})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-                <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>  
+                <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
                     <Text style={styles.albText}>{ name }</Text>
                     <Text style={styles.albText}>{ `${picsTaken} / ${capacity}` }</Text>
                 </TouchableOpacity>
@@ -57,12 +57,8 @@ export default class LibraryView extends Component {
             )
           })
         }
-
         <View style={styles.bottomBanner}></View>
       </View>
     );
   }
 }
-
-
-// <Button title='Delete' testId={name}  />

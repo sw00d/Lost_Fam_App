@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import styles from './styles';
+import Swipeout from 'react-native-swipeout';
 
 export default class NewAlbumView extends Component {
   constructor(props) {
@@ -20,7 +21,6 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum(text) {
-    console.log(this.checkDuplicate(text));
     if (this.checkDuplicate(text)) {
       const { addAlbum, navigation: { navigate } } = this.props;
       addAlbum(text);
@@ -29,8 +29,9 @@ export default class NewAlbumView extends Component {
   }
 
   render() {
+    const { navigation: { navigate } } = this.props;
     return(
-      <View style={styles.container}>
+      <Swipeout onOpen={() => navigate('library') } style={styles.container}>
         <TextInput
           placeholder="Enter Roll Name."
           onChangeText={ (text) => this.setState({ text }) }
@@ -41,7 +42,7 @@ export default class NewAlbumView extends Component {
         >
           <Text>Create New Album</Text>
         </TouchableOpacity>
-      </View>
+      </Swipeout>
     );
   }
 }
