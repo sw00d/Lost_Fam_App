@@ -9,6 +9,7 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum(text) {
+    if (text.length < 3) return;
     const { addAlbum, navigation: { navigate } } = this.props;
     addAlbum(text);
     navigate('library')

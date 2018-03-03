@@ -20,8 +20,8 @@ export default class CameraDiv extends React.Component {
     if (!activeAlbum) navigate('library');
 
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    // this.setState({ hasCameraPermission: status === 'granted' });
   }
+
   fetchPhoto = async () => {
     try {
       const value = await AsyncStorage.getItem('@foto:key');
@@ -36,9 +36,6 @@ export default class CameraDiv extends React.Component {
   cachePhoto = async (data) => {
     try {
         await AsyncStorage.setItem('@foto:key',data.uri);
-        // console.log('Success sending');
-        // setTimeout(this.fetchPhoto, 2000);
-
     } catch (error) {
       Alert.alert('Error. Try Again');
     }
@@ -56,6 +53,7 @@ export default class CameraDiv extends React.Component {
   reset() {
     this.setState({bool: false});
   }
+
   dblClick() {
      if (this.state.dblClick){
        if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
@@ -69,6 +67,7 @@ export default class CameraDiv extends React.Component {
        this.setState({dblClick: false})
      }, 400);
    }
+
   typeConfig() {
     if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
     else this.setState({type: Camera.Constants.Type.back});
