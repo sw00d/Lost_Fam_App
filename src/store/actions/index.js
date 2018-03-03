@@ -29,5 +29,7 @@ export const savePhoto = () => {
   }
 }
 export const deleteAlbum = (name) => {
-  type: DELETE_ALBUM
+  return {
+    type: DELETE_ALBUM
+  }
 }

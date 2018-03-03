@@ -21,6 +21,7 @@
   "dependencies": {
     "expo": "^25.0.0",
     "prop-types": "^15.6.1",
+    "rc-swipe": "^1.0.1",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
@@ -28,6 +29,7 @@
     "react-native-expo-image-cache": "^1.1.0",
     "react-native-fs-cache-manager": "^1.1.0",
     "react-native-library": "^1.0.25",
+    "react-native-swipeout": "^2.3.3",
     "react-navigation": "^1.2.1",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",

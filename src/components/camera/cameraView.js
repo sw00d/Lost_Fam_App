@@ -66,7 +66,6 @@ export default class CameraDiv extends React.Component {
      }
      //detect touble tap below
      setTimeout(() => {
-       console.log('double')
        this.setState({dblClick: false})
      }, 400);
    }
