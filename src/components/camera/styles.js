@@ -51,5 +51,13 @@ export default StyleSheet.create({
     width: miniCircleDiam,
     height: miniCircleDiam,
     borderRadius: 100
+  },
+  image: {
+    height: camHeight,
+    width
+  },
+  camera: {
+    height: camHeight,
+    width
   }
 })

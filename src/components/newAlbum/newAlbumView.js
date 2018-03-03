@@ -9,10 +9,10 @@ export default class NewAlbumView extends Component {
   }
 
   checkDuplicate(text) {
-    if (text.length > 3) return false;
-    const { albums } = this.props;
+    const { albums: { albums } } = this.props;
+    if (text.length < 3 || !albums) return false;
     var nonDup = true;
-    abums.forEach(album => {
+    albums.forEach(album => {
       if (album.name === text) nonDup = false;
     });
     return nonDup;

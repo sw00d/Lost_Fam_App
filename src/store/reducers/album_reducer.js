@@ -1,7 +1,8 @@
 import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM } from '../actions';
 
 export default (state = {
-  albums: []
+  albums: [],
+  activeAlbum: {}
 }, action) => {
   switch(action.type) {
     case ADD_ALBUM:
