@@ -6,15 +6,22 @@ import Swipeout from 'react-native-swipeout';
 
 
 export default class LibraryView extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedAlb: ''
+    }
+  }
+
   updateActiveAlbum(idx) {
     const { navigation: { navigate }, activeAlbum } = this.props;
     navigate('camera');
     activeAlbum(idx);
   }
-
-  deleteSomeAlbum(e) {
-    console.log(e.value);
-    this.props.deleteAlbum();
+  deleteSomeAlbum(evt) {
+    const selectedAlb = this.state.selectedAlb;
+    this.props.deleteAlbum(selectedAlb);
     this.forceUpdate();
   }
 
@@ -25,7 +32,7 @@ export default class LibraryView extends Component {
         text: 'Delete',
         backgroundColor: 'red',
         underlayColor: 'transparent',
-        onPress: () => {this.deleteSomeAlbum(this)}
+        onPress: () => {this.deleteSomeAlbum()}
       }
     ]
     return(
@@ -41,8 +48,8 @@ export default class LibraryView extends Component {
           albums.map((album, i) => {
             const { picsTaken, capacity, name } = album;
             return(
-              <Swipeout value={'swipe'} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-                <TouchableOpacity value={'swipe'} activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }  >
+              <Swipeout onOpen={() => this.setState({selectedAlb: name})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
+                <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }  >
                   <View>
                     <Text style={styles.albText}>{ name }</Text>
                     <Text style={styles.albText}>{ `${picsTaken} / ${capacity}` }</Text>

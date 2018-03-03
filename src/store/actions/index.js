@@ -24,12 +24,13 @@ export const activeAlbum = (idx) => {
 
 export const savePhoto = () => {
   return {
-    type: SAVE_PHOTO,
+    type: SAVE_PHOTO
 
   }
 }
 export const deleteAlbum = (name) => {
   return {
-    type: DELETE_ALBUM
+    type: DELETE_ALBUM,
+    payload: name
   }
 }
