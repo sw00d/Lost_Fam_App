@@ -1,4 +1,4 @@
-import { ADD_ALBUM, ACTIVE_ALBUM } from '../actions';
+import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM } from '../actions';
 
 export default (state = {
   albums: []
@@ -13,6 +13,9 @@ export default (state = {
         ...state,
         activeAlbum
       }
+    // case DELETE_ALBUM:
+    //   state.albums.shift()
+    //   return { ...state }
     default:
       return state;
   }

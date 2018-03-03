@@ -10,12 +10,15 @@ export default class LibraryView extends Component {
     navigate('camera');
     activeAlbum(idx);
   }
+  deleteAlbum() {
+    this.props.deleteAlbum();
+  }
 
   render() {
     const { navigation: { navigate }, albums } = this.props;
     return(
       <View style={styles.container}>
-        <View style={styles.topBanner}>
+        <View style={styles.topBanner} onPress={this.deleteAlbum.bind(this)}>
           <Text style={styles.title}>LIBRARY</Text>
           <TouchableOpacity onPress={() => navigate('newAlbum')} style={styles.icon} underlayColor='white'>
             <Ionicons name="md-add" size={32} color="white"/>

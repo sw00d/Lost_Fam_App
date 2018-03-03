@@ -3,12 +3,12 @@ import CameraView from './cameraView';
 import { sendPhoto } from '../../store/actions';
 
 const mapStateToProps = state => {
-  const { camType } = state;
+  const { albums: {activeAlbum} } = state;
   // console.log(state)
-  return { camType };
+  return { activeAlbum };
 }
 
-const mapDispatchToProps = state => {
+const mapDispatchToProps = dispatch => {
   // console.log(state)
   return { sendPhoto };
 }
@@ -16,7 +16,7 @@ const mapDispatchToProps = state => {
 
 const Camera = connect(
   mapStateToProps,
-  { sendPhoto }
+  mapDispatchToProps
 )(CameraView);
 
 export default Camera;

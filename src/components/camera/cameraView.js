@@ -3,7 +3,6 @@ import { TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, 
 import { Camera, Permissions, FileSystem } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
-import PropTypes from 'prop-types';
 import { sendPhoto } from '../../store/actions';
 
 
@@ -15,7 +14,10 @@ export default class CameraDiv extends React.Component {
     dblClick: false
   };
 
-  async componentWillMount() { // doesnt work RN
+  async componentWillMount() {
+    const { activeAlbum, navigation: {navigate} } = this.props;
+    if (!activeAlbum) navigate('library');
+
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     // this.setState({ hasCameraPermission: status === 'granted' });
   }
@@ -78,6 +80,7 @@ export default class CameraDiv extends React.Component {
     const {height, width} = Dimensions.get('window');
     const type = this.state.type;
 
+
     if (hasCameraPermission === null) {
       return <View />;
     }
@@ -97,19 +100,16 @@ export default class CameraDiv extends React.Component {
       );
     }
     else if (hasCameraPermission === true){
+      const albumTitle = this.props.activeAlbum.name;
       return (
         <View>
 
-<<<<<<< HEAD
         <View style={styles.topBanner}>
           <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
             <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
               </TouchableOpacity>
-                <TouchableOpacity underlayColor='white'>
-=======
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('library') } underlayColor='white'>
->>>>>>> 872aac476d2f9627c816252875a5d985aedb25a4
-                  <Text style={styles.text} >Feb 2018 &nbsp;
+                  <Text style={styles.text} >{albumTitle} &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>
                 </TouchableOpacity>
