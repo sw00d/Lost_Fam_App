@@ -1,4 +1,4 @@
-import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM } from '../actions';
+import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN } from '../actions';
 
 export default (state = {
   albums: []
@@ -22,6 +22,10 @@ export default (state = {
         }
       }
       return { ...state, albs }
+
+    case PICS_TAKEN:
+    const alb = action.album
+      return { ...state, alb }
     default:
       return state;
   }

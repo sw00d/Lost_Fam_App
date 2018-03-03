@@ -3,6 +3,8 @@ import Camera from './src/components/camera/index';
 import Login from './src/components/login/index';
 import Library from './src/components/library/index';
 import NewAlbum from './src/components/newAlbum/index';
+import FinishedAlbumView from './src/components/completeAlbum/index';
+
 
 export const InnerStack = StackNavigator({
   camera: {
@@ -14,6 +16,9 @@ export const InnerStack = StackNavigator({
   },
   newAlbum: {
     screen: NewAlbum
+  },
+  finishedAlbum: {
+    screen: FinishedAlbumView
   }
 },
 {

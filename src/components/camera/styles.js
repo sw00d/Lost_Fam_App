@@ -6,8 +6,11 @@ const topBannerHeight = height/9;
 const circleDiam = height/10;
 const miniCircleDiam = height/13;
 const camHeight = height-(bottomBannerHeight+topBannerHeight);
-
 export default StyleSheet.create({
+  camHeight: {
+    height: camHeight,
+    width: width
+  },
   icon: {
     paddingTop: height/50
   },

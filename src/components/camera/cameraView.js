@@ -3,7 +3,7 @@ import { TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, 
 import { Camera, Permissions, FileSystem } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
-import { sendPhoto } from '../../store/actions';
+import { savePhoto, picsTaken } from '../../store/actions';
 import styles from './styles';
 
 
@@ -18,13 +18,12 @@ export default class CameraDiv extends React.Component {
   async componentWillMount() {
     const { activeAlbum, navigation: {navigate} } = this.props;
     if (!activeAlbum) navigate('library');
-
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
   }
 
   fetchPhoto = async () => {
     try {
-      const value = await AsyncStorage.getItem('@foto:key');
+      const value = await AsyncStorage.getItem('New test:12'); // format is album title + : + number in roll
       if (value !== null){
         this.setState({photo: value});
         this.setState({bool: true});
@@ -34,11 +33,17 @@ export default class CameraDiv extends React.Component {
     }
   }
   cachePhoto = async (data) => {
+    // fall_2016:0
     try {
-        await AsyncStorage.setItem('@foto:key',data.uri);
+      const album = this.props.activeAlbum;
+      picsTaken(album);
+      console.log(`${album.name}:${album.picsTaken}`)
+        await AsyncStorage.setItem(`${album.name}:${album.picsTaken}`,data.uri);
+        // this.fetchPhoto();
     } catch (error) {
       Alert.alert('Error. Try Again');
     }
+    const { navigation: {navigate} } = this.props;
   }
   _shoot = async () => {
     if (this.camera) {
@@ -78,6 +83,8 @@ export default class CameraDiv extends React.Component {
     const { hasCameraPermission } = this.state;
     const {height, width} = Dimensions.get('window');
     const type = this.state.type;
+    const camHeight = styles.camHeight;
+
 
 
     if (hasCameraPermission === null) {
@@ -91,7 +98,7 @@ export default class CameraDiv extends React.Component {
         <View>
           <TouchableOpacity onPress={this.reset.bind(this)} underlayColor="white">
             <Image
-              style={{width: width, height: camHeight}}
+              style={styles.camHeight}
               source={{uri: this.state.photo}}
             />
           </TouchableOpacity>
@@ -117,7 +124,7 @@ export default class CameraDiv extends React.Component {
           </TouchableOpacity>
         </View>
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
-            <Camera  style={{ width: width, height: camHeight }} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
+            <Camera  style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
             </Camera>
           </TouchableHighlight>
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CameraView from './cameraView';
-import { sendPhoto } from '../../store/actions';
+import { savePhoto } from '../../store/actions';
 
 const mapStateToProps = state => {
   const { albums: {activeAlbum} } = state;
@@ -10,7 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   // console.log(state)
-  return { sendPhoto };
+  return { savePhoto };
 }
 
 
