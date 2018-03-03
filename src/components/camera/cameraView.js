@@ -6,8 +6,6 @@ import {CacheManager} from "react-native-expo-image-cache";
 import { savePhoto, picsTaken } from '../../store/actions';
 import styles from './styles';
 
-
-
 export default class CameraDiv extends React.Component {
   state = {
     hasCameraPermission: true,
@@ -15,10 +13,11 @@ export default class CameraDiv extends React.Component {
     dblClick: false
   };
 
-  async componentWillMount() {
+  componentWillMount() {
     const { activeAlbum, navigation: {navigate} } = this.props;
-    if (!activeAlbum) navigate('library');
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    if (!activeAlbum || !activeAlbum.name) navigate('library');
+
+    const { status } = async () => await Permissions.askAsync(Permissions.CAMERA);
   }
 
   fetchPhoto = async () => {
@@ -98,7 +97,11 @@ export default class CameraDiv extends React.Component {
         <View>
           <TouchableOpacity onPress={this.reset.bind(this)} underlayColor="white">
             <Image
+<<<<<<< HEAD
               style={styles.camHeight}
+=======
+              style={styles.images}
+>>>>>>> 856ad684a82f29b96a57edad63dd4f94a1ac466e
               source={{uri: this.state.photo}}
             />
           </TouchableOpacity>
@@ -124,7 +127,11 @@ export default class CameraDiv extends React.Component {
           </TouchableOpacity>
         </View>
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
+<<<<<<< HEAD
             <Camera  style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
+=======
+            <Camera  style={styles.camera} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
+>>>>>>> 856ad684a82f29b96a57edad63dd4f94a1ac466e
             </Camera>
           </TouchableHighlight>
 

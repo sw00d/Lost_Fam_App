@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gainsboro',
     borderBottomWidth: 1,
     height: topBannerHeight*1.5,
-    width: width/1.2,
-    justifyContent: 'space-between',
+    width: width /1.2,
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   albText: {
     color: 'black',
