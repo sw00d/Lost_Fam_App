@@ -6,12 +6,12 @@ import Swipeout from 'react-native-swipeout';
 
 
 export default class LibraryView extends Component {
-
   updateActiveAlbum(idx) {
     const { navigation: { navigate }, activeAlbum } = this.props;
     navigate('camera');
     activeAlbum(idx);
   }
+
   deleteSomeAlbum(e) {
     console.log(e.value);
     this.props.deleteAlbum();
