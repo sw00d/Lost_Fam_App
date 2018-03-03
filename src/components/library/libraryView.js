@@ -49,11 +49,9 @@ export default class LibraryView extends Component {
             const { picsTaken, capacity, name } = album;
             return(
               <Swipeout onOpen={() => this.setState({selectedAlb: name})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-                <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }  >
-                  <View>
+                <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>  
                     <Text style={styles.albText}>{ name }</Text>
                     <Text style={styles.albText}>{ `${picsTaken} / ${capacity}` }</Text>
-                  </View>
                 </TouchableOpacity>
               </Swipeout>
             )
