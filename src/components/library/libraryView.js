@@ -21,7 +21,6 @@ export default class LibraryView extends Component {
   }
   deleteSomeAlbum(evt) {
     const selectedAlb = this.state.selectedAlb;
-    console.log(this.state.selectedAlb);
     this.props.deleteAlbum(selectedAlb);
     this.forceUpdate();
   }

@@ -8,7 +8,18 @@ export default class NewAlbumView extends Component {
     this.state = { text: '' }
   }
 
+  checkDuplicate(text) {
+    if (text.length > 3) return false;
+    const { albums } = this.props;
+    var nonDup = true;
+    abums.forEach(album => {
+      if (album.name === text) nonDup = false;
+    });
+    return nonDup;
+  }
+
   createAlbum(text) {
+    if (this.checkDuplicate(text)) return;
     const { addAlbum, navigation: { navigate } } = this.props;
     addAlbum(text);
     navigate('library')

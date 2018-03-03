@@ -3,7 +3,7 @@ import NewAlbumView from './newAlbumView';
 import { addAlbum } from '../../store/actions';
 
 const mapStateToProps = (state) => {
-  const { albums } = state;
+  const { albums:{ albums } } = state;
   return { albums }
 }
 
