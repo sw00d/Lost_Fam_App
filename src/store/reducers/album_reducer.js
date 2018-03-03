@@ -14,8 +14,13 @@ export default (state = {
         activeAlbum
       }
     case DELETE_ALBUM:
-      state.albums.shift();
       const albs = state.albums;
+      const match = action.payload;
+      for (let i = 0; i < albs.length; i++){
+        if (albs[i].name === match){
+          state.albums.splice(i, 1);
+        }
+      }
       return { ...state, albs }
     default:
       return state;
