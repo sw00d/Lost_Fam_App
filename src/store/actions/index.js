@@ -1,7 +1,11 @@
-export const TEST_PERSIST = 'TEST_PERSIST';
+export const SEND_PHOTO = 'SEND_PHOTO';
+import { Camera } from 'expo';
+import {CacheManager} from "react-native-expo-image-cache";
 
-export const flipASwitch = () => {
+export function sendPhoto(cam) {
+  
   return {
-    TEST_PERSIST
+    type: SEND_PHOTO,
+    payload:
   }
 }

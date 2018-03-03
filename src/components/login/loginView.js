@@ -14,7 +14,6 @@ export default class LoginView extends Component {
   login() {
     // this.props.authenticate();
     //if this state is authenticated
-    this.props.flipASwitch();
     this.props.navigation.navigate('mainScreens');
   }
 

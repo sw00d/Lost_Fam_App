@@ -1,8 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import rootReducer from './reducers';
+import rootReducer from './reducers/index';
+import promise from 'redux-promise';
+
 
 const persistConfig = {
   key: 'root',
@@ -12,5 +14,5 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(persistedReducer);
+export const store = applyMiddleware(promise)(createStore)(persistedReducer);
 export const persistor = persistStore(store);

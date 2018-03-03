@@ -1,7 +1,7 @@
 import { StackNavigator } from "react-navigation";
-import Camera from './src/components/camera/cameraView';
+import Camera from './src/components/camera/index';
 import Login from './src/components/login/index';
-import Camera from './src/components/library/libraryView';
+import library from './src/components/library/libraryView';
 export const InnerStack = StackNavigator({
   camera: {
     screen: Camera,

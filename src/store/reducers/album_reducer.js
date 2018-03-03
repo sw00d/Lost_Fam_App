@@ -1,4 +1,4 @@
-import { TEST_PERSIST } from '../../actions';
+import { TEST_PERSIST } from '../actions';
 
 export default (state = {}, action) => {
   switch(action.type) {

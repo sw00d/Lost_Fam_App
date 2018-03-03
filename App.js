@@ -15,7 +15,7 @@ export default class App extends Component {
     // TODO: need to add Loading view component
     return (
       <Provider store={ store }>
-        <PersistGate loading={() => <Text>Loading!</Text>} persistor={persistor}>
+        <PersistGate persistor={persistor}>
           <RootNavigator />
         </PersistGate>
       </Provider>

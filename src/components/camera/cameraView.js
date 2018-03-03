@@ -1,10 +1,12 @@
 import React from 'react';
 import { TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {Ionicons} from '@expo/vector-icons';
-import {Entypo} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
+import PropTypes from 'prop-types';
+import { sendPhoto } from '../../store/actions';
+
+
 
 export default class CameraDiv extends React.Component {
   state = {
@@ -13,7 +15,7 @@ export default class CameraDiv extends React.Component {
     dblClick: false
   };
 
-  async componentWillMount() {
+  async componentWillMount() { // doesnt work RN
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     // this.setState({ hasCameraPermission: status === 'granted' });
   }
@@ -31,13 +33,13 @@ export default class CameraDiv extends React.Component {
   cachePhoto = async (data) => {
     try {
         await AsyncStorage.setItem('@foto:key',data.uri);
-        console.log('Success sending');
-        setTimeout(this.fetchPhoto, 2000);
+        // console.log('Success sending');
+        // setTimeout(this.fetchPhoto, 2000);
 
     } catch (error) {
       Alert.alert('Error. Try Again');
     }
-  }gi
+  }
   _shoot = async () => {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
@@ -51,27 +53,30 @@ export default class CameraDiv extends React.Component {
   reset() {
     this.setState({bool: false});
   }
+  dblClick() {
+     if (this.state.dblClick){
+       if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
+       else this.setState({type: Camera.Constants.Type.back})
+     }
+     else {
+       this.setState({dblClick: true});
+     }
+     //detect touble tap below
+     setTimeout(() => {
+       console.log('double')
+       this.setState({dblClick: false})
+     }, 400);
+   }
+  typeConfig() {
+    if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
+    else this.setState({type: Camera.Constants.Type.back});
+   }
 
-  typeConfig(e) {
-    if (e.target === 28){
-      if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
-      else {this.setState({type: Camera.Constants.Type.back})}
-    }
-    if (this.state.dblClick){
-      if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
-      else {this.setState({type: Camera.Constants.Type.back})}
-    }
-    else {
-      this.setState({dblClick: true});
-    }
-    //detect touble tap below
-    if (e.target === 16) setTimeout(() => this.setState({dblClick: false}), 400);
-  }
+
   render() {
     const { hasCameraPermission } = this.state;
-    const type = this.state.type;
     const {height, width} = Dimensions.get('window');
-
+    const type = this.state.type;
 
     if (hasCameraPermission === null) {
       return <View />;
@@ -84,7 +89,7 @@ export default class CameraDiv extends React.Component {
         <View>
           <TouchableOpacity onPress={this.reset.bind(this)} underlayColor="white">
             <Image
-              style={{width: width, height: height}}
+              style={{width: width, height: camHeight}}
               source={{uri: this.state.photo}}
             />
           </TouchableOpacity>
@@ -94,33 +99,32 @@ export default class CameraDiv extends React.Component {
     else if (hasCameraPermission === true){
       return (
         <View>
-          <TouchableHighlight onPress={this.typeConfig.bind(this)} activeOpacity={1}>
-            <Camera style={{ width: width, height: height }} type= { type } ref={(camera) => { this.camera = camera; }}>
-              <View style={styles.topBanner}>
-                <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
-                  <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
-                </TouchableOpacity>
 
+        <View style={styles.topBanner}>
+          <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
+            <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
+              </TouchableOpacity>
                 <TouchableOpacity underlayColor='white'>
                   <Text style={styles.text} >Feb 2018 &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity style={styles.icon} underlayColor='white'>
-                  <Ionicons name="ios-settings" size={32} color="white" />
-                </TouchableOpacity>
-
-              </View>
-                <View style={styles.bottomBanner}>
-                  <View style={styles.circle}>
-                    <TouchableOpacity onPress={this._shoot} underlayColor="white">
-                      <View style={styles.miniCircle}></View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+              <TouchableOpacity style={styles.icon} underlayColor='white'>
+            <Ionicons name="ios-settings" size={32} color="white" />
+          </TouchableOpacity>
+        </View>
+          <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
+            <Camera  style={{ width: width, height: camHeight }} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
             </Camera>
           </TouchableHighlight>
+
+          <View style={styles.bottomBanner}>
+            <View style={styles.circle}>
+              <TouchableOpacity onPress={() => this._shoot()} underlayColor="white">
+                <View style={styles.miniCircle}></View>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       );
     }
@@ -132,7 +136,7 @@ const bottomBannerHeight = height/8;
 const topBannerHeight = height/9;
 const circleDiam = height/10;
 const miniCircleDiam = height/13;
-
+const camHeight = height-(bottomBannerHeight+topBannerHeight);
 const styles = StyleSheet.create({
   icon: {
     paddingTop: height/50
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   bottomBanner: {
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
     height: bottomBannerHeight,
     width: width,

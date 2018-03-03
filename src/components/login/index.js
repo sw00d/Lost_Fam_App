@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import LoginView from './loginView';
-import { flipASwitch } from '../../actions';
+import { flipASwitch } from '../../store/actions';
 
 const mapStateToProps = state => {
   const { test } = state;
