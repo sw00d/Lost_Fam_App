@@ -9,20 +9,23 @@ export default class NewAlbumView extends Component {
   }
 
   checkDuplicate(text) {
-    const { albums: { albums } } = this.props;
+    const { albums } = this.props;
     if (text.length < 3 || !albums) return false;
     var nonDup = true;
     albums.forEach(album => {
+      console.log(album.name)
       if (album.name === text) nonDup = false;
     });
     return nonDup;
   }
 
   createAlbum(text) {
-    if (this.checkDuplicate(text)) return;
-    const { addAlbum, navigation: { navigate } } = this.props;
-    addAlbum(text);
-    navigate('library')
+    console.log(this.checkDuplicate(text));
+    if (this.checkDuplicate(text)) {
+      const { addAlbum, navigation: { navigate } } = this.props;
+      addAlbum(text);
+      navigate('library')
+    }
   }
 
   render() {
