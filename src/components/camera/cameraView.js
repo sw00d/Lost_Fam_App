@@ -97,11 +97,8 @@ export default class CameraDiv extends React.Component {
         <View>
           <TouchableOpacity onPress={this.reset.bind(this)} underlayColor="white">
             <Image
-<<<<<<< HEAD
               style={styles.camHeight}
-=======
               style={styles.images}
->>>>>>> 856ad684a82f29b96a57edad63dd4f94a1ac466e
               source={{uri: this.state.photo}}
             />
           </TouchableOpacity>
@@ -127,11 +124,12 @@ export default class CameraDiv extends React.Component {
           </TouchableOpacity>
         </View>
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
-<<<<<<< HEAD
             <Camera  style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
-=======
-            <Camera  style={styles.camera} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
->>>>>>> 856ad684a82f29b96a57edad63dd4f94a1ac466e
+              <View style={styles.filmCircle}>
+                <View style={styles.miniTopHalf}></View>
+                <View style={styles.miniBottomHalf}></View>
+
+              </View>
             </Camera>
           </TouchableHighlight>
 

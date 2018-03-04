@@ -7,9 +7,42 @@ const circleDiam = height/10;
 const miniCircleDiam = height/13;
 const camHeight = height-(bottomBannerHeight+topBannerHeight);
 export default StyleSheet.create({
+  miniTopHalf: {
+    height: height/32,
+    width: height/16,
+    backgroundColor: 'rgba(0,0,0,.08)',
+    // borderColor: 'black',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    borderTopLeftRadius: height/16,
+    borderTopRightRadius: height/16
+  },
+  miniBottomHalf: {
+    height: height/32,
+    width: height/16,
+    backgroundColor: 'rgba(0,0,0,.17)',
+    // borderColor: 'black',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    borderBottomLeftRadius: height/16,
+    borderBottomRightRadius: height/16
+  },
+  filmCircle: {
+    height: height/8,
+    width: height/8,
+    backgroundColor: 'rgba(0,0,0,.08)',
+    // borderColor: 'black',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    borderRadius: height/6,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   camHeight: {
     height: camHeight,
-    width: width
+    width: width,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   icon: {
     paddingTop: height/50
