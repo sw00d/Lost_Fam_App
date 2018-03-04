@@ -21,9 +21,10 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum(text) {
+    const { albums } = this.props;
     if (this.checkDuplicate(text)) {
       const { addAlbum, navigation: { navigate } } = this.props;
-      addAlbum(text);
+      addAlbum(text, albums.length);
       navigate('library')
     }
   }

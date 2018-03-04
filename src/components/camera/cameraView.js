@@ -3,7 +3,7 @@ import { TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, 
 import { Camera, Permissions, FileSystem } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
-import { savePhoto, picsTaken } from '../../store/actions';
+import { savePhoto } from '../../store/actions';
 import styles from './styles';
 
 export default class CameraDiv extends React.Component {
@@ -16,34 +16,34 @@ export default class CameraDiv extends React.Component {
   componentWillMount() {
     const { activeAlbum, navigation: {navigate} } = this.props;
     if (!activeAlbum || !activeAlbum.name) navigate('library');
-
-    const { status } = async () => await Permissions.askAsync(Permissions.CAMERA);
+    //idk why need a local var for this
+    // const { status } = async () => await Permissions.askAsync(Permissions.CAMERA);
   }
 
   fetchPhoto = async () => {
     try {
       const value = await AsyncStorage.getItem('New test:12'); // format is album title + : + number in roll
       if (value !== null){
-        this.setState({photo: value});
-        this.setState({bool: true});
+        this.setState({photo: value, bool: true});
       }
     } catch (error) {
       Alert.alert('fkd');
     }
   }
   cachePhoto = async (data) => {
+    const { savePhoto, activeAlbum: { name, pics } } = this.props;
+    const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
+    console.log(key);
     // fall_2016:0
     try {
-      const album = this.props.activeAlbum;
-      picsTaken(album);
-      console.log(`${album.name}:${album.picsTaken}`)
-        await AsyncStorage.setItem(`${album.name}:${album.picsTaken}`,data.uri);
-        // this.fetchPhoto();
+      await AsyncStorage.setItem(key, data.uri);
     } catch (error) {
       Alert.alert('Error. Try Again');
+    } finally {
+      savePhoto(key);
     }
-    const { navigation: {navigate} } = this.props;
   }
+
   _shoot = async () => {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
