@@ -31,18 +31,27 @@ export default class NewAlbumView extends Component {
   render() {
     const { navigation: { navigate } } = this.props;
     return(
-      <Swipeout onOpen={() => navigate('library') } style={styles.container}>
-        <TextInput
-          placeholder="Enter Roll Name."
-          onChangeText={ (text) => this.setState({ text }) }
-          value={ this.state.text }
-        />
-        <TouchableOpacity
-          onPress={ () => this.createAlbum(this.state.text) }
-        >
-          <Text>Create New Album</Text>
-        </TouchableOpacity>
-      </Swipeout>
+      <View>
+        <View style={styles.topBanner}>
+          <Text style={styles.title}>New Roll</Text>
+        </View>
+        <Swipeout onOpen={() => navigate('library') } style={styles.container}>
+          <TextInput
+            placeholder="Enter Roll Name."
+            onChangeText={ (text) => this.setState({ text }) }
+            value={ this.state.text }
+            style={styles.input}
+            autoCorrect={true}
+          />
+          <TouchableOpacity
+            activeOpacity={.1}
+            style={styles.button}
+            onPress={ () => this.createAlbum(this.state.text) }
+          >
+            <Text style={styles.btnText} >Add New Album</Text>
+          </TouchableOpacity>
+        </Swipeout>
+      </View>
     );
   }
 }
