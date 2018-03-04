@@ -26,7 +26,11 @@ export default (state = {
           }
         })
       albums.splice(idx, 1);
-      return { ...state, albums }
+      if (state.activeAlbum.idx === idx) state.activeAlbum = {}; 
+      return {
+        ...state,
+        albums
+      }
     case SAVE_PHOTO:
       const alb = state.activeAlbum;
       alb.pics.push(action.key);
