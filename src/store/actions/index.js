@@ -6,13 +6,20 @@ export const PICS_TAKEN = 'PICS_TAKEN';
 
 export const addAlbum = (name) => {
   const newAlbum = {
-    picsTaken: 0,
+    pics: [],
     capacity: 24,
     name
   }
   return {
     type: ADD_ALBUM,
     newAlbum
+  }
+}
+
+export const savePhoto = (key) => {
+  return {
+    type: SAVE_PHOTO,
+    key
   }
 }
 
@@ -23,42 +30,9 @@ export const activeAlbum = (idx) => {
   }
 }
 
-export const picsTaken = (album) => {
-  album.picsTaken++;
-  return {
-    type: PICS_TAKEN,
-    album
-  }
-}
-export const cache = (data) => {
- console.log(3)
-  return {
-    type: SAVE_PHOTO,
-    payload: data
-  }
-
-}
-
-export function savePhoto(data) {
- // console.log(1)
- //  return async (dispatch) => {
- //    console.log(2)
- //    try {
- //      await AsyncStorage.setItem('@foto:key',data.uri);
- //      dispatch(cache(data))
- //    } catch (error) {
- //      Alert.alert('Error. Try Again');
- //    }
- //
- //
- //    return data;
- //  }
-}
-
-
-export const deleteAlbum = (name) => {
+export const deleteAlbum = (idx) => {
   return {
     type: DELETE_ALBUM,
-    payload: name
+    idx
   }
 }

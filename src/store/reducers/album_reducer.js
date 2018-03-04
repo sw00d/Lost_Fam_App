@@ -1,4 +1,5 @@
-import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN } from '../actions';
+import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN, SAVE_PHOTO } from '../actions';
+import { AsyncStorage } from 'react-native'
 
 export default (state = {
   albums: [],
@@ -15,18 +16,24 @@ export default (state = {
         activeAlbum
       }
     case DELETE_ALBUM:
-      const albs = state.albums;
-      const match = action.payload;
-      for (let i = 0; i < albs.length; i++){
-        if (albs[i].name === match){
-          state.albums.splice(i, 1);
-        }
+      const { albums } = state;
+      const { idx } = action;
+      albums[idx].pics.forEach(async key => {
+          try {
+            await AsyncStorage.removeItem(key);
+          } catch (error) {
+            console.log(error)
+          }
+        })
+      albums.splice(idx, 1);
+      return { ...state, albums }
+    case SAVE_PHOTO:
+      const alb = state.activeAlbum;
+      alb.pics.push(action.key);
+      return {
+        ...state,
+        activeAlbum: alb
       }
-      return { ...state, albs }
-
-    case PICS_TAKEN:
-    const alb = action.album
-      return { ...state, alb }
     default:
       return state;
   }
