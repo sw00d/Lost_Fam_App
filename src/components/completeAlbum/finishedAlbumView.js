@@ -26,39 +26,20 @@ export default class completedAlbum extends React.Component {
       if (value !== null){
         const joined = this.state.pics.concat(value);
         this.setState({ pics: joined })
-        console.log(value)
       }
     } catch (error) {
       Alert.alert('Error fetching photo');
     }
   }
-
-  // picGrid = async() => {
-  //   const { activeAlbum: { name, pics } } = this.props;
-  //   `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
-  //
-  //
-  //   return (
-  //     <ScrollView>
-  //     {
-  //       pics.map((album, i) => {
-  //         return(
-  //                 <Image
-  //                   style={styles.camHeight}
-  //                   style={styles.images}
-  //                   source={{uri: this.state.photo}}
-  //                 />
-  //         )
-  //       })
-  //     }
-  //     </ScrollView>
-  //   )
-  // }
+  expandImg() {
+    console.log(styles)
+  }
 
   render(){
     // console.log(this.state.pics);
     const { pics } = this.state;
     const { navigation: { goBack } } = this.props;
+    const {height, width} = Dimensions.get('window');
 
 
 
@@ -68,11 +49,11 @@ export default class completedAlbum extends React.Component {
           <TouchableOpacity onPress={() => goBack()}>
             <Ionicons name="ios-arrow-back-outline" size={32} color="white"/>
           </TouchableOpacity>
-          <Text style={styles.title}>{ this.props.activeAlbum.name }</Text>
+
+          <Text style={styles.title} onPress={this.expandImg.bind(this)}>{ this.props.activeAlbum.name }</Text>
           <TouchableOpacity onPress= { () => {
             Share.share({
                 message: 'SHARE THAT SHIT AROUND BITCH ASS N***A',
-                url: 'http://bam.tech',
                 title: 'f**k ME TITLE'
               }, {
                 // Android only:
@@ -90,9 +71,7 @@ export default class completedAlbum extends React.Component {
         <ScrollView
           contentContainerStyle={styles.scroll}
           ref={ref => this.scrollView = ref}
-          onContentSizeChange={(contentWidth, contentHeight)=>{
-            this.scrollView.scrollToEnd({animated: false});
-        }}>
+          onContentSizeChange={(contentWidth, contentHeight)=>{}}>
           {
 
             pics.map((album, i) => {
