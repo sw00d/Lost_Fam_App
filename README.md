@@ -1,11 +1,10 @@
 # todos
 
 1. Add User authentication
-3. Save photos to albums
-4. generate random photo keys
 5. persist redux store
 6: fix scrollview for albums
-
+7: send emails with order information
+8: order forms (address ect.)
 
 # schema
   {
