@@ -13,9 +13,10 @@ export default class LibraryView extends Component {
   }
 
   updateActiveAlbum(idx) {
-    const { navigation: { navigate }, activeAlbum } = this.props;
-    navigate('camera');
+    const { navigation: { navigate }, activeAlbum, albums } = this.props;
     activeAlbum(idx);
+    if (albums[idx].pics.length < albums[idx].capacity) navigate('camera');
+    else navigate('finishedAlbum');
   }
 
   deleteAndUpdate() {
@@ -33,18 +34,20 @@ export default class LibraryView extends Component {
     }]
     const { navigation: { navigate }, albums } = this.props;
 
-    //uncomment this to view all keys
-    // (async () => {
-    //   try {
-    //     await AsyncStorage.getAllKeys((k, e) => {
-    //       console.log(e)
-    //     // uncomment this to clear all keys including store key
-    //     //e.forEach(async key => await AsyncStorage.removeItem(key))
-    //     })
-    //   } catch(error) {
-    //
-    //   }
-    // })()
+    // uncomment this to view all keys
+    (async () => {
+      try {
+        // uncomment to clear cache totally
+        // await AsyncStorage.clear();
+        await AsyncStorage.getAllKeys((k, e) => {
+          // console.log(e)
+        // // uncomment this to clear all keys including store key
+        // e.forEach(async key => await AsyncStorage.removeItem(key))
+        })
+      } catch(error) {
+
+      }
+    })()
 
     return(
       <View style={styles.container}>

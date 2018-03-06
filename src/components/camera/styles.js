@@ -7,7 +7,7 @@ const circleDiam = height/10;
 const miniCircleDiam = height/13;
 const camHeight = height-(bottomBannerHeight+topBannerHeight);
 const fCircleDiam = height/16;
-const fCircleHeight = height/16;
+const fCircleHeight = height/32;
 
 export default StyleSheet.create({
   miniTopHalf: {

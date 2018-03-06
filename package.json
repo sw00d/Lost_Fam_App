@@ -13,7 +13,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js"
+    "test": "node node_modules/jest/bin/jest.js",
+    "purge": "./node_modules/.bin/react-native-clean-project"
   },
   "jest": {
     "preset": "jest-expo"
@@ -38,6 +39,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.9.1",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "watchman": "^1.0.0"
   }
 }

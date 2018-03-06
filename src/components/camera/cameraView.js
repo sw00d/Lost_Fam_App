@@ -7,11 +7,11 @@ import { savePhoto } from '../../store/actions';
 import styles from './styles';
 
 export default class CameraDiv extends React.Component {
-  state = {
-    hasCameraPermission: true,
-    type: Camera.Constants.Type.back,
-    dblClick: false
-  };
+    state = {
+      hasCameraPermission: true,
+      type: Camera.Constants.Type.back,
+      dblClick: false
+    };
 
   componentWillMount() {
     const { activeAlbum, navigation: {navigate} } = this.props;
@@ -20,20 +20,11 @@ export default class CameraDiv extends React.Component {
     // const { status } = async () => await Permissions.askAsync(Permissions.CAMERA);
   }
 
-  fetchPhoto = async () => {
-    try {
-      const value = await AsyncStorage.getItem('New test:12'); // format is album title + : + number in roll
-      if (value !== null){
-        this.setState({photo: value, bool: true});
-      }
-    } catch (error) {
-      Alert.alert('fkd');
-    }
-  }
+  
   cachePhoto = async (data) => {
     const { savePhoto, activeAlbum: { name, pics } } = this.props;
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
-    console.log(key);
+    // console.log(key);
     // fall_2016:0
     try {
       await AsyncStorage.setItem(key, data.uri);
@@ -83,8 +74,6 @@ export default class CameraDiv extends React.Component {
     const {height, width} = Dimensions.get('window');
     const type = this.state.type;
     const camHeight = styles.camHeight;
-
-
 
     if (hasCameraPermission === null) {
       return <View />;

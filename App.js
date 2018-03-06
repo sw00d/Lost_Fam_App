@@ -9,7 +9,7 @@ import { store, persistor } from './src/store/index';
 export default class App extends Component {
   render() {
     // TODO: need to add Loading view component
-    console.log(store)
+    // console.log(store)
     return (
       <Provider store={ store }>
         <PersistGate loading={null} persistor={persistor}>

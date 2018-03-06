@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import finishedAlbumView from './finishedAlbumView';
 
 const mapStateToProps = state => {
-  return {}
+  const { albums: {activeAlbum} } = state;
+  return { activeAlbum };
 }
 
 const mapDispatchToProps = dispatch => {

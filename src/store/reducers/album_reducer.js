@@ -22,11 +22,11 @@ export default (state = {
           try {
             await AsyncStorage.removeItem(key);
           } catch (error) {
-            console.log(error)
+            console.log('Delete Album error: ', error)
           }
         })
       albums.splice(idx, 1);
-      if (state.activeAlbum.idx === idx) state.activeAlbum = {}; 
+      if (state.activeAlbum.idx === idx) state.activeAlbum = {};
       return {
         ...state,
         albums
