@@ -20,7 +20,7 @@ export default (state = {
       const { idx } = action;
       albums[idx].pics.forEach(async key => {
           try {
-            await AsyncStorage.removeItem(key);
+            await AsyncStorage.removeItem(key.key);
           } catch (error) {
             console.log('Delete Album error: ', error)
           }
@@ -33,7 +33,7 @@ export default (state = {
       }
     case SAVE_PHOTO:
       const alb = state.activeAlbum;
-      alb.pics.push(action.key);
+      alb.pics.push(action.data);
       return {
         ...state,
         activeAlbum: alb

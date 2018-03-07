@@ -1,6 +1,6 @@
 import React from 'react';
 import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
-import { Camera, Permissions, FileSystem } from 'expo';
+import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
 
@@ -17,22 +17,31 @@ export default class completedAlbum extends React.Component {
     const fotos = this.props.activeAlbum.pics;
 
     for (let i in fotos){
-      this.fetchPhoto(fotos[i])
+      this.fetchPhoto(fotos[i].key, fotos[i].exif)
     }
   }
-  fetchPhoto = async (key) => {
+  fetchPhoto = async (key, exif) => {
+    console.log('pomcer', key, exif)
+    const int = 360-parseInt(exif);
     try {
       const value = await AsyncStorage.getItem(key); // format is album title + : + number in roll
+      const rotate = await ImageManipulator.manipulate(value, [{ rotate: int },{ resize: {height: 100, width: 100}} ]);
       if (value !== null){
-        const joined = this.state.pics.concat(value);
+        const joined = this.state.pics.concat(rotate.uri);
         this.setState({ pics: joined })
       }
     } catch (error) {
       Alert.alert('Error fetching photo');
     }
   }
-  expandImg() {
-    console.log(styles)
+  saveToPhone = async () => {
+    const uri = this.state.pics[20];
+    const promise = CameraRoll.saveToCameraRoll(uri);
+    promise.then(function(result) {
+      console.log('save succeeded ' + result);
+    }).catch(function(error) {
+      console.log('save failed ' + error);
+    });
   }
 
   render(){
@@ -50,7 +59,7 @@ export default class completedAlbum extends React.Component {
             <Ionicons name="ios-arrow-back-outline" size={32} color="white"/>
           </TouchableOpacity>
 
-          <Text style={styles.title} onPress={this.expandImg.bind(this)}>{ this.props.activeAlbum.name }</Text>
+          <Text style={styles.title} >{ this.props.activeAlbum.name }</Text>
           <TouchableOpacity onPress= { () => {
             Share.share({
                 message: 'SHARE THAT SHIT AROUND BITCH ASS N***A',
@@ -68,6 +77,7 @@ export default class completedAlbum extends React.Component {
           </TouchableOpacity>
 
         </View>
+        <Button onPress={ this.saveToPhone } title="Save to CameraRoll"></Button>
         <ScrollView
           contentContainerStyle={styles.scroll}
           ref={ref => this.scrollView = ref}

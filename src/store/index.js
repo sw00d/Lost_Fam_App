@@ -15,5 +15,5 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = applyMiddleware(promise, Logger)(createStore)(persistedReducer);
+export const store = applyMiddleware(promise)(createStore)(persistedReducer);
 export const persistor = persistStore(store);

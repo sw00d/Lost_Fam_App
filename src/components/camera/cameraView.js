@@ -20,9 +20,10 @@ export default class CameraDiv extends React.Component {
     // const { status } = async () => await Permissions.askAsync(Permissions.CAMERA);
   }
 
-  
+
   cachePhoto = async (data) => {
     const { savePhoto, activeAlbum: { name, pics } } = this.props;
+    const { exif } = data;
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
     // console.log(key);
     // fall_2016:0
@@ -31,13 +32,13 @@ export default class CameraDiv extends React.Component {
     } catch (error) {
       Alert.alert('Error. Try Again');
     } finally {
-      savePhoto(key);
+      savePhoto(key, exif.Orientation);
     }
   }
 
   _shoot = async () => {
     if (this.camera) {
-      this.camera.takePictureAsync().then(data => {
+      this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {
         const uri = data.uri;
         CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
         this.cachePhoto(data);

@@ -17,10 +17,14 @@ export const addAlbum = (name, idx) => {
   }
 }
 
-export const savePhoto = (key) => {
+export const savePhoto = (key, exif) => {
+  const data = {
+    key: key,
+    exif: exif
+  }
   return {
     type: SAVE_PHOTO,
-    key
+    data
   }
 }
 
