@@ -13,9 +13,9 @@ export default class LibraryView extends Component {
   }
 
   updateActiveAlbum(idx) {
-    const { navigation: { navigate }, activeAlbum, albums } = this.props;
+    const { navigation: { goBack, navigate }, activeAlbum, albums } = this.props;
     activeAlbum(idx);
-    if (albums[idx].pics.length < albums[idx].capacity) navigate('camera');
+    if (albums[idx].pics.length < albums[idx].capacity) goBack();
     else navigate('finishedAlbum');
   }
 

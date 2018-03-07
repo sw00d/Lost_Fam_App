@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Button, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
 import {Ionicons} from '@expo/vector-icons';
@@ -22,25 +22,26 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum(text) {
-    const { albums } = this.props;
+    const { albums} = this.props;
     if (this.checkDuplicate(text)) {
-      const { addAlbum, navigation: { navigate } } = this.props;
+      const { addAlbum, navigation: { goBack } } = this.props;
       addAlbum(text, albums.length);
-      navigate('library')
+      goBack()
     }
   }
+
 
   render() {
     const { navigation: { navigate } } = this.props;
     const { navigation: { goBack } } = this.props;
     return(
       <View>
-        <View style={styles.topBanner}>
-          <TouchableOpacity onPress={() => goBack()}>
-            <Ionicons name="ios-arrow-back-outline" size={32} color="white"/>
-          </TouchableOpacity>
-          <Text style={styles.title}>New Roll</Text>
-        </View>
+      <View style={styles.topBanner}>
+        <TouchableOpacity onPress={() => goBack()}>
+          <Ionicons name="ios-arrow-back-outline" size={32} color="white"/>
+        </TouchableOpacity>
+        <Text style={styles.title}>New Roll</Text>
+      </View>
         <Swipeout onOpen={() => navigate('library') } style={styles.container}>
           <TextInput
             placeholder="Enter Roll Name."

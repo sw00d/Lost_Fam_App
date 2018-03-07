@@ -8,6 +8,9 @@ I changed the schema a bit to include the exif data, which is all the in depth p
 7: send emails with order information
 8: order forms (address ect.)
 9: figure out height/width of pics for dwnld.
+10: integrate navigation headers instead of custom headers https://reactnavigation.org/docs/headers.html
+
+
 # schema
   {
     ablums: [

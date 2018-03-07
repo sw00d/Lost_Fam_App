@@ -9,7 +9,10 @@ export default class completedAlbum extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      pics: []
+      pics: [],
+      height: Dimensions.get('window').height,
+      width: Dimensions.get('window').width,
+      pomc: 'poop'
     }
   }
 
@@ -21,22 +24,44 @@ export default class completedAlbum extends React.Component {
     }
   }
   fetchPhoto = async (key, exif) => {
-    console.log('pomcer', key, exif)
+    const {height, width} = Dimensions.get('window')
+
+
     const int = 360-parseInt(exif);
     try {
       const value = await AsyncStorage.getItem(key); // format is album title + : + number in roll
-      const rotate = await ImageManipulator.manipulate(value, [{ rotate: int },{ resize: {height: 100, width: 100}} ]);
+      // console.log(value)
       if (value !== null){
+        if (exif == 90 || exif == -90){
+          this.setState({width: height});
+          this.setState({height: width});
+        }
+        else {
+          this.setState({width: width});
+          this.setState({height: height});
+
+        }
+        console.log(key, this.state.height, this.state.width, this.state.pomc);
+        const rotate = await ImageManipulator.manipulate(value, [{ rotate: int },{ resize: {height: this.state.height, width: this.state.width}} ]);
+        this.setState({pomc:'pomc'});
         const joined = this.state.pics.concat(rotate.uri);
         this.setState({ pics: joined })
       }
     } catch (error) {
       Alert.alert('Error fetching photo');
     }
+
+
+
+
   }
   saveToPhone = async () => {
-    const uri = this.state.pics[20];
-    const promise = CameraRoll.saveToCameraRoll(uri);
+    const uri = this.state.pics;
+     const promise = CameraRoll.saveToCameraRoll(uri[0]);
+     CameraRoll.saveToCameraRoll(uri[1]);
+     CameraRoll.saveToCameraRoll(uri[2]);
+     CameraRoll.saveToCameraRoll(uri[3]);
+
     promise.then(function(result) {
       console.log('save succeeded ' + result);
     }).catch(function(error) {
@@ -48,7 +73,7 @@ export default class completedAlbum extends React.Component {
     // console.log(this.state.pics);
     const { pics } = this.state;
     const { navigation: { goBack } } = this.props;
-    const {height, width} = Dimensions.get('window');
+    // const {height, width} = Dimensions.get('window');
 
 
 

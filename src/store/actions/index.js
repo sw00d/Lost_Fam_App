@@ -7,7 +7,7 @@ export const PICS_TAKEN = 'PICS_TAKEN';
 export const addAlbum = (name, idx) => {
   const newAlbum = {
     pics: [],
-    capacity: 24,
+    capacity: 4,
     idx,
     name
   }
