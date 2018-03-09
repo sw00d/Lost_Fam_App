@@ -25,13 +25,17 @@ export default class LibraryView extends Component {
     this.forceUpdate();
   }
 
+  static navigationOptions = {
+    title: 'Library',
+  };
+
   render() {
     const swipeBtns = [{
       text: 'Delete',
       backgroundColor: 'red',
       underlayColor: 'transparent',
       onPress: () => this.deleteAndUpdate()
-    }]
+    }];
     const { navigation: { navigate }, albums } = this.props;
 
     // uncomment this to view all keys
@@ -48,15 +52,15 @@ export default class LibraryView extends Component {
 
       }
     })()
+    // <View style={styles.topBanner} >
+    // <Text style={styles.title}>LIBRARY</Text>
+    // </View>
 
     return(
       <View style={styles.container}>
-        <View style={styles.topBanner} >
-          <Text style={styles.title}>LIBRARY</Text>
-          <TouchableOpacity onPress={() => navigate('newAlbum')} style={styles.icon} underlayColor='white'>
-            <Ionicons name="md-add" size={32} color="white"/>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => navigate('newAlbum')} style={styles.icon} underlayColor='white'>
+          <Ionicons name="md-add" size={32} color="White"/>
+        </TouchableOpacity>
         <ScrollView>
         {
           albums.map((album, i) => {

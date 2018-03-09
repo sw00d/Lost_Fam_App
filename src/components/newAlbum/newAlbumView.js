@@ -30,19 +30,16 @@ export default class NewAlbumView extends Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'New Roll',
+  };
 
   render() {
     const { navigation: { navigate } } = this.props;
     const { navigation: { goBack } } = this.props;
     return(
       <View>
-      <View style={styles.topBanner}>
-        <TouchableOpacity onPress={() => goBack()}>
-          <Ionicons name="ios-arrow-back-outline" size={32} color="white"/>
-        </TouchableOpacity>
-        <Text style={styles.title}>New Roll</Text>
-      </View>
-        <Swipeout onOpen={() => navigate('library') } style={styles.container}>
+        <Swipeout style={styles.container}>
           <TextInput
             placeholder="Enter Roll Name."
             onChangeText={ (text) => this.setState({ text }) }

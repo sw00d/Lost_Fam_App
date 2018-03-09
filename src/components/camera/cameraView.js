@@ -8,16 +8,17 @@ import styles from './styles';
 
 export default class CameraDiv extends React.Component {
     state = {
-      hasCameraPermission: true,
+      hasCameraPermission: false,
       type: Camera.Constants.Type.back,
       dblClick: false
     };
 
-  componentWillMount() {
+  async componentWillMount() {
     const { activeAlbum, navigation: {navigate} } = this.props;
     if (!activeAlbum || !activeAlbum.name) navigate('library');
     //idk why need a local var for this
-    // const { status } = async () => await Permissions.askAsync(Permissions.CAMERA);
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === 'granted' });
   }
 
 
@@ -68,13 +69,16 @@ export default class CameraDiv extends React.Component {
     if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
     else this.setState({type: Camera.Constants.Type.back});
    }
-
+   static navigationOptions = {
+     header: null
+   };
 
   render() {
     const { hasCameraPermission } = this.state;
     const {height, width} = Dimensions.get('window');
     const type = this.state.type;
     const camHeight = styles.camHeight;
+    console.log(hasCameraPermission)
 
     if (hasCameraPermission === null) {
       return <View />;
@@ -82,20 +86,7 @@ export default class CameraDiv extends React.Component {
     else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     }
-    else if (hasCameraPermission === true && this.state.bool){
-      return (
-        <View>
-          <TouchableOpacity onPress={this.reset.bind(this)} underlayColor="white">
-            <Image
-              style={styles.camHeight}
-              style={styles.images}
-              source={{uri: this.state.photo}}
-            />
-          </TouchableOpacity>
-        </View>
-      );
-    }
-    else if (hasCameraPermission === true){
+    else{
       const albumTitle = this.props.activeAlbum.name;
       return (
         <View>
@@ -109,12 +100,12 @@ export default class CameraDiv extends React.Component {
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>
                 </TouchableOpacity>
-              <TouchableOpacity style={styles.icon} underlayColor='white'>
+              <TouchableOpacity style={styles.icon} onPress={ () => this.props.navigation.navigate('settings') } underlayColor='white'>
             <Ionicons name="ios-settings" size={32} color="white" />
           </TouchableOpacity>
         </View>
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
-            <Camera  style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
+            <Camera style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
               <View style={styles.filmCircle}>
                 <View style={styles.miniTopHalf}></View>
                 <View style={styles.miniBottomHalf}></View>

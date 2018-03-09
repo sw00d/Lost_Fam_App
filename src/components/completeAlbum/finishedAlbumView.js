@@ -69,6 +69,27 @@ export default class completedAlbum extends React.Component {
     });
   }
 
+  static navigationOptions = {
+    title: 'Album Title',
+    headerRight: (
+      <TouchableOpacity onPress= { () => {
+        Share.share({
+            message: 'SHARE THAT SHIT AROUND BITCH ASS N***A',
+            title: 'f**k ME TITLE'
+          }, {
+            // Android only:
+            dialogTitle: 'Share goodness',
+            // iOS only:
+            excludedActivityTypes: [
+              'com.apple.UIKit.activity.PostToTwitter'
+            ]
+          })
+      }}>
+        <Ionicons name="ios-share-alt" size={32} color="white"/>
+      </TouchableOpacity>
+  ),
+  };
+
   render(){
     // console.log(this.state.pics);
     const { pics } = this.state;
@@ -79,29 +100,6 @@ export default class completedAlbum extends React.Component {
 
     return(
       <View>
-        <View style={styles.topBanner}>
-          <TouchableOpacity onPress={() => goBack()}>
-            <Ionicons name="ios-arrow-back-outline" size={32} color="white"/>
-          </TouchableOpacity>
-
-          <Text style={styles.title} >{ this.props.activeAlbum.name }</Text>
-          <TouchableOpacity onPress= { () => {
-            Share.share({
-                message: 'SHARE THAT SHIT AROUND BITCH ASS N***A',
-                title: 'f**k ME TITLE'
-              }, {
-                // Android only:
-                dialogTitle: 'Share goodness',
-                // iOS only:
-                excludedActivityTypes: [
-                  'com.apple.UIKit.activity.PostToTwitter'
-                ]
-              })
-          }}>
-            <Ionicons name="ios-share-alt" size={32} color="white"/>
-          </TouchableOpacity>
-
-        </View>
         <Button onPress={ this.saveToPhone } title="Save to CameraRoll"></Button>
         <ScrollView
           contentContainerStyle={styles.scroll}
