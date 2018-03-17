@@ -5,10 +5,11 @@ export default StyleSheet.create({
     container: {
       justifyContent: 'center',
       alignItems: 'center',
+      height: height,
     },
     submitBtn: {
       marginTop: height/30,
-      width: width/1.2,
+      width: width*1,
       height: height/10,
       backgroundColor: "#C95656",
       justifyContent: 'center',
