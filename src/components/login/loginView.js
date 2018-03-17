@@ -9,7 +9,6 @@ const styles = LoginStyles(height, width);
 export default class LoginView extends Component {
   navToRegister() {
     this.props.navigation.navigate('signUp');
-
   }
 
   login() {

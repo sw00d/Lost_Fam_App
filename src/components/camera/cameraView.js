@@ -14,6 +14,7 @@ export default class CameraDiv extends React.Component {
     };
 
   async componentWillMount() {
+    console.log('DUH POMS');
     const { activeAlbum, navigation: {navigate} } = this.props;
     if (!activeAlbum || !activeAlbum.name) navigate('library');
     //idk why need a local var for this

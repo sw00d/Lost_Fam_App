@@ -25,9 +25,6 @@ export const InnerStack = StackNavigator({
   },
   settings: {
     screen: Settings
-  },
-  signUp: {
-    screen: SignUp
   }
 },
 {
@@ -38,6 +35,9 @@ export const InnerStack = StackNavigator({
 const rootNavigator = StackNavigator({
   login: {
     screen: Login,
+  },
+  signUp: {
+      screen: SignUp
   },
   mainScreens: {
     screen: InnerStack,
