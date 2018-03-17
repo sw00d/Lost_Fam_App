@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
+import {ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import { Container, Header, Content, Form, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import { renderField } from './renderField';
 import {Field} from 'redux-form';
 import { canNavToNext } from '../../utils';
+import Swipeout from 'react-native-swipeout';
+import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 
 
 export default class SignUpView extends Component {
@@ -18,20 +20,20 @@ export default class SignUpView extends Component {
 
   render() {
     return (
-      <Container style={styles.container}>
+      <View style={styles.container}>
         <Header style={styles.header}>
           <Left>
-            <Button transparent onPress={()=>this.props.navigation.navigate.goBack()}>
-              <Text>Back</Text>
+            <Button transparent onPress={()=>this.props.navigation.goBack()}>
+              <Text style={styles.btnFont}>Back</Text>
             </Button>
           </Left>
           <Body>
-            <Title>Header</Title>
+            <Title style={styles.btnFont}>Sign Up</Title>
           </Body>
           <Right>
           </Right>
           </Header>
-        <Content>
+        <Content style={styles.content}>
           <Form>
               <Field name="fullName" label="Full Name" component={renderField} />
               <Field name="email" label={"Email"} component={renderField} />
@@ -39,11 +41,18 @@ export default class SignUpView extends Component {
               <Field name="password" label={"Password"} component={renderField} />
               <Field name="confirmPass" label={"Confirm Password"} component={renderField} />
           </Form>
+<<<<<<< HEAD
           <Button style={styles.submitBtn} onPress={() => this.submit()}>
             <Text style={styles.btnFont}>Sign Up</Text>
           </Button>
+=======
+>>>>>>> e81887cad274fd16c6f3d9c48afc42e91c29e91d
         </Content>
-      </Container>
+        <Button style={styles.submitBtn} onPress={this.submit.bind(this)}>
+          <Text style={styles.btnFont}>Sign Up</Text>
+        </Button>
+
+      </View>
     );
   }
 }
