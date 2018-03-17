@@ -6,18 +6,15 @@ export default StyleSheet.create({
       height: height,
       width: width,
       alignItems: 'center',
-      // justifyContent: 'space-between'
-
+      justifyContent: 'space-between',
+      backgroundColor: 'gainsboro'
     },
     submitBtn: {
-      marginTop: height/30,
-      width: width*1,
+      width: width,
       height: height/10,
       backgroundColor: "#C95656",
       justifyContent: 'center',
       alignItems: 'center',
-      position: 'absolute',
-      bottom: 0,
     },
     btnFont: {
       color: 'white',
@@ -27,16 +24,8 @@ export default StyleSheet.create({
       height: height/10,
       width: width,
       backgroundColor: '#C95656',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      flexDirection: 'row'
     },
-    filler: {
-      height:height - height/2.5,
-      width: width,
-      backgroundColor: 'transparent'
-    },
-    invisibleText: {
-      color: 'transparent'
+    content: {
+      width: width
     }
 });
