@@ -12,10 +12,12 @@ export default class App extends Component {
     // console.log(store)
     return (
       <Provider store={ store }>
-        <PersistGate loading={null} persistor={persistor}>
           <RootNavigator />
-        </PersistGate>
       </Provider>
     );
   }
 }
+
+// <PersistGate loading={null} persistor={persistor}>
+
+// </PersistGate>

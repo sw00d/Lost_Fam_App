@@ -11,8 +11,7 @@ export default class completedAlbum extends React.Component {
     this.state = {
       pics: [],
       height: Dimensions.get('window').height,
-      width: Dimensions.get('window').width,
-      pomc: 'poop'
+      width: Dimensions.get('window').width
     }
   }
 
@@ -41,7 +40,6 @@ export default class completedAlbum extends React.Component {
           this.setState({height: height});
 
         }
-        console.log(key, this.state.height, this.state.width, this.state.pomc);
         const rotate = await ImageManipulator.manipulate(value, [{ rotate: int },{ resize: {height: this.state.height, width: this.state.width}} ]);
         this.setState({pomc:'pomc'});
         const joined = this.state.pics.concat(rotate.uri);

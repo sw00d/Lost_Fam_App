@@ -44,8 +44,8 @@ export default class LibraryView extends Component {
     //     // await AsyncStorage.clear();
     //     await AsyncStorage.getAllKeys((k, e) => {
     //       // console.log(e)
-    //     // // uncomment this to clear all keys including store key
-    //     // e.forEach(async key => await AsyncStorage.removeItem(key))
+    //     // uncomment this to clear all keys including store key
+    //     e.forEach(async key => await AsyncStorage.removeItem(key))
     //     })
     //   } catch(error) {
     //

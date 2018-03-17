@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CameraView from './cameraView';
-import { savePhoto } from '../../store/actions';
+import { savePhoto } from '../../store/actions/album_actions';
 
 const mapStateToProps = state => {
   const { albums: {activeAlbum} } = state;

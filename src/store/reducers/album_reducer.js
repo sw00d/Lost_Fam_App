@@ -1,4 +1,4 @@
-import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN, SAVE_PHOTO } from '../actions';
+import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN, SAVE_PHOTO } from '../actions/album_actions';
 import { AsyncStorage } from 'react-native'
 
 export default (state = {

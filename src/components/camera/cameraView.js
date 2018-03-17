@@ -3,7 +3,6 @@ import { TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, 
 import { Camera, Permissions, FileSystem } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
-import { savePhoto } from '../../store/actions';
 import styles from './styles';
 
 export default class CameraDiv extends React.Component {
@@ -14,7 +13,6 @@ export default class CameraDiv extends React.Component {
     };
 
   async componentWillMount() {
-    console.log('DUH POMS');
     const { activeAlbum, navigation: {navigate} } = this.props;
     if (!activeAlbum || !activeAlbum.name) navigate('library');
     //idk why need a local var for this
@@ -34,7 +32,7 @@ export default class CameraDiv extends React.Component {
     } catch (error) {
       Alert.alert('Error. Try Again');
     } finally {
-      savePhoto(key, exif.Orientation);
+      this.props.savePhoto(key, exif.Orientation);
     }
   }
 
@@ -77,7 +75,6 @@ export default class CameraDiv extends React.Component {
     const {height, width} = Dimensions.get('window');
     const type = this.state.type;
     const camHeight = styles.camHeight;
-    console.log(hasCameraPermission)
 
     if (hasCameraPermission === null) {
       return <View />;

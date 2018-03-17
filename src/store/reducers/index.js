@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import albumReducer from './album_reducer';
-import cameraReducer from './camera_reducer';
+import userReducer from './user_reducer';
+import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
   albums: albumReducer,
-  camera: cameraReducer
+  form: formReducer,
+  user: userReducer
 });
 
 export default rootReducer;
