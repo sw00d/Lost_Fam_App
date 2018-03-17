@@ -16,9 +16,10 @@ export default class FloatingLabelExample extends Component {
   render() {
     return (
       <Swipeout style={styles.container}>
+        <View>
         <Header style={styles.header}>
           <Left>
-            <Button transparent onPress={()=>this.props.navigation.navigate.goBack()}>
+            <Button transparent onPress={()=>this.props.navigation.goBack()}>
               <Text>Back</Text>
             </Button>
           </Left>
@@ -43,10 +44,15 @@ export default class FloatingLabelExample extends Component {
               <Input />
             </Item>
           </Form>
-          <Button style={styles.submitBtn} onPress={this.submit.bind(this)}>
-            <Text style={styles.btnFont}>Sign Up</Text>
-          </Button>
         </Content>
+        <Button style={styles.filler}>
+          <Text style={styles.invisibleText}>Sign Up</Text> 
+        </Button>
+        <Button style={styles.submitBtn} onPress={this.submit.bind(this)}>
+          <Text style={styles.btnFont}>Sign Up</Text>
+        </Button>
+
+        </View>
       </Swipeout>
     );
   }
