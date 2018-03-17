@@ -69,9 +69,7 @@ export default class CameraDiv extends React.Component {
     if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
     else this.setState({type: Camera.Constants.Type.back});
    }
-   static navigationOptions = {
-     header: null
-   };
+
 
   render() {
     const { hasCameraPermission } = this.state;

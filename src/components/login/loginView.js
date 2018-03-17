@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, TouchableHighlight } from 'react-native';
 import LoginStyles from './styles';
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,8 @@ const styles = LoginStyles(height, width);
 
 export default class LoginView extends Component {
   navToRegister() {
-    console.log('tryna registr');
+    this.props.navigation.navigate('signUp');
+
   }
 
   login() {
@@ -20,21 +21,29 @@ export default class LoginView extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <Text style={styles.loginBtnText}>BRIEF DESCRIPTION</Text>
-        <TouchableOpacity
-          style={styles.signUpBtn}
-          onPress={ () => this.navToRegister() }
-        >
-          <Text style={styles.signUpBtnText}>SIGN UP</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={ () => this.login() }
-          style={styles.loginBtn}
-        >
-          <Text
-            style={styles.loginBtnText}
-          >ALREADY A USER? LOG IN</Text>
-        </TouchableOpacity>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logoText}> LOGO </Text>
+          <Text style={styles.signUpBtnText}> TAGLINE </Text>
+        </View>
+        <Text style={styles.descript}>BRIEF DESCRIPTION OF APP AND THINGS</Text>
+        <View style={styles.btnContainer}>
+          <TouchableHighlight
+            underlayColor='gainsboro'
+            activeOpacity={.5}
+            style={styles.signUpBtn}
+            onPress={ () => this.navToRegister() }
+          >
+            <Text style={styles.signUpBtnText}>SIGN UP</Text>
+          </TouchableHighlight>
+          <TouchableOpacity
+            onPress={ () => this.login() }
+            style={styles.loginBtn}
+          >
+            <Text
+              style={styles.loginBtnText}
+            >ALREADY A USER? LOG IN</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

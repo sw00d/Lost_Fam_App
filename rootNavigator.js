@@ -5,6 +5,8 @@ import Library from './src/components/library/index';
 import NewAlbum from './src/components/newAlbum/index';
 import FinishedAlbumView from './src/components/completeAlbum/index';
 import Settings from './src/components/Settings/index';
+import SignUp from './src/components/signUp/index';
+
 
 
 export const InnerStack = StackNavigator({
@@ -23,21 +25,14 @@ export const InnerStack = StackNavigator({
   },
   settings: {
     screen: Settings
+  },
+  signUp: {
+    screen: SignUp
   }
 },
 {
   initialRouteName: 'camera',
-  navigationOptions: {
-   headerStyle: {
-     backgroundColor: '#C95656',
-   },
-   headerTintColor: '#fff',
-   headerTitleStyle: {
-     fontWeight: 'bold',
-     fontSize: 25,
-     letterSpacing: 1,
-   },
- },
+  headerMode: 'none'
 });
 
 const rootNavigator = StackNavigator({

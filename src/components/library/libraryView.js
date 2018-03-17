@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, Button, AsyncStorage} from 'react-native';
+import {ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
+import { Container, Header, Left, Body, Right, Button, Title, Subtitle } from 'native-base';
+
 
 export default class LibraryView extends Component {
   constructor(props) {
@@ -25,9 +27,6 @@ export default class LibraryView extends Component {
     this.forceUpdate();
   }
 
-  static navigationOptions = {
-    title: 'Library',
-  };
 
   render() {
     const swipeBtns = [{
@@ -52,15 +51,13 @@ export default class LibraryView extends Component {
 
       }
     })()
-    // <View style={styles.topBanner} >
-    // <Text style={styles.title}>LIBRARY</Text>
-    // </View>
+
 
     return(
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigate('newAlbum')} style={styles.icon} underlayColor='white'>
-          <Ionicons name="md-add" size={32} color="White"/>
-        </TouchableOpacity>
+        <View style={styles.topBanner} >
+          <Text style={styles.title}>LIBRARY</Text>
+        </View>
         <ScrollView>
         {
           albums.map((album, i) => {

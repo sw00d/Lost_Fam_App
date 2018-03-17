@@ -9,8 +9,14 @@ export default (height, width) => {
       justifyContent: 'center',
       alignItems: 'center'
     },
+    btnContainer: {
+      position: 'absolute',
+      justifyContent: 'center',
+      alignItems: 'center',
+      top: height*.60
+    },
     signUpBtn: {
-      height: height / 6,
+      height: height / 9,
       width: width / 1.2,
       justifyContent: 'center',
       alignItems: 'center',
@@ -20,7 +26,7 @@ export default (height, width) => {
     },
     signUpBtnText: {
       color: 'white',
-      fontSize: height / 24,
+      fontSize: height / 32,
       fontWeight: '600'
     },
     loginBtnText: {
@@ -28,8 +34,28 @@ export default (height, width) => {
       fontWeight: '600',
       fontSize: height / 40,
     },
+    descript: {
+      color: 'white',
+      fontWeight: '600',
+      fontSize: height / 40,
+      position: 'absolute',
+      top: height*.5
+    },
     loginBtn: {
       marginTop: height / 6 / 4
-    }
+    },
+    logoContainer: {
+      position: 'absolute',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      top: height*.2
+    },
+    logoText: {
+      color: 'white',
+      fontSize: height / 16,
+      fontWeight: '700',
+      letterSpacing: 1
+
+    },
   })
 }
