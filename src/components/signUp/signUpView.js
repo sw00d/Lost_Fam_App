@@ -46,8 +46,10 @@ export default class SignUpView extends Component {
   }
   submit() {
     const { register, validate } = this.props;
-    if (!register) return;
-    if (!canNavToNext(register, validate)) return;
+    // if (!register) return;
+    // console.log("is reg ister");
+    // console.log(register);
+    // if (!canNavToNext(register, validate)) return;
     this.props.createUser(register);
   }
 
@@ -75,10 +77,17 @@ export default class SignUpView extends Component {
               <Field name="password" label="Password" component={this.renderField} />
               <Field name="confirmPass" label="Confirm Password" component={this.renderField} />
           </Form>
+<<<<<<< HEAD
         </Content>
         <Button style={styles.submitBtn} onPress={() => this.submit()}>
         <Text style={styles.btnFont}>Sign Up</Text>
         </Button>
+=======
+          <Button style={styles.submitBtn} onPress={() => this.submit()}>
+            <Text style={styles.btnFont}>Sign Up</Text>
+          </Button>
+        </Content>
+>>>>>>> 60657783fc66875af011ce986bac5eebc801ebd2
       </View>
     );
   }
