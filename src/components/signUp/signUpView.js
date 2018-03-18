@@ -1,22 +1,56 @@
 import React, { Component } from 'react';
-import {ScrollView, Text, View, TouchableOpacity} from 'react-native';
+import {TextInput, ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import { Container, Header, Content, Form, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+// import { Container, Header, Content, Form, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import { renderField } from './renderField';
-import {Field} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import { canNavToNext } from '../../utils';
 import Swipeout from 'react-native-swipeout';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+import {Ionicons} from '@expo/vector-icons';
 
 
 export default class SignUpView extends Component {
 
+  renderField(field) {
+    const { meta: { touched, error, active } } = field;
+    const className = `${touched && error ? styles.hasDanger : ''}`;
+    if (field.input.name === 'confirmPass'){
+      return (
+        <View >
+        <Item floatingLabel style={ (active || touched) && error ? styles.hasDanger : ''}>
+        <Label>{ (active || touched) && error ? error : 'Confirmed'}</Label>
+        <Input
+        type='text'
+        placeholderTextColor='red'
+        {...field.input}
+        />
+        </Item>
+        </View>
+      );
+    }
+    else {
+      return (
+        <View >
+        <Item floatingLabel style={(active || touched) && error ? styles.hasDanger : ''}>
+        <Label>{(active || touched) && error ? error : field.label}</Label>
+        <Input
+        type='text'
+        placeholderTextColor='red'
+        {...field.input}
+        />
+        </Item>
+        </View>
+      );
+    }
+  }
   submit() {
     const { register, validate } = this.props;
     if (!register) return;
     if (!canNavToNext(register, validate)) return;
     this.props.createUser(register);
   }
+
 
   render() {
     return (
@@ -28,30 +62,23 @@ export default class SignUpView extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={styles.btnFont}>Sign Up</Title>
+            <Title style={styles.title}>Sign Up</Title>
           </Body>
           <Right>
           </Right>
           </Header>
         <Content style={styles.content}>
           <Form>
-              <Field name="fullName" label="Full Name" component={renderField} />
-              <Field name="email" label={"Email"} component={renderField} />
-              <Field name="username" label={"Username"} component={renderField} />
-              <Field name="password" label={"Password"} component={renderField} />
-              <Field name="confirmPass" label={"Confirm Password"} component={renderField} />
+              <Field name="fullName" label="Full Name" component={this.renderField} />
+              <Field name="email" label="Email" component={this.renderField} />
+              <Field name="username" label="Username" component={this.renderField} />
+              <Field name="password" label="Password" component={this.renderField} />
+              <Field name="confirmPass" label="Confirm Password" component={this.renderField} />
           </Form>
-<<<<<<< HEAD
-          <Button style={styles.submitBtn} onPress={() => this.submit()}>
-            <Text style={styles.btnFont}>Sign Up</Text>
-          </Button>
-=======
->>>>>>> e81887cad274fd16c6f3d9c48afc42e91c29e91d
         </Content>
-        <Button style={styles.submitBtn} onPress={this.submit.bind(this)}>
-          <Text style={styles.btnFont}>Sign Up</Text>
+        <Button style={styles.submitBtn} onPress={() => this.submit()}>
+        <Text style={styles.btnFont}>Sign Up</Text>
         </Button>
-
       </View>
     );
   }

@@ -5,6 +5,15 @@ const bottomBannerHeight = height/10;
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  btnFont: {
+    color: 'white',
+    fontSize: 20,
+  },
+  header: {
+    height: height/10,
+    width: width,
+    backgroundColor: '#C95656',
+  },
   swipeCont: {
     width: width,
     backgroundColor: 'transparent',
@@ -40,9 +49,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontSize: 20,
-    paddingLeft: width/11,
-    paddingTop: height/60,
+    fontSize: 25,
     fontWeight: '700',
   },
   row: {

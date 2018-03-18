@@ -13,3 +13,15 @@
    }
    return false;
  }
+
+ export const testName = (name) => {
+   if (name){
+     return(name.length > 2);
+   }
+ }
+
+ export const testPassword = (password) => {
+   if (password){
+     return(password.length > 5);
+   }
+ }

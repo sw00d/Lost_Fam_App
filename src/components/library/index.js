@@ -8,13 +8,13 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { deleteAlbum }
+  return { deleteAlbum, activeAlbum }
 }
 
 const Library = connect(
   mapStateToProps,
-  { activeAlbum, deleteAlbum },
-  // mapDispatchToProps
+  // { activeAlbum, deleteAlbum },
+  mapDispatchToProps
 )(LibraryView);
 
 export default Library;
