@@ -1,5 +1,6 @@
 import React from 'react';
 import { Item, Input, Label } from 'native-base';
+import { TextInput } from 'react-native';
 
 export const renderField = field => {
   const { meta:{ touched, error }} = field;

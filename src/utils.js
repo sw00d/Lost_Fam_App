@@ -3,13 +3,12 @@
    return re.test(email);
  }
 
- export const canNavToNext = (formObj, instOfValidate) => {
-   if (formObj.hasOwnProperty('values')) {
-     let objToTest = instOfValidate(formObj.values);
-     for (let key in objToTest) {
-       if(objToTest.hasOwnProperty(key)) return false;
-     }
-     return true;
-   }
-   return false;
+ export const canNavToNext = (values, instOfValidate) => {
+   console.log(values)
+    if (!values) return false;
+    let objToTest = instOfValidate(values);
+    for (let key in objToTest) {
+      if(objToTest.hasOwnProperty(key)) return false;
+    }
+    return true;
  }

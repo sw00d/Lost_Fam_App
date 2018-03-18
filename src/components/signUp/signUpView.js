@@ -11,12 +11,8 @@ import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Bod
 export default class SignUpView extends Component {
 
   submit() {
-    const { register, validate } = this.props;
-    // if (!register) return;
-    // console.log("is reg ister");
-    // console.log(register);
-    // if (!canNavToNext(register, validate)) return;
-    this.props.createUser(register);
+    const { validate } = this.props;
+    this.props.createUser(validate);
   }
 
   render() {
@@ -36,11 +32,11 @@ export default class SignUpView extends Component {
           </Header>
         <Content style={styles.content}>
           <Form>
-              <Field name="fullName" label="Full Name" component={renderField} />
-              <Field name="email" label={"Email"} component={renderField} />
-              <Field name="username" label={"Username"} component={renderField} />
-              <Field name="password" label={"Password"} component={renderField} />
-              <Field name="confirmPass" label={"Confirm Password"} component={renderField} />
+              <Field name="name" label="Your Name" component={renderField} />
+              <Field name="email" label="Email" component={renderField} />
+              <Field name="username" label="Username" component={renderField} />
+              <Field name="password" label="Password" component={renderField} />
+              <Field name="confirmPass" label="Confirm Password" component={renderField} />
           </Form>
           <Button style={styles.submitBtn} onPress={() => this.submit()}>
             <Text style={styles.btnFont}>Sign Up</Text>

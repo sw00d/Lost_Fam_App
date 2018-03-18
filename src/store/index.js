@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 import promise from 'redux-promise';
 import Logger from 'redux-logger';
+import Thunk from 'redux-thunk';
 
 
 // const persistConfig = {
@@ -15,5 +16,5 @@ import Logger from 'redux-logger';
 //
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = applyMiddleware(promise)(createStore)(rootReducer);
+export const store = applyMiddleware(Thunk, promise)(createStore)(rootReducer);
 // export const persistor = persistStore(store);

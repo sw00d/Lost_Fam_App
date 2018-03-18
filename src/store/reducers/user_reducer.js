@@ -1,11 +1,18 @@
-import { CREATE_USER } from '../actions/user_actions';
+import { USER_HAS_ERRORED, SAVE_TOKEN } from '../actions/user_actions';
 
 export default (state = {}, action) => {
   switch(action.type) {
-    case CREATE_USER:
-      const { success } = action.req;
+    case USER_HAS_ERRORED:
+      const { message, status } = action.payload;
       return {
-        success,
+        status,
+        message,
+        ...state
+      }
+    case SAVE_TOKEN:
+      const { token } = action;
+      return {
+        token,
         ...state
       }
     default:
