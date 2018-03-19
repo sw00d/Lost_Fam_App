@@ -3,9 +3,9 @@ const {height, width} = Dimensions.get('window');
 console.log(height)
 export default StyleSheet.create({
     hasDanger: {
-      fontWeight: '100',
       borderBottomColor: 'red',
-      borderBottomWidth: 1
+      borderBottomWidth: 1,
+      width: width
     },
     title: {
       color: 'white',
@@ -20,6 +20,7 @@ export default StyleSheet.create({
       backgroundColor: 'gainsboro'
     },
     submitBtn: {
+      marginTop: height/30,
       width: width,
       height: height/10,
       backgroundColor: "#C95656",
@@ -36,6 +37,6 @@ export default StyleSheet.create({
       backgroundColor: '#C95656',
     },
     content: {
-      width: width
+      width: width,
     }
 });

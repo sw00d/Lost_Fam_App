@@ -4,7 +4,6 @@
  }
 
  export const canNavToNext = (values, instOfValidate) => {
-   console.log(values)
     if (!values) return false;
     let objToTest = instOfValidate(values);
     for (let key in objToTest) {

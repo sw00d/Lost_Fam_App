@@ -17,28 +17,28 @@ export default class SignUpView extends Component {
     if (field.input.name === 'confirmPass'){
       return (
         <View >
-        <Item floatingLabel style={ (active || touched) && error ? styles.hasDanger : ''}>
-        <Label>{ (active || touched) && error ? error : 'Confirmed'}</Label>
-        <Input
-        type='text'
-        placeholderTextColor='red'
-        {...field.input}
-        />
-        </Item>
+          <Item floatingLabel style={ (active || touched) && error ? styles.hasDanger : ''}>
+            <Label>{ (active || touched) && error ? error : 'Confirmed'}</Label>
+              <Input
+              type='text'
+              placeholderTextColor='red'
+              {...field.input}
+              />
+            </Item>
         </View>
       );
     }
     else {
       return (
         <View >
-        <Item floatingLabel style={(active || touched) && error ? styles.hasDanger : ''}>
-        <Label>{(active || touched) && error ? error : field.label}</Label>
-        <Input
-        type='text'
-        placeholderTextColor='red'
-        {...field.input}
-        />
-        </Item>
+          <Item floatingLabel style={ (active || touched) && error ? styles.hasDanger : ''}>
+            <Label>{(active || touched) && error ? error : field.label}</Label>
+              <Input
+              type='text'
+              placeholderTextColor='red'
+              {...field.input}
+              />
+          </Item>
         </View>
       );
     }

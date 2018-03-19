@@ -8,12 +8,12 @@ import { createUser } from '../../store/actions/user_actions';
 
 const validate = (values, field) => {
   const errors = {};
-  if (!values.email || !testEmail(values.email)) errors.email = "Requires valid email address";
+  if (!values.email || !testEmail(values.email)) errors.email = "Please enter valid email address";
   if (!values.fullName || !testName(values.fullName)) errors.fullName = "Please enter you name";
   if (!values.password || !testPassword(values.password)) errors.password = "Enter a password at least 6 characters";
   if (!values.confirmPass) errors.confirmPass = "Confirm your password";
   if (values.password !== values.confirmPass && values.confirmPass != undefined) {
-      errors.confirmPass = "Entered passwords must match";
+      errors.confirmPass = "Passwords must match";
   }
   return errors;
 }
