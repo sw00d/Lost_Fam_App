@@ -3,8 +3,8 @@ import CameraView from './cameraView';
 import { savePhoto } from '../../store/actions/album_actions';
 
 const mapStateToProps = state => {
-  const { albums: {activeAlbum} } = state;
-  return { activeAlbum };
+  const { albums: {activeAlbum}, user: {token} } = state;
+  return { activeAlbum, token };
 }
 
 const Camera = connect(

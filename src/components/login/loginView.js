@@ -18,6 +18,10 @@ export default class LoginView extends Component {
   }
 
   render() {
+    const { token, navigation:{navigate} } = this.props;
+    if (!!token) {
+      navigate('mainScreens');
+    }
     return(
       <View style={styles.container}>
         <View style={styles.logoContainer}>

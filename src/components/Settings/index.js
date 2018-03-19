@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import settingsView from './settingsView';
 
 const mapStateToProps = state => {
-  const { albums: {activeAlbum} } = state;
-  return { activeAlbum };
+  const { albums: {activeAlbum}, user:{token} } = state;
+  return { activeAlbum, token };
 }
 
 const mapDispatchToProps = dispatch => {

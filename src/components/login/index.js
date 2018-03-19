@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import LoginView from './loginView';
 
 const mapStateToProps = state => {
-  const { test } = state;
-  return { test };
+  const { token } = state.user;
+  return { token };
 }
 
 const mapDispatchToProps = dispatch => {

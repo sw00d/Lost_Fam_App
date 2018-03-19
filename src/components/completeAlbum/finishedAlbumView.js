@@ -91,10 +91,10 @@ export default class completedAlbum extends React.Component {
   render(){
     // console.log(this.state.pics);
     const { pics } = this.state;
-    const { navigation: { goBack } } = this.props;
+    const { navigation: { goBack, navigate }, token } = this.props;
     // const {height, width} = Dimensions.get('window');
 
-
+    if (!token) navigate('login');
 
     return(
       <View>

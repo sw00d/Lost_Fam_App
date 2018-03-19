@@ -35,8 +35,8 @@ export default class NewAlbumView extends Component {
   };
 
   render() {
-    const { navigation: { navigate } } = this.props;
-    const { navigation: { goBack } } = this.props;
+    const { navigation: { navigate, goBack}, token } = this.props;
+    if (!token) navigate('login');
     return(
       <View>
         <Swipeout style={styles.container}>

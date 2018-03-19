@@ -13,8 +13,9 @@ export default class CameraDiv extends React.Component {
     };
 
   async componentWillMount() {
-    const { activeAlbum, navigation: {navigate} } = this.props;
-    if (!activeAlbum || !activeAlbum.name) navigate('library');
+    const { activeAlbum, navigation: {navigate}, token } = this.props;
+    if (!token) navigate('login');
+    if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
     //idk why need a local var for this
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });

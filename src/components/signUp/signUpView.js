@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {TextInput, ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import styles from './styles';
 // import { Container, Header, Content, Form, Button, Left, Body, Right, Icon, Title, } from 'native-base';
-import { renderField } from './renderField';
 import {Field, reduxForm} from 'redux-form';
 import { canNavToNext } from '../../utils';
 import Swipeout from 'react-native-swipeout';

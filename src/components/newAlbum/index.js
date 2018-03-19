@@ -3,8 +3,8 @@ import NewAlbumView from './newAlbumView';
 import { addAlbum } from '../../store/actions/album_actions';
 
 const mapStateToProps = (state) => {
-  const { albums:{ albums } } = state;
-  return { albums }
+  const { albums:{ albums }, user: {token} } = state;
+  return { albums, token }
 }
 
 const NewAlbum = connect(

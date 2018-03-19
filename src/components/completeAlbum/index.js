@@ -2,18 +2,12 @@ import { connect } from 'react-redux';
 import finishedAlbumView from './finishedAlbumView';
 
 const mapStateToProps = state => {
-  const { albums: {activeAlbum} } = state;
-  return { activeAlbum };
+  const { albums: {activeAlbum}, user: {token} } = state;
+  return { activeAlbum, token };
 }
-
-const mapDispatchToProps = dispatch => {
- return {}
-}
-
 
 const CompletedAlbum = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(finishedAlbumView);
 
 export default CompletedAlbum;

@@ -5,7 +5,6 @@ export default StyleSheet.create({
     hasDanger: {
       fontWeight: '100',
       borderBottomColor: 'red',
-      borderBottomStyle: 'solid',
       borderBottomWidth: 1
     },
     title: {

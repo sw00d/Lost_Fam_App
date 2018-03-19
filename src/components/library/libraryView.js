@@ -14,6 +14,12 @@ export default class LibraryView extends Component {
     }
   }
 
+  componentWillMount() {
+    const { navigation: { navigate }, token } = this.props;
+    console.log(token)
+    if (!token) navigate('login');
+  }
+
   updateActiveAlbum(idx) {
     const { navigation: { goBack, navigate }, activeAlbum, albums } = this.props;
     activeAlbum(idx);
@@ -40,8 +46,7 @@ export default class LibraryView extends Component {
       underlayColor: 'transparent',
       onPress: () => this.deleteAndUpdate()
     }];
-    const { navigation: { navigate }, albums } = this.props;
-
+    const { albums } = this.props;
     // uncomment this to view all keys
     // (async () => {
     //   try {
