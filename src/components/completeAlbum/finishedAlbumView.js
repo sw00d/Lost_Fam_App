@@ -94,7 +94,7 @@ export default class completedAlbum extends React.Component {
     const { navigation: { goBack, navigate }, token } = this.props;
     // const {height, width} = Dimensions.get('window');
 
-    if (!token) navigate('login');
+    if (!token) navigate('titleScreen');
 
     return(
       <View>

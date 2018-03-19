@@ -1,52 +1,63 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Dimensions, TouchableHighlight } from 'react-native';
-import LoginStyles from './styles';
-import PropTypes from 'prop-types';
+import {TextInput, ScrollView, Text, View, TouchableOpacity} from 'react-native';
+import styles from './styles';
+// import { Container, Header, Content, Form, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+import {Field, reduxForm} from 'redux-form';
+import { canNavToNext } from '../../utils';
+import Swipeout from 'react-native-swipeout';
+import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+import {Ionicons} from '@expo/vector-icons';
 
-const { height, width } = Dimensions.get('window');
-const styles = LoginStyles(height, width);
 
 export default class LoginView extends Component {
-  navToRegister() {
-    this.props.navigation.navigate('signUp');
+
+  renderField(field) {
+    const { meta: { touched, error, active } } = field;
+    const className = `${touched && error ? styles.hasDanger : ''}`;
+    return (
+      <View >
+        <Item floatingLabel >
+          <Label>{(active || touched) && error ? error : field.label}</Label>
+          <Input
+            type='text'
+            style={(active || touched) && error ? styles.hasDanger : ''}
+            placeholderTextColor='red'
+            {...field.input}
+          />
+        </Item>
+      </View>
+      );
+  }
+  submit() {
+    const { validate } = this.props;
+    this.props.authenticateUser(validate);
   }
 
-  login() {
-    // this.props.authenticate();
-    //if this state is authenticated
-    this.props.navigation.navigate('mainScreens');
-  }
 
   render() {
-    const { token, navigation:{navigate} } = this.props;
-    if (!!token) {
-      navigate('mainScreens');
-    }
-    return(
+    return (
       <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logoText}> LOGO </Text>
-          <Text style={styles.signUpBtnText}> TAGLINE </Text>
-        </View>
-        <Text style={styles.descript}>BRIEF DESCRIPTION OF APP AND THINGS</Text>
-        <View style={styles.btnContainer}>
-          <TouchableHighlight
-            underlayColor='gainsboro'
-            activeOpacity={.5}
-            style={styles.signUpBtn}
-            onPress={ () => this.navToRegister() }
-          >
-            <Text style={styles.signUpBtnText}>SIGN UP</Text>
-          </TouchableHighlight>
-          <TouchableOpacity
-            onPress={ () => this.login() }
-            style={styles.loginBtn}
-          >
-            <Text
-              style={styles.loginBtnText}
-            >ALREADY A USER? LOG IN</Text>
-          </TouchableOpacity>
-        </View>
+        <Header style={styles.header}>
+          <Left>
+            <Button transparent onPress={()=>this.props.navigation.goBack()}>
+              <Text style={styles.btnFont}>Back</Text>
+            </Button>
+          </Left>
+          <Body>
+            <Title style={styles.title}>Login</Title>
+          </Body>
+          <Right>
+          </Right>
+          </Header>
+        <Content style={styles.content}>
+          <Form>
+              <Field name="username" label="Username" component={this.renderField} />
+              <Field name="password" label="Password" component={this.renderField} />
+          </Form>
+          <Button style={styles.submitBtn} onPress={() => this.submit()}>
+            <Text style={styles.btnFont}>Login</Text>
+          </Button>
+        </Content>
       </View>
     );
   }

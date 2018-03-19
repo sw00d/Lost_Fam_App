@@ -24,3 +24,7 @@
      return(password.length > 5);
    }
  }
+
+ export const checkForWhiteSpace = (str) => {
+    return /\s/g.test(str);
+ }

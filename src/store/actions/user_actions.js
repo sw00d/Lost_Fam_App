@@ -10,6 +10,7 @@ const ROOT_URL = 'http://192.168.1.2:8080';
 export const createUser = (validate) => {
   return (dispatch, getState) => {
     const { values } = getState().form.register;
+    values.email = values.email.toLowerCase();
     if (canNavToNext(values, validate)) {
       axios.post(`${ROOT_URL}/api/register`, { values }).then(res => {
         if (!res.data.success) dispatch(userHasErrored(true, "Failed to create user."));
