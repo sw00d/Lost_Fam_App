@@ -4,7 +4,15 @@ export default StyleSheet.create({
     hasDanger: {
       borderBottomColor: 'red',
       borderBottomWidth: 1,
-      width: width
+      borderStyle: 'solid'
+    },
+    success: {
+      borderBottomColor: 'green',
+
+      borderBottomWidth: 1,
+
+      borderStyle: 'solid'
+
     },
     title: {
       color: 'white',

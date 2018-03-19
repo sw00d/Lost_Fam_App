@@ -11,16 +11,19 @@ import {Ionicons} from '@expo/vector-icons';
 
 export default class SignUpView extends Component {
 
+
+
   renderField(field) {
     const { meta: { touched, error, active } } = field;
-    const className = `${touched && error ? styles.hasDanger : ''}`;
+    // const className = `${touched && error ? styles.hasDanger : ''}`;
     if (field.input.name === 'confirmPass'){
       return (
-        <View >
-          <Item floatingLabel style={ (active || touched) && error ? styles.hasDanger : ''}>
-            <Label>{ (active || touched) && error ? error : 'Confirmed'}</Label>
+        <View style={ (active || touched) && error ? styles.hasDanger : (touched && !error) || (active && !error) ? styles.success : ''}>
+          <Item floatingLabel >
+            <Label>{ (active || touched) && error ? error : (!touched) ? field.label : 'Confirmed'}</Label>
               <Input
               type='text'
+              secureTextEntry={true}
               placeholderTextColor='red'
               {...field.input}
               />
@@ -30,11 +33,12 @@ export default class SignUpView extends Component {
     }
     else {
       return (
-        <View >
-          <Item floatingLabel style={ (active || touched) && error ? styles.hasDanger : ''}>
-            <Label>{(active || touched) && error ? error : field.label}</Label>
+        <View style={ (active || touched) && error ? styles.hasDanger : (touched && !error) || (active && !error) ? styles.success : ''}>
+          <Item floatingLabel >
+              <Label>{(active || touched) && error ? error : field.label}</Label>
               <Input
               type='text'
+              secureTextEntry={(field.input.name === 'password') ? true : false}
               placeholderTextColor='red'
               {...field.input}
               />
@@ -42,6 +46,12 @@ export default class SignUpView extends Component {
         </View>
       );
     }
+
+    console.log(field);
+  }
+
+  activateSubmit() {
+    console.log('poc')
   }
   submit() {
     const { validate, navigation:{navigate} } = this.props;
@@ -56,7 +66,7 @@ export default class SignUpView extends Component {
         <Header style={styles.header}>
           <Left>
             <Button transparent onPress={()=>this.props.navigation.goBack()}>
-              <Text style={styles.btnFont}>Back</Text>
+              <Ionicons name="ios-arrow-back" size={32} color="white" />
             </Button>
           </Left>
           <Body>

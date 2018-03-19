@@ -8,7 +8,7 @@ const validate = (values, field) => {
   const errors = {};
   if (!values.email || !testEmail(values.email)) errors.email = "Requires valid email address";
   if (!values.name || !testName(values.name)) errors.name = "Please enter your name";
-  if (!values.password || !testPassword(values.password)) errors.password = "Enter a password at least 6 characters";
+  if (!values.password || !testPassword(values.password)) errors.password = "Enter a password of at least 6 characters";
   if (!values.confirmPass) errors.confirmPass = "Confirm your password";
   if (values.password !== values.confirmPass && values.confirmPass != undefined) {
       errors.confirmPass = "Passwords must match";

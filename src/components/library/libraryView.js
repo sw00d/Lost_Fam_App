@@ -70,7 +70,7 @@ export default class LibraryView extends Component {
         <Header style={styles.header}>
           <Left>
             <Button transparent onPress={()=>this.props.navigation.goBack()}>
-              <Ionicons  name="ios-arrow-back" size={32} color="white" />
+              <Ionicons name="ios-arrow-back" size={32} color="white" />
             </Button>
           </Left>
           <Body>
