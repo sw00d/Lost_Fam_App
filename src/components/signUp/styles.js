@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
 const {height, width} = Dimensions.get('window');
-console.log(height)
 export default StyleSheet.create({
     hasDanger: {
       borderBottomColor: 'red',

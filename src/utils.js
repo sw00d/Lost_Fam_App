@@ -6,6 +6,7 @@
  export const canNavToNext = (values, instOfValidate) => {
     if (!values) return false;
     let objToTest = instOfValidate(values);
+    console.log(objToTest)
     for (let key in objToTest) {
       if(objToTest.hasOwnProperty(key)) return false;
     }
@@ -22,4 +23,8 @@
    if (password){
      return(password.length > 5);
    }
+ }
+
+ export const checkForWhiteSpace = (str) => {
+    return /\s/g.test(str);
  }

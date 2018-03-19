@@ -1,61 +1,40 @@
-import { StyleSheet } from 'react-native';
-
-export default (height, width) => {
-  return StyleSheet.create({
-    container: {
-      width,
-      height,
-      backgroundColor: '#C95656',
-      justifyContent: 'center',
-      alignItems: 'center'
+import { StyleSheet, Dimensions } from 'react-native';
+const {height, width} = Dimensions.get('window');
+export default StyleSheet.create({
+    hasDanger: {
+      fontWeight: '100',
+      borderBottomColor: 'red',
+      borderBottomWidth: 1
     },
-    btnContainer: {
-      position: 'absolute',
-      justifyContent: 'center',
-      alignItems: 'center',
-      top: height*.60
-    },
-    signUpBtn: {
-      height: height / 9,
-      width: width / 1.2,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderColor: 'white',
-      borderRadius: 10,
-      borderWidth: 2
-    },
-    signUpBtnText: {
+    title: {
       color: 'white',
-      fontSize: height / 32,
-      fontWeight: '600'
-    },
-    loginBtnText: {
-      color: 'white',
-      fontWeight: '600',
-      fontSize: height / 40,
-    },
-    descript: {
-      color: 'white',
-      fontWeight: '600',
-      fontSize: height / 40,
-      position: 'absolute',
-      top: height*.5
-    },
-    loginBtn: {
-      marginTop: height / 6 / 4
-    },
-    logoContainer: {
-      position: 'absolute',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      top: height*.2
-    },
-    logoText: {
-      color: 'white',
-      fontSize: height / 16,
+      fontSize: 20,
       fontWeight: '700',
-      letterSpacing: 1
-
     },
-  })
-}
+    container: {
+      height: height,
+      width: width,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: 'gainsboro'
+    },
+    submitBtn: {
+      width: width,
+      height: height/10,
+      backgroundColor: "#C95656",
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    btnFont: {
+      color: 'white',
+      fontSize: 20,
+    },
+    header: {
+      height: height/10,
+      width: width,
+      backgroundColor: '#C95656',
+    },
+    content: {
+      width: width
+    }
+});

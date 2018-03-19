@@ -1,20 +1,27 @@
 import { connect } from 'react-redux';
 import LoginView from './loginView';
+import {reduxForm} from 'redux-form';
+import { testPassword, checkForWhiteSpace } from '../../utils';
+import { authenticateUser } from '../../store/actions/user_actions';
 
-const mapStateToProps = state => {
-  const { token } = state.user;
-  return { token };
+const validate = (values, field) => {
+  // || !testPassword(values.password)
+  const errors = {};
+  if (!values.username) errors.username = "Enter your Username";
+  if (!values.password ) errors.password = "Enter your password";
+  if (checkForWhiteSpace(values.password)) errors.password = "Password cannot have whitespace";
+  if (checkForWhiteSpace(values.username)) errors.username = "Username cannot have whitespace";
+  return errors;
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    authenticate: () => alert('Autheincate')
-  }
+const mapStateToProps = (state) => {
+  return { validate }
 }
 
-const Login = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginView);
+const Login = connect(mapStateToProps, { authenticateUser })(LoginView);
 
-export default Login;
+export default reduxForm({
+  validate: validate,
+  destroyOnUnmount: true,
+  form: 'login'
+})(Login);

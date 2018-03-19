@@ -17,7 +17,7 @@ export default class LibraryView extends Component {
   componentWillMount() {
     const { navigation: { navigate }, token } = this.props;
     console.log(token)
-    if (!token) navigate('login');
+    if (!token) navigate('titleScreen');
   }
 
   updateActiveAlbum(idx) {

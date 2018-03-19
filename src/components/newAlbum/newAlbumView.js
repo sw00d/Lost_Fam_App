@@ -11,6 +11,11 @@ export default class NewAlbumView extends Component {
     this.state = { text: '' }
   }
 
+  componentWillMount() {
+    const {navigation:{navigate}, token} = this.props;
+    if (!token) navigate('titleScreen');
+  }
+
   checkDuplicate(text) {
     const { albums } = this.props;
     if (text.length < 3 || !albums) return false;
@@ -35,8 +40,7 @@ export default class NewAlbumView extends Component {
   };
 
   render() {
-    const { navigation: { navigate, goBack}, token } = this.props;
-    if (!token) navigate('login');
+    const { navigation: { navigate, goBack}} = this.props;
     return(
       <View>
         <Swipeout style={styles.container}>
