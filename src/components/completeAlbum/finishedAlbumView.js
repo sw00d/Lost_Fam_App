@@ -15,6 +15,11 @@ export default class completedAlbum extends React.Component {
     }
   }
 
+  componentWillMount() {
+    const {navigation:{navigate}, token} = this.props;
+    if (!token) navigate('titleScreen');
+  }
+
   componentDidMount(){
     const fotos = this.props.activeAlbum.pics;
 
@@ -93,9 +98,6 @@ export default class completedAlbum extends React.Component {
     const { pics } = this.state;
     const { navigation: { goBack, navigate }, token } = this.props;
     // const {height, width} = Dimensions.get('window');
-
-    if (!token) navigate('titleScreen');
-
     return(
       <View>
         <Button onPress={ this.saveToPhone } title="Save to CameraRoll"></Button>

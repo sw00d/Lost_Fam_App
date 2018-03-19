@@ -14,23 +14,23 @@ export default class LoginView extends Component {
   renderField(field) {
     const { meta: { touched, error, active } } = field;
     const className = `${touched && error ? styles.hasDanger : ''}`;
-    return (
-      <View >
-        <Item floatingLabel >
-          <Label>{(active || touched) && error ? error : field.label}</Label>
-          <Input
-            type='text'
-            style={(active || touched) && error ? styles.hasDanger : ''}
-            placeholderTextColor='red'
-            {...field.input}
-          />
+      return (
+        <View >
+        <Item floatingLabel style={(active || touched) && error ? styles.hasDanger : ''}>
+        <Label>{(active || touched) && error ? error : field.label}</Label>
+        <Input
+        type='text'
+        placeholderTextColor='red'
+        {...field.input}
+        />
         </Item>
-      </View>
+        </View>
       );
   }
   submit() {
-    const { validate } = this.props;
+    const { validate, navigation:{navigate} } = this.props;
     this.props.authenticateUser(validate);
+    navigate('titleScreen');
   }
 
 

@@ -44,8 +44,9 @@ export default class SignUpView extends Component {
     }
   }
   submit() {
-    const { validate } = this.props;
+    const { validate, navigation:{navigate} } = this.props;
     this.props.createUser(validate);
+    navigate('titleScreen');
   }
 
 

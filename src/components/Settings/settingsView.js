@@ -10,9 +10,12 @@ export default class Settings extends React.Component {
     title: 'Settings',
   };
 
-  render() {
-    const { token, navigation: {navigate} } = this.props;
+  componentWillMount() {
+    const {navigation:{navigate}, token} = this.props;
     if (!token) navigate('titleScreen');
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.option}>

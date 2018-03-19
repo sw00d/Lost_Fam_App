@@ -7,11 +7,13 @@ const { height, width } = Dimensions.get('window');
 const styles = TitleStyles(height, width);
 
 export default class TitleView extends Component {
+  componentWillMount() {
+    const {navigation:{navigate}, token} = this.props;
+    if (!!token) navigate('mainScreens');
+  }
+
   render() {
-    const { token, navigation:{navigate} } = this.props;
-    if (!!token) {
-      navigate('mainScreens');
-    }
+    const { navigation:{navigate} } = this.props;
     return(
       <View style={styles.container}>
         <View style={styles.logoContainer}>
