@@ -1,14 +1,14 @@
 # Lost Fam map
 
 
-## Original idea proposed by Kent Johns and Micahel Graeff
+### Original idea proposed by Kent Johns and Micahel Graeff
 
 
 
-# URL:
+## URL:
 exp://j2-w8v.samuelote.lostfam.exp.direct:80
 
-# todos
+## todos
 
 1. Add User authentication
 5. persist redux store
@@ -19,7 +19,7 @@ exp://j2-w8v.samuelote.lostfam.exp.direct:80
 10: integrate navigation headers instead of custom headers https://reactnavigation.org/docs/headers.html
 
 
-# schema
+## schema
   {
     ablums: [
       {
