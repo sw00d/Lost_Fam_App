@@ -1,3 +1,9 @@
+# Lost Fam map
+
+
+## Original idea proposed by Kent Johns and Micahel Graeff
+
+
 
 # URL:
 exp://j2-w8v.samuelote.lostfam.exp.direct:80
