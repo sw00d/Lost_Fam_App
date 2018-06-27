@@ -14,7 +14,7 @@ export default class CameraDiv extends React.Component {
 
   async componentWillMount() {
     const { activeAlbum, navigation: {navigate}, token } = this.props;
-    if (!token) navigate('titleScreen');
+    // if (!token) navigate('titleScreen');
     if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
     //idk why need a local var for this
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -23,8 +23,10 @@ export default class CameraDiv extends React.Component {
 
 
   cachePhoto = async (data) => {
+
     const { savePhoto, activeAlbum: { name, pics } } = this.props;
     const { exif } = data;
+    console.log(data);
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
     // console.log(key);
     // fall_2016:0

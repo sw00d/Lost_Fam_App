@@ -10,54 +10,45 @@ import { BlurView } from 'expo';
 const { height, width } = Dimensions.get('window');
 
 class RenderField extends Component {
+
+
   render() {
     const { refName, meta: { touched, error, active, visited }, input: { value, name, onFocus, onChange} } = this.props;
-      console.log(this.props);
+    const display = (!error && name === 'confirmPass') ? 'submitBtn' : 'btnHidden';
       return (
-        <KeyboardAvoidingView style={!visited ? null : (visited && error) || (error && active) ? styles.hasDanger : styles.success}>
-          <Item floatingLabel>
-            <Label>{error && active ? error : this.props.label}</Label>
-            <Input
-              autoCorrect={false}
-              ref={refName}
-              value={value}
-              style={{color: 'black'}}
-              onFocus={onFocus}
-              onChange={onChange}
-              keyboardType={name === 'email' ? 'email-address' : 'default' }
-              secureTextEntry={name === 'confirmPass' || name === 'password' ? true : false }
-            />
-          </Item>
-        </KeyboardAvoidingView>
+        <View>
+          <KeyboardAvoidingView style={!visited ? null : (visited && error) || (error && active) ? styles.hasDanger : styles.success}>
+            <Item floatingLabel>
+              <Label>{error && active ? error : this.props.label}</Label>
+              <Input
+                autoCorrect={false}
+                ref={refName}
+                value={value}
+                style={{color: 'black'}}
+                onFocus={onFocus}
+                onChange={onChange}
+                keyboardType={name === 'email' ? 'email-address' : 'default' }
+                secureTextEntry={name === 'confirmPass' || name === 'password' ? true : false }
+              />
+            </Item>
+          </KeyboardAvoidingView>
+        </View>
       );
+      // <Button style={styles[display]} onPress={() => this.submit()}>
+      //   <Text style={styles.btnFont}>Sign Up</Text>
+      // </Button>
   }
 };
 
 
 export default class SignUpView extends Component {
-
-  constructor(){
-    super();
-    this.state = {
-      name: false,
-      email: false
-    }
-  }
-  componentDidMount(){
-  }
   submit() {
-    console.log(this.refs.refName);
-    // let body = this._Ref
-    // console.log(body);
-    // const { validate, navigation:{navigate}, createUser } = this.props;
-    // createUser(validate);
-    // navigate('titleScreen');
+    const { validate, navigation:{navigate}, createUser } = this.props;
+    createUser(validate);
+    navigate('titleScreen');
   }
 
   render() {
-    // console.log('asdf')
-
-
     return (
       <View>
         <View style={styles.container}>
@@ -103,10 +94,10 @@ export default class SignUpView extends Component {
                 component={RenderField} />
             </Form>
           </Content>
+          <Button style={styles.submitBtn} onPress={() => this.submit()}>
+            <Text style={styles.btnFont}>Sign Up</Text>
+          </Button>
         </View>
-        <Button style={styles.submitBtn} onPress={() => this.submit()}>
-          <Text style={styles.btnFont}>Sign Up</Text>
-        </Button>
       </View>
     );
   }

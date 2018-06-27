@@ -57,6 +57,9 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'gainsboro'
   },
+  btnHidden: {
+    display: 'none'
+  },
   submitBtn: {
     position: 'absolute',
     width: width/1.2,

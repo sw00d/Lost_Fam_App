@@ -77,7 +77,7 @@ export default class completedAlbum extends React.Component {
     headerRight: (
       <TouchableOpacity onPress= { () => {
         Share.share({
-            message: 'SHARE THAT SHIT AROUND BITCH ASS N***A',
+            message: 'SHARE THAT SHIT AROUND',
             title: 'f**k ME TITLE'
           }, {
             // Android only:

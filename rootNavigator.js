@@ -51,7 +51,8 @@ const rootNavigator = StackNavigator({
   }
 },
 {
-  initialRouteName: 'titleScreen',
+  // initialRouteName: 'titleScreen',
+  initialRouteName: 'mainScreens',
   headerMode: 'none'
 });
 
