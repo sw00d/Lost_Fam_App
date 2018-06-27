@@ -8,29 +8,31 @@ import Swipeout from 'react-native-swipeout';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import {Ionicons} from '@expo/vector-icons';
 
-
-export default class LoginView extends Component {
-
-  renderField(field) {
-    const { meta: { touched, error, active } } = field;
-    const className = `${touched && error ? styles.hasDanger : ''}`;
+class RenderField extends Component {
+  render() {
+    const { meta: { touched, error, active, visited } } = this.props;
       return (
-        <View >
-        <Item floatingLabel style={(active || touched) && error ? styles.hasDanger : ''}>
-        <Label>{(active || touched) && error ? error : field.label}</Label>
-        <Input
-        type='text'
-        placeholderTextColor='red'
-        {...field.input}
-        />
-        </Item>
+        <View style={!visited ? null : (visited && error) || (error && active) ? styles.hasDanger : styles.success}>
+          <Item floatingLabel>
+            <Label>{error && touched && !active ? error : this.props.label}</Label>
+            <Input
+              onFocus={this.props.input.onFocus}
+              onBlur={this.props.input.onBlur}
+              onChange={this.props.input.onChange}
+              keyboardType={this.props.input.name === 'email' ? 'email-address' : 'default' }
+              secureTextEntry={this.props.input.name === 'confirmPass' || this.props.input.name === 'password' ? true : false }
+            />
+          </Item>
         </View>
       );
   }
+}
+
+export default class LoginView extends Component {
   submit() {
     const { validate, navigation:{navigate} } = this.props;
     this.props.authenticateUser(validate);
-    navigate('titleScreen');
+    navigate('camera');
   }
 
 
@@ -40,7 +42,7 @@ export default class LoginView extends Component {
         <Header style={styles.header}>
           <Left>
             <Button transparent onPress={()=>this.props.navigation.goBack()}>
-              <Text style={styles.btnFont}>Back</Text>
+              <Ionicons name="ios-arrow-back" size={32} color="white" />
             </Button>
           </Left>
           <Body>
@@ -51,8 +53,8 @@ export default class LoginView extends Component {
           </Header>
         <Content style={styles.content}>
           <Form>
-              <Field name="username" label="Username" component={this.renderField} />
-              <Field name="password" label="Password" component={this.renderField} />
+              <Field name="username" label="Username" component={RenderField} />
+              <Field name="password" label="Password" component={RenderField} />
           </Form>
           <Button style={styles.submitBtn} onPress={() => this.submit()}>
             <Text style={styles.btnFont}>Login</Text>

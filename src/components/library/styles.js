@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  success: {
+    borderBottomColor: 'blue',
+    borderBottomWidth: 1,
+    borderStyle: 'solid'
+  },
   header: {
     height: height/10,
     width: width,

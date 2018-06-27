@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    authenticate: () => alert('Autheincate')
+    authenticate: () => alert('Authenticate')
   }
 }
 

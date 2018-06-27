@@ -15,7 +15,7 @@
 
  export const testName = (name) => {
    if (name){
-     return(name.length > 2);
+     return(name.length > 1);
    }
  }
 

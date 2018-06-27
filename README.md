@@ -1,4 +1,6 @@
-I changed the schema a bit to include the exif data, which is all the in depth pic data, but i'm using it for orientation right now. I need to still figure out the height and width of each image to save them properly. I am in the process of saving images to the camera roll.
+
+# URL:
+exp://j2-w8v.samuelote.lostfam.exp.direct:80
 
 # todos
 

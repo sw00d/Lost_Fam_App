@@ -2,8 +2,11 @@ import { StyleSheet, Dimensions } from 'react-native';
 const {height, width} = Dimensions.get('window');
 export default StyleSheet.create({
     hasDanger: {
-      fontWeight: '100',
       borderBottomColor: 'red',
+      borderBottomWidth: 1
+    },
+    success: {
+      borderBottomColor: 'blue',
       borderBottomWidth: 1
     },
     title: {
@@ -19,6 +22,7 @@ export default StyleSheet.create({
       backgroundColor: 'gainsboro'
     },
     submitBtn: {
+      marginTop: height/30,
       width: width,
       height: height/10,
       backgroundColor: "#C95656",

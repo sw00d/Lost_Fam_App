@@ -4,8 +4,10 @@ import { canNavToNext } from '../../utils';
 export const CREATE_USER = 'CREATE_USER';
 export const USER_HAS_ERRORED = 'USER_ERROR';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
+export const CHECK_FOR_ERRORS = 'CHECK_FOR_ERRORS';
 
-const ROOT_URL = 'http://192.168.1.2:8080';
+
+const ROOT_URL = 'http://172.20.10.9:8080';
 
 export const createUser = (validate) => {
   return (dispatch, getState) => {
@@ -40,7 +42,7 @@ export const authenticateUser = (validate, uAndP) => {
 }
 
 export const saveToken = token => {
-  console.log(token);
+  console.log('token', token);
   return {
     type: SAVE_TOKEN,
     token
