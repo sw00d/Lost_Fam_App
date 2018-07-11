@@ -1,22 +1,36 @@
+const ROOT_URL = 'http://127.0.0.1:8080';
+
+
 export const ADD_ALBUM = 'ADD_ALBUM';
 export const DELETE_ALBUM = 'DELETE_ALBUM';
 export const ACTIVE_ALBUM = 'ACTIVE_ALBUM';
 export const SAVE_PHOTO = 'SAVE_PHOTO';
 export const PICS_TAKEN = 'PICS_TAKEN';
 
-export const addAlbum = (name, idx) => {
-  const newAlbum = {
-    pics: [],
-    capacity: 4,
-    idx,
-    name
-  }
-  return {
-    type: ADD_ALBUM,
-    newAlbum
+// export const addAlbum = (name, idx) => {
+//   const newAlbum = {
+//     pics: [],
+//     capacity: 4,
+//     idx,
+//     name
+//   }
+//   return {
+//     type: ADD_ALBUM,
+//     newAlbum
+//   }
+// }
+
+export const addAlbum = (token, name, cap) => {
+  return (dispatch, getState) => {
   }
 }
 
+export const saveAlbum = (newAlbum) => {
+    return {
+      type: ADD_ALBUM,
+      newAlbum
+    }
+}
 export const savePhoto = (key, exif) => {
   const data = {
     key: key,

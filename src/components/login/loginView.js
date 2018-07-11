@@ -31,8 +31,9 @@ class RenderField extends Component {
 export default class LoginView extends Component {
   submit() {
     const { validate, navigation:{navigate} } = this.props;
+    // console.log(validate);
     this.props.authenticateUser(validate);
-    navigate('camera');
+    // navigate('camera');
   }
 
 

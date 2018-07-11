@@ -12,7 +12,7 @@ export default class Settings extends React.Component {
 
   componentWillMount() {
     const {navigation:{navigate}, token} = this.props;
-    if (!token) navigate('titleScreen');
+    // if (!token) navigate('titleScreen');
   }
 
   render() {

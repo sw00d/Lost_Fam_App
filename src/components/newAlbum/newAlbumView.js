@@ -13,7 +13,7 @@ export default class NewAlbumView extends Component {
 
   componentWillMount() {
     const {navigation:{navigate}, token} = this.props;
-    if (!token) navigate('titleScreen');
+    // if (!token) navigate('titleScreen');
   }
 
   checkDuplicate(text) {
@@ -27,12 +27,13 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum(text) {
-    const { albums} = this.props;
-    if (this.checkDuplicate(text)) {
-      const { addAlbum, navigation: { goBack } } = this.props;
-      addAlbum(text, albums.length);
-      goBack()
-    }
+    this.props.addAlbum(this.props.token, text, 36)
+    // const { albums} = this.props;
+    // if (this.checkDuplicate(text)) {
+    //   const { addAlbum, navigation: { goBack } } = this.props;
+    //   addAlbum(text, albums.length);
+    //   goBack()
+    // }
   }
 
   static navigationOptions = {

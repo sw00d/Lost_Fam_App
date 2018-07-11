@@ -7,7 +7,7 @@ export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const CHECK_FOR_ERRORS = 'CHECK_FOR_ERRORS';
 
 
-const ROOT_URL = 'http://172.20.10.9:8080';
+const ROOT_URL = 'http://127.0.0.1:8080';
 
 export const createUser = (validate) => {
   return (dispatch, getState) => {
@@ -27,16 +27,19 @@ export const createUser = (validate) => {
 
 export const authenticateUser = (validate, uAndP) => {
   return (dispatch, getState) => {
+    // console.log(dispatch);
     const { username, password } = !uAndP ? getState().form.login.values : uAndP;
-    console.log(canNavToNext({ username, password }, validate))
+    // console.log(canNavToNext({ username, password }, validate))
     if (canNavToNext({ username, password }, validate)) {
+      console.log('pomcer');
       axios.post(`${ROOT_URL}/api/authenticate`, { username, password }).then(res => {
+        console.log(res.data,'This iS res.data');
         if (!res.data.success) dispatch(userHasErrored(true, "Failed to authenticate."));
         if (res.data.success) {
           dispatch(userHasErrored(false, ""))
           dispatch(saveToken(res.data.token));
         }
-      });
+      }).catch(err=>console.log(err));
     }
   }
 }

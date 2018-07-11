@@ -73,11 +73,11 @@ export default class LibraryView extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={styles.title}>Library</Title>
+            <Title style={styles.title} >Library</Title>
           </Body>
           <Right>
             <TouchableOpacity>
-              <Ionicons name="ios-add-circle-outline" size={32} color="white" />
+              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => this.props.navigation.navigate('newAlbum') } />
             </TouchableOpacity>
           </Right>
         </Header>
