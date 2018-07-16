@@ -43,7 +43,6 @@ class RenderField extends Component {
 export default class SignUpView extends Component {
   submit() {
     // disables button functionality if any errors are in form.
-    console.log(this.enableBtn());
     if (this.enableBtn() === true){
       const { validate, navigation:{navigate}, createUser } = this.props;
       const inst = createUser(validate);
