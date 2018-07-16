@@ -5,8 +5,6 @@ import { testPassword, checkForWhiteSpace } from '../../utils';
 import { authenticateUser } from '../../store/actions/user_actions';
 
 const validate = (values, field) => {
-  // || !testPassword(values.password)
-  // console.log(values);
   const errors = {};
   if (!values.username) errors.username = "Enter your Username";
   if (!values.password ) errors.password = "Enter your password";

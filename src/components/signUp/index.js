@@ -3,6 +3,7 @@ import signUpView from './signUpView';
 import { reduxForm } from 'redux-form';
 import { testEmail, testName, testPassword, checkForWhiteSpace } from '../../utils';
 import { createUser } from '../../store/actions/user_actions';
+import { canNavToNext } from '../../utils';
 
 
 const validate = (values, field) => {
@@ -22,11 +23,10 @@ const validate = (values, field) => {
 }
 
 const mapStateToProps = (state) => {
-  return { validate }
+  return { validate, createUser }
 }
 
-
-const SignUp = connect(mapStateToProps, {createUser})(signUpView);
+const SignUp = connect(mapStateToProps)(signUpView);
 
 export default reduxForm({
   validate,

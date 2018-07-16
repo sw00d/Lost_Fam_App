@@ -15,6 +15,6 @@ import Thunk from 'redux-thunk';
 // };
 //
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
-
+export const hal = 'hal';
 export const store = applyMiddleware(Thunk, promise)(createStore)(rootReducer);
 // export const persistor = persistStore(store);

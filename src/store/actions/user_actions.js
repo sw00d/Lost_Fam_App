@@ -1,16 +1,22 @@
 import axios from 'axios';
 import { canNavToNext } from '../../utils';
+import Expo from 'expo';
+import { store } from '../index.js'
 
 export const CREATE_USER = 'CREATE_USER';
 export const USER_HAS_ERRORED = 'USER_ERROR';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const CHECK_FOR_ERRORS = 'CHECK_FOR_ERRORS';
 
-
-const ROOT_URL = 'http://127.0.0.1:8080';
+const { manifest } = Expo.Constants;
+const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts.dev
+  ? manifest.debuggerHost.split(`:`).shift().concat(`:8080`)
+  : `api.example.com`;
+const ROOT_URL = `http://${api}`;
 
 export const createUser = (validate) => {
-  return (dispatch, getState) => {
+  return () =>{
+    const { dispatch, getState } = store;
     const { values } = getState().form.register;
     values.email = values.email.toLowerCase();
     if (canNavToNext(values, validate)) {
@@ -20,20 +26,17 @@ export const createUser = (validate) => {
           dispatch(userHasErrored(false, ""))
           dispatch(authenticateUser(validate, values));
         }
-      });
+      }).catch(err=>console.log(err));
     }
   }
 }
 
 export const authenticateUser = (validate, uAndP) => {
-  return (dispatch, getState) => {
-    // console.log(dispatch);
+  return () => {
+    const { dispatch, getState } = store;
     const { username, password } = !uAndP ? getState().form.login.values : uAndP;
-    // console.log(canNavToNext({ username, password }, validate))
     if (canNavToNext({ username, password }, validate)) {
-      console.log('pomcer');
       axios.post(`${ROOT_URL}/api/authenticate`, { username, password }).then(res => {
-        console.log(res.data,'This iS res.data');
         if (!res.data.success) dispatch(userHasErrored(true, "Failed to authenticate."));
         if (res.data.success) {
           dispatch(userHasErrored(false, ""))
