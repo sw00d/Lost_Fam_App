@@ -37,7 +37,11 @@ export const authenticateUser = (validate, uAndP) => {
     const { username, password } = !uAndP ? getState().form.login.values : uAndP;
     if (canNavToNext({ username, password }, validate)) {
       axios.post(`${ROOT_URL}/api/authenticate`, { username, password }).then(res => {
-        if (!res.data.success) dispatch(userHasErrored(true, "Failed to authenticate."));
+        if (!res.data.success){
+          dispatch(userHasErrored(true, "Failed to authenticate."));
+          alert('Invalid Login. Try again.');
+        }
+
         if (res.data.success) {
           dispatch(userHasErrored(false, ""))
           dispatch(saveToken(res.data.token));

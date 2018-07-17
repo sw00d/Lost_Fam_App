@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {TextInput, ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import styles from './styles';
-// import { Container, Header, Content, Form, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import {Field, reduxForm} from 'redux-form';
 import { canNavToNext } from '../../utils';
 import Swipeout from 'react-native-swipeout';
@@ -19,7 +18,7 @@ class RenderField extends Component {
               onFocus={this.props.input.onFocus}
               onBlur={this.props.input.onBlur}
               onChange={this.props.input.onChange}
-              keyboardType={this.props.input.name === 'email' ? 'email-address' : 'default' }
+              keyboardType={this.props.input.name === 'username' ? 'email-address' : 'default' }
               secureTextEntry={this.props.input.name === 'confirmPass' || this.props.input.name === 'password' ? true : false }
             />
           </Item>
@@ -29,10 +28,18 @@ class RenderField extends Component {
 }
 
 export default class LoginView extends Component {
+  componentDidUpdate(){
+    const { navigation:{navigate}, token } = this.props;
+    if (token) navigate('camera');
+  }
   submit() {
-    const { validate, navigation:{navigate} } = this.props;
-    this.props.authenticateUser(validate);
-    // navigate('camera');
+    const { validate, syncErrors } = this.props;
+    if (!syncErrors || syncErrors === ''){
+      this.props.authenticateUser(validate);
+    }
+    else {
+      alert(`Please fill out both your password and username.`)
+    }
   }
 
   render() {
@@ -52,7 +59,7 @@ export default class LoginView extends Component {
           </Header>
         <Content style={styles.content}>
           <Form>
-              <Field name="username" label="Username" component={RenderField} />
+              <Field name="username" label="Email" component={RenderField} />
               <Field name="password" label="Password" component={RenderField} />
           </Form>
           <Button style={styles.submitBtn} onPress={() => this.submit()}>
