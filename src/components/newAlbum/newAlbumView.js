@@ -13,7 +13,7 @@ export default class NewAlbumView extends Component {
 
   componentWillMount() {
     const {navigation:{navigate}, token} = this.props;
-    // if (!token) navigate('titleScreen');
+    if (!token) navigate('titleScreen');
   }
 
   checkDuplicate(text) {
@@ -27,7 +27,8 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum(text) {
-    this.props.addAlbum(this.props.token, text, 36)
+    const { addAlbum, token } = this.props;
+    addAlbum(token, text, 36);
     // const { albums} = this.props;
     // if (this.checkDuplicate(text)) {
     //   const { addAlbum, navigation: { goBack } } = this.props;
@@ -46,7 +47,7 @@ export default class NewAlbumView extends Component {
       <View>
         <Swipeout style={styles.container}>
           <TextInput
-            placeholder="Enter Roll Name."
+            placeholder="Enter Roll Name"
             onChangeText={ (text) => this.setState({ text }) }
             value={ this.state.text }
             style={styles.input}

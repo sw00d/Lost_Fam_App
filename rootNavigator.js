@@ -12,7 +12,9 @@ import Login from './src/components/login/index'
 export const InnerStack = StackNavigator({
   camera: {
     screen: Camera,
-    navigationOptions: {}
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   library: {
     screen: Library

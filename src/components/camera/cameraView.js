@@ -6,19 +6,24 @@ import {CacheManager} from "react-native-expo-image-cache";
 import styles from './styles';
 
 export default class CameraDiv extends React.Component {
-    state = {
-      hasCameraPermission: false,
-      type: Camera.Constants.Type.back,
-      dblClick: false
-    };
+  componentDidMount(){
+    // console.log('once');
+    const { activeAlbum, navigation: {navigate}, token } = this.props;
+    if (!token) navigate('titleScreen');
+    if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
+  }
+  state = {
+    hasCameraPermission: true,
+    type: Camera.Constants.Type.back,
+    dblClick: false
+  };
+
 
   async componentWillMount() {
-    const { activeAlbum, navigation: {navigate}, token } = this.props;
-    // if (!token) navigate('titleScreen');
-    // if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
+
     //idk why need a local var for this
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    // const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    // this.setState({ hasCameraPermission: status === 'granted' });
   }
 
 
@@ -78,6 +83,7 @@ export default class CameraDiv extends React.Component {
     const {height, width} = Dimensions.get('window');
     const type = this.state.type;
     const camHeight = styles.camHeight;
+
 
     if (hasCameraPermission === null) {
       return <View />;

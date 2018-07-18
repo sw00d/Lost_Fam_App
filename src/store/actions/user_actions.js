@@ -21,7 +21,10 @@ export const createUser = (validate) => {
     values.email = values.email.toLowerCase();
     if (canNavToNext(values, validate)) {
       axios.post(`${ROOT_URL}/api/register`, { values }).then(res => {
-        if (!res.data.success) dispatch(userHasErrored(true, "Failed to create user."));
+        if (!res.data.success) {
+          dispatch(userHasErrored(true, "Failed to create user."));
+          alert(res.data.message)
+        }
         if (res.data.success) {
           dispatch(userHasErrored(false, ""))
           dispatch(authenticateUser(validate, values));
@@ -34,9 +37,9 @@ export const createUser = (validate) => {
 export const authenticateUser = (validate, uAndP) => {
   return () => {
     const { dispatch, getState } = store;
-    const { username, password } = !uAndP ? getState().form.login.values : uAndP;
-    if (canNavToNext({ username, password }, validate)) {
-      axios.post(`${ROOT_URL}/api/authenticate`, { username, password }).then(res => {
+    const { email, password } = !uAndP ? getState().form.login.values : uAndP;
+    if (canNavToNext({ email, password }, validate)) {
+      axios.post(`${ROOT_URL}/api/authenticate`, { email, password }).then(res => {
         if (!res.data.success){
           dispatch(userHasErrored(true, "Failed to authenticate."));
           alert('Invalid Login. Try again.');
@@ -52,7 +55,7 @@ export const authenticateUser = (validate, uAndP) => {
 }
 
 export const saveToken = token => {
-  console.log('token', token);
+  // console.log('token', token);
   return {
     type: SAVE_TOKEN,
     token

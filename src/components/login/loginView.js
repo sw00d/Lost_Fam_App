@@ -18,7 +18,7 @@ class RenderField extends Component {
               onFocus={this.props.input.onFocus}
               onBlur={this.props.input.onBlur}
               onChange={this.props.input.onChange}
-              keyboardType={this.props.input.name === 'username' ? 'email-address' : 'default' }
+              keyboardType={this.props.input.name === 'email' ? 'email-address' : 'default' }
               secureTextEntry={this.props.input.name === 'confirmPass' || this.props.input.name === 'password' ? true : false }
             />
           </Item>
@@ -28,9 +28,19 @@ class RenderField extends Component {
 }
 
 export default class LoginView extends Component {
+  componentWillMount(){
+    const { navigation:{navigate}, token, validate } = this.props;
+    const me ={
+      email: 'samote.wood@gmail.com',
+      password: 'pomcer',
+      name: 'Sam'
+    }
+    this.props.authenticateUser(validate, me);
+
+  }
   componentDidUpdate(){
     const { navigation:{navigate}, token } = this.props;
-    if (token) navigate('camera');
+    if (token) navigate('newAlbum');
   }
   submit() {
     const { validate, syncErrors } = this.props;
@@ -38,7 +48,7 @@ export default class LoginView extends Component {
       this.props.authenticateUser(validate);
     }
     else {
-      alert(`Please fill out both your password and username.`)
+      alert(`Please fill out both your password and email.`)
     }
   }
 
@@ -59,7 +69,7 @@ export default class LoginView extends Component {
           </Header>
         <Content style={styles.content}>
           <Form>
-              <Field name="username" label="Email" component={RenderField} />
+              <Field name="email" label="Email" component={RenderField} />
               <Field name="password" label="Password" component={RenderField} />
           </Form>
           <Button style={styles.submitBtn} onPress={() => this.submit()}>

@@ -6,10 +6,10 @@ import { authenticateUser } from '../../store/actions/user_actions';
 
 const validate = (values, field) => {
   const errors = {};
-  if (!values.username) errors.username = "Enter your Email";
+  if (!values.email) errors.email = "Enter your Email";
   if (!values.password ) errors.password = "Enter your password";
   if (checkForWhiteSpace(values.password)) errors.password = "Password cannot have whitespace";
-  if (checkForWhiteSpace(values.username)) errors.username = "Email cannot have whitespace";
+  if (checkForWhiteSpace(values.email)) errors.email = "Email cannot have whitespace";
   return errors;
 }
 

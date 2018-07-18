@@ -78,23 +78,10 @@ export default class SignUpView extends Component {
           <Content style={styles.content}>
             <Form>
               <Field
-                component={RenderField}
-                name="name"
-                type="text"
-                label="Your Name"
-                refName={(c) => this.nameRef = c}
-                refName='pomc'
-                withRef
-              />
-              <Field
                 name="email"
                 label="Email"
                 component={RenderField}
               />
-              <Field
-                name="username"
-                label="Username"
-                component={RenderField} />
               <Field
                 name="password"
                 label="Password"
