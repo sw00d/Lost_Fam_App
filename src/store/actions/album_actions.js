@@ -1,3 +1,4 @@
+import { store } from '../index.js'
 import axios from 'axios';
 const { manifest } = Expo.Constants;
 const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts.dev
@@ -9,6 +10,7 @@ export const ADD_ALBUM = 'ADD_ALBUM';
 export const DELETE_ALBUM = 'DELETE_ALBUM';
 export const ACTIVE_ALBUM = 'ACTIVE_ALBUM';
 export const SAVE_PHOTO = 'SAVE_PHOTO';
+export const ALBUM_LIST = 'ALBUM_LIST';
 export const PICS_TAKEN = 'PICS_TAKEN';
 
 // export const addAlbum = (name, idx) => {
@@ -40,7 +42,6 @@ export const PICS_TAKEN = 'PICS_TAKEN';
 // }
 
 export const addAlbum = (token, name, cap) => {
-  console.log('fires');
   const values = {
     name,
     capacity: cap,
@@ -48,15 +49,32 @@ export const addAlbum = (token, name, cap) => {
   }
   return () => {
     axios.post(`${ROOT_URL}/api/users/albums`, { values }).then(res => {
-      console.log(res.AlbumSuccess);
+      return true;
     }).catch(err=>console.log(err));
   }
 }
 
-export const saveAlbum = (newAlbum) => {
+export const getAlbums = (token) => {
+  const { dispatch, getState } = store;
+
+  const params = {
+    user_id: token
+  }
+
+  return () => {
+    axios.get(`${ROOT_URL}/api/albums`, { params }).then(res => {
+      dispatch(saveAlbumList(res.data));
+
+    }).catch(err=>console.log(err));
+  }
+
+}
+
+export const saveAlbumList = (list) => {
+  console.log('fires');
     return {
-      type: ADD_ALBUM,
-      newAlbum
+      type: ALBUM_LIST,
+      list
     }
 }
 export const savePhoto = (key, exif) => {

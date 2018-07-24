@@ -31,16 +31,16 @@ export default class LoginView extends Component {
   componentWillMount(){
     const { navigation:{navigate}, token, validate } = this.props;
     const me ={
-      email: 'samote.wood@gmail.com',
+      email: 'maria@gmail.com',
       password: 'pomcer',
-      name: 'Sam'
+      name: 'Maria'
     }
     this.props.authenticateUser(validate, me);
 
   }
   componentDidUpdate(){
     const { navigation:{navigate}, token } = this.props;
-    if (token) navigate('newAlbum');
+    if (token) navigate('camera');
   }
   submit() {
     const { validate, syncErrors } = this.props;

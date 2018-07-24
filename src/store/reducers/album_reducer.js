@@ -1,4 +1,4 @@
-import { ADD_ALBUM, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN, SAVE_PHOTO } from '../actions/album_actions';
+import { ALBUM_LIST, ACTIVE_ALBUM, DELETE_ALBUM, PICS_TAKEN, SAVE_PHOTO } from '../actions/album_actions';
 import { AsyncStorage } from 'react-native'
 
 export default (state = {
@@ -6,8 +6,8 @@ export default (state = {
   activeAlbum: {}
 }, action) => {
   switch(action.type) {
-    case ADD_ALBUM:
-      state.albums.push(action.newAlbum)
+    case ALBUM_LIST:
+      state.albums = action.list;
       return { ...state }
     case ACTIVE_ALBUM:
       const activeAlbum = state.albums[action.idx];

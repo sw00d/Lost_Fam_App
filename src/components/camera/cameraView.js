@@ -10,7 +10,7 @@ export default class CameraDiv extends React.Component {
     // console.log('once');
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
-    if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
+    // if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
   }
   state = {
     hasCameraPermission: true,
