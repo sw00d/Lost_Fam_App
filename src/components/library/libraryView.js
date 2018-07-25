@@ -14,7 +14,7 @@ export default class LibraryView extends Component {
       albums: []
     }
   }
-  componentDidUpdate(){
+  componentDidMount(){
     const { albums } = this.props;
     const albArr = [];
     for (let i = 0; i <= albums.length; i++){
@@ -51,14 +51,7 @@ export default class LibraryView extends Component {
     this.forceUpdate();
   }
 
-  addAlbum() {
-    console.log('add')
-    // const { register, validate } = this.props;
-    // if (!canNavToNext(register, validate)) return;
-    // this.props.addAlbum(register)
-  }
   render() {
-    console.log(albums);
     const swipeBtns = [{
       text: 'Delete',
       backgroundColor: 'red',
@@ -66,6 +59,7 @@ export default class LibraryView extends Component {
       onPress: () => this.deleteAndUpdate()
     }];
     const { albums } = this.props;
+    // console.log(albums);
     // uncomment this to view all keys
     // (async () => {
     //   try {
@@ -81,9 +75,6 @@ export default class LibraryView extends Component {
     //   }
     // })()
 
-    // <View style={styles.topBanner} >
-    // <Text style={styles.title}>LIBRARY</Text>
-    // </View>
     return(
       <View style={styles.container}>
         <Header style={styles.header}>
@@ -101,25 +92,25 @@ export default class LibraryView extends Component {
             </TouchableOpacity>
           </Right>
         </Header>
+        <ScrollView>
+        { (albums.length) ?
+            albums.map((album, i) => {
+              const { capacity, name, pics } = album;
+              return(
+                <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
+                  <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
+                    <Text style={styles.albText}>{ name }</Text>
+                    <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text>
+                  </TouchableOpacity>
+                </Swipeout>
+              )
+            })
+           : null
+        }
+        </ScrollView>
 
         <View style={styles.bottomBanner}></View>
       </View>
     );
   }
 }
-
-// <ScrollView>
-// {
-//   albums.map((album, i) => {
-//     const { capacity, name } = album;
-//     return(
-//       <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-//       <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
-//       <Text style={styles.albText}>{ name }</Text>
-//       <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text>
-//       </TouchableOpacity>
-//       </Swipeout>
-//     )
-//   })
-// }
-// </ScrollView>
