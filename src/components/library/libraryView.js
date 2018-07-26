@@ -46,9 +46,10 @@ export default class LibraryView extends Component {
   }
 
   deleteAndUpdate() {
+    const { token } = this.props;
     const { selectedAlb } = this.state;
-    this.props.deleteAlbum(selectedAlb);
-    this.forceUpdate();
+    this.props.deleteAlbum(token, selectedAlb);
+    // this.forceUpdate();
   }
 
   render() {

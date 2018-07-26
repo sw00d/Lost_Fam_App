@@ -55,7 +55,7 @@ export const addAlbum = (token, name, cap) => {
 }
 
 export const getAlbums = (token) => {
-  const { dispatch, getState } = store;
+  const { dispatch } = store;
 
   const params = {
     user_id: token
@@ -95,9 +95,17 @@ export const activeAlbum = (idx) => {
   }
 }
 
-export const deleteAlbum = (idx) => {
-  return {
-    type: DELETE_ALBUM,
-    idx
+export const deleteAlbum = (token, albIdx) => {
+  const params = {
+    user_id: token,
+    albIdx
+  }
+
+  return () => {
+    axios.delete(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
+      // dispatch(saveAlbumList(res.data));
+      console.log(res.data);
+
+    }).catch(err=>console.log(err));
   }
 }
