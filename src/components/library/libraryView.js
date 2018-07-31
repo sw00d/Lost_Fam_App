@@ -44,10 +44,9 @@ export default class LibraryView extends Component {
   }
 
   updateActiveAlbum(idx) {
-    console.log('line 47');
-    const { navigation: { goBack, navigate }, activeAlbum, albums } = this.props;
+    const { navigation: { popToTop, navigate }, activeAlbum, albums } = this.props;
     activeAlbum(idx);
-    if (albums[idx].pics.length < albums[idx].capacity) goBack('camera');
+    if (albums[idx].pics.length < albums[idx].capacity) popToTop();
     else navigate('finishedAlbum');
   }
 
@@ -68,7 +67,7 @@ export default class LibraryView extends Component {
       underlayColor: 'transparent',
       onPress: () => this.deleteAndUpdate()
     }];
-    const { albums } = this.props;
+    const { albums, navigation: { popToTop } } = this.props;
     // console.log(albums);
     // uncomment this to view all keys
     // (async () => {
@@ -89,7 +88,7 @@ export default class LibraryView extends Component {
       <View style={styles.container}>
         <Header style={styles.header}>
           <Left>
-            <Button transparent onPress={()=>this.props.navigation.goBack()}>
+            <Button transparent onPress={()=>popToTop()}>
               <Ionicons name="ios-arrow-back" size={32} color="white" />
             </Button>
           </Left>

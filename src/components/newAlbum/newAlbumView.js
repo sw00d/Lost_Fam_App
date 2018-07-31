@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import { Button, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
-import {Ionicons} from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default class NewAlbumView extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' }
+    this.state = {
+      text: '',
+      cap: 7
+    };
+    this.timer = null;
+
   }
 
   componentWillMount() {
@@ -24,6 +30,21 @@ export default class NewAlbumView extends Component {
       if (album.name === text) nonDup = false;
     });
     return nonDup;
+  }
+
+  updateCap(e){
+    const { cap } = this.state
+    const self = this;
+    if (e && cap < 32){
+      this.setState({cap: cap+1})
+    } else if (!e && cap >= 1) {
+      this.setState({cap: cap-1})
+    }
+    this.timer = setTimeout(()=>self.updateCap(e), 100);
+
+  }
+  stopTimer() {
+    clearTimeout(this.timer);
   }
 
   createAlbum(text) {
@@ -46,6 +67,21 @@ export default class NewAlbumView extends Component {
     const { navigation: { navigate, goBack}} = this.props;
     return(
       <View>
+        <Header style={styles.header}>
+          <Left>
+            <Button transparent onPress={()=>goBack()}>
+              <Ionicons name="ios-arrow-back" size={32} color="white" />
+            </Button>
+          </Left>
+          <Body>
+            <Title style={styles.title} >New Album</Title>
+          </Body>
+          <Right>
+            <TouchableOpacity>
+              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => navigate('newAlbum') } />
+            </TouchableOpacity>
+          </Right>
+        </Header>
         <Swipeout style={styles.container}>
           <TextInput
             placeholder="Enter Roll Name"
@@ -54,13 +90,18 @@ export default class NewAlbumView extends Component {
             style={styles.input}
             autoCorrect={true}
           />
-          <TouchableOpacity
-            activeOpacity={.1}
-            style={styles.button}
-            onPress={ () => this.createAlbum(this.state.text) }
-          >
-            <Text style={styles.btnText} >Add New Album</Text>
+          <Text>{ this.state.cap }</Text>
+          <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(true) }}>
+            <Ionicons name="ios-arrow-up" size={42} color="grey" />
           </TouchableOpacity>
+          <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(false) }}>
+            <Ionicons name="ios-arrow-down" size={42} color="grey" />
+          </TouchableOpacity>
+
+
+          <Button block style={styles.button}>
+            <Text style={styles.btnText} >Add New Album</Text>
+          </Button>
         </Swipeout>
       </View>
     );

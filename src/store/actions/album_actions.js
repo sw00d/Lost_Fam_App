@@ -112,7 +112,6 @@ export const savePhoto = (key, exif) => {
 }
 
 export const activeAlbum = (idx) => {
-  console.log(idx);
   return {
     type: ACTIVE_ALBUM,
     idx

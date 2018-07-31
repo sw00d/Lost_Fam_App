@@ -4,28 +4,20 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  header: {
+    height: height/10,
+    width: width,
+    backgroundColor: '#C95656',
+  },
+  title: {
+    color: "white",
+    // fontSize: 25,
+    // fontWeight: '700'
+  },
   container: {
     height: height,
     width: width,
     alignItems: 'center',
-
-  },
-  topBanner: {
-    top: 0,
-    height: topBannerHeight,
-    width: width,
-    backgroundColor: '#C95656',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    paddingLeft: width/20
-  },
-  title: {
-    color: 'white',
-    fontSize: 20,
-    paddingLeft: width/11,
-    paddingTop: height/60,
-    fontWeight: '700',
   },
   btnText: {
     color: 'white',
@@ -42,11 +34,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#c95656',
-    width: width/1.2,
-    height: height/15,
-    marginTop: height/20,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 
 })
