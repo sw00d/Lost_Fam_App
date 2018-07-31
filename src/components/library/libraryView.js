@@ -16,21 +16,26 @@ export default class LibraryView extends Component {
   }
   componentDidMount(){
     const { albums } = this.props;
-    const albArr = [];
-    for (let i = 0; i <= albums.length; i++){
-      const alb = albums[i];
-      if (alb){
-        const { name, pics, capacity, _id} = alb;
-        if (name && pics && capacity && _id){
-          const obj = {
-            name,
-            pics,
-            capacity
-          }
-          albArr.push(obj)
-        } else continue;
+    if (albums){
+      const albArr = [];
+      for (let i = 0; i <= albums.length; i++){
+        const alb = albums[i];
+        if (alb){
+          const { name, pics, capacity, _id} = alb;
+          if (name && pics && capacity && _id){
+            const obj = {
+              name,
+              pics,
+              capacity
+            }
+            albArr.push(obj)
+          } else continue;
+        }
       }
     }
+  }
+  componentDidUpdate(){
+    // console.log(this.props.albums);
   }
   componentWillMount() {
     const { token, getAlbums } = this.props;
@@ -49,10 +54,13 @@ export default class LibraryView extends Component {
     const { token } = this.props;
     const { selectedAlb } = this.state;
     this.props.deleteAlbum(token, selectedAlb);
-    // this.forceUpdate();
+    // console.log(this.props.albums);
+    this.forceUpdate();
+
   }
 
   render() {
+    // console.log('render');
     const swipeBtns = [{
       text: 'Delete',
       backgroundColor: 'red',
@@ -94,7 +102,7 @@ export default class LibraryView extends Component {
           </Right>
         </Header>
         <ScrollView>
-        { (albums.length) ?
+        { (albums) ?
             albums.map((album, i) => {
               const { capacity, name, pics } = album;
               return(

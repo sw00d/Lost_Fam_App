@@ -47,9 +47,13 @@ export const addAlbum = (token, name, cap) => {
     capacity: cap,
     user_id: token
   }
+  const self = this;
   return () => {
     axios.post(`${ROOT_URL}/api/users/albums`, { values }).then(res => {
-      return true;
+      alert(res.data)
+      console.log('boombammbamm');
+      self.props.navigation.navigate('library');
+
     }).catch(err=>console.log(err));
   }
 }
@@ -58,11 +62,13 @@ export const getAlbums = (token) => {
   const { dispatch } = store;
 
   const params = {
-    user_id: token
+    user_id: token,
+    albIdx: 0
   }
 
   return () => {
-    axios.get(`${ROOT_URL}/api/albums`, { params }).then(res => {
+    axios.get(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
+      console.log('fired getalbums');
       dispatch(saveAlbumList(res.data));
 
     }).catch(err=>console.log(err));
@@ -71,12 +77,33 @@ export const getAlbums = (token) => {
 }
 
 export const saveAlbumList = (list) => {
-  console.log('fires');
+  console.log(list);
     return {
       type: ALBUM_LIST,
       list
     }
 }
+
+export const deleteAlbum = (token, albIdx) => {
+  const { dispatch } = store;
+
+  const params = {
+    user_id: token,
+    albIdx
+  }
+
+  return () => {
+
+    axios.delete(`${ROOT_URL}/api/users/albums`, { params }).then((res)=>{
+      if (res.data.success){
+        // console.log(res.data.albums);
+        dispatch(saveAlbumList(res.data.albums))
+      }
+    }).catch((err)=>{console.log(err)});
+
+  }
+}
+
 export const savePhoto = (key, exif) => {
   const data = {
     key: key,
@@ -92,20 +119,5 @@ export const activeAlbum = (idx) => {
   return {
     type: ACTIVE_ALBUM,
     idx
-  }
-}
-
-export const deleteAlbum = (token, albIdx) => {
-  const params = {
-    user_id: token,
-    albIdx
-  }
-
-  return () => {
-    axios.delete(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
-      // dispatch(saveAlbumList(res.data));
-      console.log(res.data);
-
-    }).catch(err=>console.log(err));
   }
 }

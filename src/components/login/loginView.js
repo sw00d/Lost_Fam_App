@@ -31,9 +31,9 @@ export default class LoginView extends Component {
   componentWillMount(){
     const { navigation:{navigate}, token, validate } = this.props;
     const me ={
-      email: 'samote.wood@gmail.com',
+      email: 'sam@gmail.com',
       password: 'pomcer',
-      name: 'Sam'
+      name: 'sam'
     }
     this.props.authenticateUser(validate, me);
 

@@ -30,7 +30,6 @@ export default class NewAlbumView extends Component {
     const { addAlbum, token, navigation: { navigate } } = this.props;
     addAlbum(token, text, 36);
 
-    navigate('library');
     // const { albums} = this.props;
     // if (this.checkDuplicate(text)) {
     //   const { addAlbum, navigation: { goBack } } = this.props;

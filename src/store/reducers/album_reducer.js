@@ -18,13 +18,13 @@ export default (state = {
     case DELETE_ALBUM:
       const { albums } = state;
       const { idx } = action;
-      albums[idx].pics.forEach(async key => {
-          try {
-            await AsyncStorage.removeItem(key.key);
-          } catch (error) {
-            console.log('Delete Album error: ', error)
-          }
-        })
+      // albums[idx].pics.forEach(async key => {
+      //     try {
+      //       await AsyncStorage.removeItem(key.key);
+      //     } catch (error) {
+      //       console.log('Delete Album error: ', error)
+      //     }
+      //   })
       albums.splice(idx, 1);
       if (state.activeAlbum.idx === idx) state.activeAlbum = {};
       return {
