@@ -7,10 +7,10 @@ import styles from './styles';
 
 export default class CameraDiv extends React.Component {
   componentDidMount(){
-    // console.log('once');
+    console.log('fired');
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
-    // if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
+    if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
   }
   state = {
     hasCameraPermission: true,
@@ -92,7 +92,7 @@ export default class CameraDiv extends React.Component {
       return <Text>No access to camera</Text>;
     }
     else{
-      const albumTitle = this.props.activeAlbum.name;
+      const { name } = this.props.activeAlbum;
       return (
         <View>
 
@@ -101,7 +101,7 @@ export default class CameraDiv extends React.Component {
             <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
               </TouchableOpacity>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('library') } underlayColor='white'>
-                  <Text style={styles.text} >{albumTitle} &nbsp;
+                  <Text style={styles.text} >{ name } &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>
                 </TouchableOpacity>

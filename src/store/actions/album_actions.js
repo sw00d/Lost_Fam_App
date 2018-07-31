@@ -51,7 +51,6 @@ export const addAlbum = (token, name, cap) => {
   return () => {
     axios.post(`${ROOT_URL}/api/users/albums`, { values }).then(res => {
       alert(res.data)
-      console.log('boombammbamm');
       self.props.navigation.navigate('library');
 
     }).catch(err=>console.log(err));
@@ -68,7 +67,6 @@ export const getAlbums = (token) => {
 
   return () => {
     axios.get(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
-      console.log('fired getalbums');
       dispatch(saveAlbumList(res.data));
 
     }).catch(err=>console.log(err));
@@ -77,7 +75,6 @@ export const getAlbums = (token) => {
 }
 
 export const saveAlbumList = (list) => {
-  console.log(list);
     return {
       type: ALBUM_LIST,
       list
@@ -96,9 +93,8 @@ export const deleteAlbum = (token, albIdx) => {
 
     axios.delete(`${ROOT_URL}/api/users/albums`, { params }).then((res)=>{
       if (res.data.success){
-        // console.log(res.data.albums);
         dispatch(saveAlbumList(res.data.albums))
-      }
+      } else alert('Unknown Error. Try Again.');
     }).catch((err)=>{console.log(err)});
 
   }
@@ -116,6 +112,7 @@ export const savePhoto = (key, exif) => {
 }
 
 export const activeAlbum = (idx) => {
+  console.log(idx);
   return {
     type: ACTIVE_ALBUM,
     idx
