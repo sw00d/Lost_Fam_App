@@ -25,7 +25,7 @@ export default class NewAlbumView extends Component {
   checkDuplicate(text) {
     const { albums } = this.props;
     if (text.length < 3 || !albums) return false;
-    var nonDup = true;
+    let nonDup = true;
     albums.forEach(album => {
       if (album.name === text) nonDup = false;
     });
@@ -47,16 +47,14 @@ export default class NewAlbumView extends Component {
     clearTimeout(this.timer);
   }
 
-  createAlbum(text) {
-    const { addAlbum, token, navigation: { navigate } } = this.props;
-    addAlbum(token, text, 36);
-
-    // const { albums} = this.props;
-    // if (this.checkDuplicate(text)) {
-    //   const { addAlbum, navigation: { goBack } } = this.props;
-    //   addAlbum(text, albums.length);
-    //   goBack()
-    // }
+  createAlbum() {
+    const { addAlbum, token, navigation: { goBack } } = this.props;
+    const { cap, text } = this.state;
+    console.log(cap);
+    if (this.checkDuplicate(text)) {
+      addAlbum(token, text, cap);
+      goBack();
+    } else alert('You already have an roll with that name. Try Again.')
   }
 
   static navigationOptions = {
@@ -86,20 +84,33 @@ export default class NewAlbumView extends Component {
           <TextInput
             placeholder="Enter Roll Name"
             onChangeText={ (text) => this.setState({ text }) }
-            value={ this.state.text }
+            onFocus={ (text) => this.setState({ text }) }
+            value={ (this.state.text.length > 0) ? this.state.text : '' }
+            placeholderTextColor='rgba(0,0,0,.2)'
             style={styles.input}
             autoCorrect={true}
           />
-          <Text>{ this.state.cap }</Text>
-          <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(true) }}>
-            <Ionicons name="ios-arrow-up" size={42} color="grey" />
-          </TouchableOpacity>
-          <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(false) }}>
-            <Ionicons name="ios-arrow-down" size={42} color="grey" />
-          </TouchableOpacity>
+
+          <View style={styles.row2}>
+            <View style={styles.column1}>
+              <View style={styles.container2}>
+                <Text style={styles.h2}>Roll Length</Text>
+              </View>
+              <Text style={styles.cap}>{ this.state.cap } days</Text>
+            </View>
+            <View style={styles.divider}></View>
+            <View>
+              <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(true) }}>
+                <Ionicons name="ios-arrow-up" size={42} color="grey" />
+              </TouchableOpacity>
+              <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(false) }}>
+                <Ionicons name="ios-arrow-down" size={42} color="grey" />
+              </TouchableOpacity>
+            </View>
+          </View>
 
 
-          <Button block style={styles.button}>
+          <Button block style={styles.button} onPress={()=>this.createAlbum()}>
             <Text style={styles.btnText} >Add New Album</Text>
           </Button>
         </Swipeout>

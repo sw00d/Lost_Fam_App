@@ -33,7 +33,7 @@ export default class CameraDiv extends React.Component {
     const { exif } = data;
     console.log(data);
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
-    // console.log(key);
+    console.log(key);
     // fall_2016:0
     try {
       await AsyncStorage.setItem(key, data.uri);
