@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
+import { NetInfo, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
@@ -10,7 +10,7 @@ export default class CameraDiv extends React.Component {
     console.log('fired');
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
-    if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
+    // if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
   }
   state = {
     hasCameraPermission: true,
@@ -19,9 +19,13 @@ export default class CameraDiv extends React.Component {
   };
 
 
-  async componentWillMount() {
+  componentWillMount() {
+    const { updateConnection } = this.props;
+    const dispatchConnected = isConnected => updateConnection(isConnected);
 
-    //idk why need a local var for this
+    NetInfo.isConnected.fetch().then().done(() => {
+      NetInfo.isConnected.addEventListener('connectionChange', dispatchConnected);
+    });
     // const { status } = await Permissions.askAsync(Permissions.CAMERA);
     // this.setState({ hasCameraPermission: status === 'granted' });
   }
@@ -31,25 +35,32 @@ export default class CameraDiv extends React.Component {
 
     const { savePhoto, activeAlbum: { name, pics } } = this.props;
     const { exif } = data;
-    console.log(data);
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
-    console.log(key);
     // fall_2016:0
     try {
       await AsyncStorage.setItem(key, data.uri);
     } catch (error) {
       Alert.alert('Error. Try Again');
     } finally {
-      this.props.savePhoto(key, exif.Orientation);
+      savePhoto(key, exif.Orientation);
+      console.log(pics);
     }
   }
 
   _shoot = async () => {
+    const { isConnected } = this.props;
     if (this.camera) {
       this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {
         const uri = data.uri;
         CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
-        this.cachePhoto(data);
+
+        console.log(isConnected);
+        //saves to database if connected, else image is cached.
+        if (isConnected) {
+          console.log('api call for saving pic');
+        } else {
+          this.cachePhoto(data);
+        }
       });
     }
   };

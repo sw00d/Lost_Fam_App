@@ -50,7 +50,6 @@ export default class NewAlbumView extends Component {
   createAlbum() {
     const { addAlbum, token, navigation: { goBack } } = this.props;
     const { cap, text } = this.state;
-    console.log(cap);
     if (this.checkDuplicate(text)) {
       addAlbum(token, text, cap);
       goBack();

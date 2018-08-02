@@ -29,13 +29,13 @@ class RenderField extends Component {
 
 export default class LoginView extends Component {
   componentWillMount(){
-    const { navigation:{navigate}, token, validate } = this.props;
+    const { navigation:{navigate}, token, validate, authenticateUser } = this.props;
     const me ={
       email: 'sam@gmail.com',
       password: 'pomcer',
       name: 'sam'
     }
-    this.props.authenticateUser(validate, me);
+    authenticateUser(validate, me);
 
   }
   componentDidUpdate(){
@@ -43,9 +43,9 @@ export default class LoginView extends Component {
     if (token) navigate('camera');
   }
   submit() {
-    const { validate, syncErrors } = this.props;
+    const { validate, syncErrors, authenticateUser } = this.props;
     if (!syncErrors || syncErrors === ''){
-      this.props.authenticateUser(validate);
+      authenticateUser(validate);
     }
     else {
       alert(`Please fill out both your password and email.`)
