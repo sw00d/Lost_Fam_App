@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CameraView from './cameraView';
-import { savePhoto } from '../../store/actions/album_actions';
+import { savePhoto, savePicToAPI } from '../../store/actions/pics_actions';
 import { updateConnection } from '../../store/actions/general_actions';
 
 const mapStateToProps = state => {
@@ -11,6 +11,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     savePhoto : (e) => dispatch(savePhoto(e)),
+    savePicToAPI : (e) => dispatch(savePicToAPI(e)),
     updateConnection : (e) => dispatch(updateConnection(e))
   }
 }

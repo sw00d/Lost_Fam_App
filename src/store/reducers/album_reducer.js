@@ -32,13 +32,6 @@ export default (state = {
         ...state,
         albums
       }
-    case SAVE_PHOTO:
-      const alb = state.activeAlbum;
-      alb.pics.push(action.data);
-      return {
-        ...state,
-        activeAlbum: alb
-      }
     default:
       return state;
   }

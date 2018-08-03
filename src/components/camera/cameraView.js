@@ -31,36 +31,35 @@ export default class CameraDiv extends React.Component {
   }
 
 
-  cachePhoto = async (data) => {
+  savePhoto = async (data) => {
 
-    const { savePhoto, activeAlbum: { name, pics } } = this.props;
+    const { savePhoto, activeAlbum: { name, pics }, savePicToAPI, token, isConnected } = this.props;
+
     const { exif } = data;
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
     // fall_2016:0
-    try {
-      await AsyncStorage.setItem(key, data.uri);
-    } catch (error) {
-      Alert.alert('Error. Try Again');
-    } finally {
-      savePhoto(key, exif.Orientation);
-      console.log(pics);
+    if (isConnected){
+      savePicToAPI({user_id: token, name, exif})
+    } else {
+      // if not connected to internet, saves pic to cache for later saving to api.
+      try {
+        await AsyncStorage.setItem(key, data.uri);
+      } catch (error) {
+        Alert.alert('Error. Try Again');
+      } finally {
+        savePhoto(key, exif.Orientation);
+      }
     }
   }
 
   _shoot = async () => {
-    const { isConnected } = this.props;
     if (this.camera) {
       this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {
         const uri = data.uri;
         CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
 
-        console.log(isConnected);
-        //saves to database if connected, else image is cached.
-        if (isConnected) {
-          console.log('api call for saving pic');
-        } else {
-          this.cachePhoto(data);
-        }
+        this.savePhoto(data);
+
       });
     }
   };

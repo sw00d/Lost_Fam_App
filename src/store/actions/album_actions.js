@@ -11,7 +11,6 @@ export const DELETE_ALBUM = 'DELETE_ALBUM';
 export const ACTIVE_ALBUM = 'ACTIVE_ALBUM';
 export const SAVE_PHOTO = 'SAVE_PHOTO';
 export const ALBUM_LIST = 'ALBUM_LIST';
-export const PICS_TAKEN = 'PICS_TAKEN';
 
 // export const addAlbum = (name, idx) => {
 //   const newAlbum = {
