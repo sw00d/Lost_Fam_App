@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
+import { RefreshControl, ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
@@ -11,7 +11,8 @@ export default class LibraryView extends Component {
     super(props);
     this.state = {
       selectedAlb: '',
-      albums: []
+      albums: [],
+      refreshing: false
     }
   }
   componentDidMount(){
@@ -34,13 +35,23 @@ export default class LibraryView extends Component {
       }
     }
   }
-  componentDidUpdate(){
-    // console.log(this.props.albums);
-  }
+
   componentWillMount() {
     const { token, getAlbums } = this.props;
     getAlbums(token);
     // if (!token) navigate('titleScreen');
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.reffy().then(()=>console.log('done'))
+  }
+
+  reffy() {
+    const { token, getAlbums } = this.props;
+    return new Promise((resolve, reject) => {
+      getAlbums(token)
+    })
   }
 
   updateActiveAlbum(idx) {
@@ -68,7 +79,7 @@ export default class LibraryView extends Component {
       onPress: () => this.deleteAndUpdate()
     }];
     const { albums, navigation: { popToTop } } = this.props;
-    // console.log(albums);
+    // console.log(albums.forEach((e)=>console.log(e.name)));
     // uncomment this to view all keys
     // (async () => {
     //   try {
@@ -101,7 +112,14 @@ export default class LibraryView extends Component {
             </TouchableOpacity>
           </Right>
         </Header>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
+        >
         { (albums) ?
             albums.map((album, i) => {
               const { capacity, name, pics } = album;

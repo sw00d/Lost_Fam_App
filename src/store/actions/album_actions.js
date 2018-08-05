@@ -47,13 +47,9 @@ export const addAlbum = (token, name, cap) => {
     user_id: token
   }
   const self = this;
-  return () => {
-    axios.post(`${ROOT_URL}/api/users/albums`, { values }).then(res => {
-      alert(res.data)
-      self.props.navigation.navigate('library');
-
-    }).catch(err=>console.log(err));
-  }
+  return new Promise((resolve, reject) => {
+    axios.post(`${ROOT_URL}/api/users/albums`, { values });
+  })
 }
 
 export const getAlbums = (token) => {
@@ -66,6 +62,7 @@ export const getAlbums = (token) => {
 
   return () => {
     axios.get(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
+      // console.log(res.data);
       dispatch(saveAlbumList(res.data));
 
     }).catch(err=>console.log(err));

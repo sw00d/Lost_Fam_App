@@ -7,7 +7,6 @@ import styles from './styles';
 
 export default class CameraDiv extends React.Component {
   componentDidMount(){
-    console.log('fired');
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
     // if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
@@ -38,6 +37,7 @@ export default class CameraDiv extends React.Component {
     const { exif } = data;
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
     // fall_2016:0
+    // console.log(this.props.activeAlbum);
     if (isConnected){
       savePicToAPI({user_id: token, name, exif})
     } else {
@@ -102,7 +102,7 @@ export default class CameraDiv extends React.Component {
       return <Text>No access to camera</Text>;
     }
     else{
-      const { name } = this.props.activeAlbum;
+      const { activeAlbum: {name}, navigation: {navigate} } = this.props;
       return (
         <View>
 
@@ -110,12 +110,12 @@ export default class CameraDiv extends React.Component {
           <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
             <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
               </TouchableOpacity>
-                <TouchableOpacity onPress={ () => this.props.navigation.navigate('library') } underlayColor='white'>
+                <TouchableOpacity onPress={ () => navigate('library') } underlayColor='white'>
                   <Text style={styles.text} >{ name } &nbsp;
                     <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
                   </Text>
                 </TouchableOpacity>
-              <TouchableOpacity style={styles.icon} onPress={ () => this.props.navigation.navigate('settings') } underlayColor='white'>
+              <TouchableOpacity style={styles.icon} onPress={ () => navigate('settings') } underlayColor='white'>
             <Ionicons name="ios-settings" size={32} color="white" />
           </TouchableOpacity>
         </View>
