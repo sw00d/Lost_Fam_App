@@ -37,22 +37,20 @@ export default class LibraryView extends Component {
   }
 
   componentWillMount() {
-    const { token, getAlbums } = this.props;
-    getAlbums(token);
+    this.onRefresh();
     // if (!token) navigate('titleScreen');
   }
 
-  _onRefresh = () => {
+  onRefresh = () => {
+    const self = this;
     this.setState({refreshing: true});
-    this.reffy().then(()=>console.log('done'))
+    const { token, getAlbums } = this.props;
+    setTimeout(()=>self.setState({refreshing: false}),1000)
+    return new Promise((resolve, reject) => {
+      return getAlbums(token)
+    });
   }
 
-  reffy() {
-    const { token, getAlbums } = this.props;
-    return new Promise((resolve, reject) => {
-      getAlbums(token)
-    })
-  }
 
   updateActiveAlbum(idx) {
     const { navigation: { popToTop, navigate }, activeAlbum, albums } = this.props;
@@ -71,7 +69,7 @@ export default class LibraryView extends Component {
   }
 
   render() {
-    // console.log('render');
+    const self = this;
     const swipeBtns = [{
       text: 'Delete',
       backgroundColor: 'red',
@@ -79,22 +77,6 @@ export default class LibraryView extends Component {
       onPress: () => this.deleteAndUpdate()
     }];
     const { albums, navigation: { popToTop } } = this.props;
-    // console.log(albums.forEach((e)=>console.log(e.name)));
-    // uncomment this to view all keys
-    // (async () => {
-    //   try {
-    //     // uncomment to clear cache totally
-    //     // await AsyncStorage.clear();
-    //     await AsyncStorage.getAllKeys((k, e) => {
-    //       // console.log(e)
-    //     // uncomment this to clear all keys including store key
-    //     e.forEach(async key => await AsyncStorage.removeItem(key))
-    //     })
-    //   } catch(error) {
-    //
-    //   }
-    // })()
-
     return(
       <View style={styles.container}>
         <Header style={styles.header}>
@@ -113,30 +95,30 @@ export default class LibraryView extends Component {
           </Right>
         </Header>
         <ScrollView
+          showsVerticalScrollIndicator={true}
+          contentContainerStyle={styles.scrollView}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
+              onRefresh={this.onRefresh}
             />
           }
         >
-        { (albums) ?
-            albums.map((album, i) => {
-              const { capacity, name, pics } = album;
-              return(
-                <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-                  <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
-                    <Text style={styles.albText}>{ name }</Text>
-                    <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text>
-                  </TouchableOpacity>
-                </Swipeout>
-              )
-            })
-           : null
-        }
+          { (albums) ?
+              albums.map((album, i) => {
+                const { capacity, name, pics } = album;
+                return(
+                  <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
+                    <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
+                      <Text style={styles.albText}>{ name }</Text>
+                      <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text>
+                    </TouchableOpacity>
+                  </Swipeout>
+                )
+              })
+             : null
+          }
         </ScrollView>
-
-        <View style={styles.bottomBanner}></View>
       </View>
     );
   }

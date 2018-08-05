@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
-const bottomBannerHeight = height/10;
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
@@ -36,21 +35,12 @@ const styles = StyleSheet.create({
   },
   topBanner: {
     top: 0,
-    height: bottomBannerHeight,
+    height: topBannerHeight,
     width: width,
     backgroundColor: '#C95656',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row'
-  },
-  bottomBanner: {
-    position: 'absolute',
-    bottom: 0,
-    height: bottomBannerHeight,
-    width: width,
-    backgroundColor: '#C95656',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   title: {
     color: 'white',

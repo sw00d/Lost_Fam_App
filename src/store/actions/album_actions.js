@@ -62,8 +62,9 @@ export const getAlbums = (token) => {
 
   return () => {
     axios.get(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
-      // console.log(res.data);
       dispatch(saveAlbumList(res.data));
+      // console.log(res.data);
+      return 'pomc'
 
     }).catch(err=>console.log(err));
   }
