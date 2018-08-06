@@ -6,7 +6,8 @@ import NewAlbum from './src/components/newAlbum/index';
 import FinishedAlbumView from './src/components/completeAlbum/index';
 import Settings from './src/components/Settings/index';
 import SignUp from './src/components/signUp/index';
-import Login from './src/components/login/index'
+import Login from './src/components/login/index';
+import { store } from './src/store';
 
 
 export const InnerStack = StackNavigator({
@@ -30,7 +31,7 @@ export const InnerStack = StackNavigator({
   }
 },
 {
-  initialRouteName: 'camera',
+  initialRouteName: 'library',
   headerMode: 'none'
 });
 

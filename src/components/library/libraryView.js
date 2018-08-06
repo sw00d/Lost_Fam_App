@@ -11,29 +11,11 @@ export default class LibraryView extends Component {
     super(props);
     this.state = {
       selectedAlb: '',
-      albums: [],
       refreshing: false
     }
   }
   componentDidMount(){
-    const { albums } = this.props;
-    if (albums){
-      const albArr = [];
-      for (let i = 0; i <= albums.length; i++){
-        const alb = albums[i];
-        if (alb){
-          const { name, pics, capacity, _id} = alb;
-          if (name && pics && capacity && _id){
-            const obj = {
-              name,
-              pics,
-              capacity
-            }
-            albArr.push(obj)
-          } else continue;
-        }
-      }
-    }
+    this.onRefresh();
   }
 
   componentWillMount() {
@@ -46,16 +28,14 @@ export default class LibraryView extends Component {
     this.setState({refreshing: true});
     const { token, getAlbums } = this.props;
     setTimeout(()=>self.setState({refreshing: false}),1000)
-    return new Promise((resolve, reject) => {
-      return getAlbums(token)
-    });
+    getAlbums(token)
   }
 
 
   updateActiveAlbum(idx) {
-    const { navigation: { popToTop, navigate }, activeAlbum, albums } = this.props;
+    const { navigation: { navigate }, activeAlbum, albums } = this.props;
     activeAlbum(idx);
-    if (albums[idx].pics.length < albums[idx].capacity) popToTop();
+    if (albums[idx].pics.length < albums[idx].capacity) navigate('camera');
     else navigate('finishedAlbum');
   }
 
@@ -63,7 +43,6 @@ export default class LibraryView extends Component {
     const { token } = this.props;
     const { selectedAlb } = this.state;
     this.props.deleteAlbum(token, selectedAlb);
-    // console.log(this.props.albums);
     this.forceUpdate();
 
   }
@@ -76,15 +55,11 @@ export default class LibraryView extends Component {
       underlayColor: 'transparent',
       onPress: () => this.deleteAndUpdate()
     }];
-    const { albums, navigation: { popToTop } } = this.props;
+    const { albums } = this.props;
     return(
       <View style={styles.container}>
         <Header style={styles.header}>
-          <Left>
-            <Button transparent onPress={()=>popToTop()}>
-              <Ionicons name="ios-arrow-back" size={32} color="white" />
-            </Button>
-          </Left>
+          <Left></Left>
           <Body>
             <Title style={styles.title} >Library</Title>
           </Body>
@@ -109,7 +84,7 @@ export default class LibraryView extends Component {
                 const { capacity, name, pics } = album;
                 return(
                   <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-                    <TouchableOpacity activeOpacity={1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
+                    <TouchableOpacity activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
                       <Text style={styles.albText}>{ name }</Text>
                       <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text>
                     </TouchableOpacity>

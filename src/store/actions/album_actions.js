@@ -11,6 +11,7 @@ export const DELETE_ALBUM = 'DELETE_ALBUM';
 export const ACTIVE_ALBUM = 'ACTIVE_ALBUM';
 export const SAVE_PHOTO = 'SAVE_PHOTO';
 export const ALBUM_LIST = 'ALBUM_LIST';
+export const ALBUM_SAVE = 'ALBUM_SAVE';
 
 // export const addAlbum = (name, idx) => {
 //   const newAlbum = {
@@ -40,16 +41,21 @@ export const ALBUM_LIST = 'ALBUM_LIST';
 //   dispatch(authenticateUser(validate, values));
 // }
 
+
 export const addAlbum = (token, name, cap) => {
+  const { dispatch } = store;
   const values = {
     name,
     capacity: cap,
     user_id: token
   }
-  const self = this;
-  return new Promise((resolve, reject) => {
-    axios.post(`${ROOT_URL}/api/users/albums`, { values });
-  })
+  return (dispatch)=>{
+    axios.post(`${ROOT_URL}/api/users/albums`, { values }).then((res)=>{
+      console.log(res.data);
+      dispatch(albumSaved(true))
+      setTimeout(()=>dispatch(albumSaved(false)))
+    });
+  }
 }
 
 export const getAlbums = (token) => {
@@ -75,6 +81,13 @@ export const saveAlbumList = (list) => {
     return {
       type: ALBUM_LIST,
       list
+    }
+}
+
+export const albumSaved = (bool) => {
+    return {
+      type: ALBUM_SAVE,
+      bool
     }
 }
 

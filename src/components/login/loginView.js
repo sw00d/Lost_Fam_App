@@ -40,7 +40,7 @@ export default class LoginView extends Component {
   }
   componentDidUpdate(){
     const { navigation:{navigate}, token } = this.props;
-    if (token) navigate('camera');
+    if (token) navigate('library');
   }
   submit() {
     const { validate, syncErrors, authenticateUser } = this.props;
