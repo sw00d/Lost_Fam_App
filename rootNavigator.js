@@ -7,7 +7,6 @@ import FinishedAlbumView from './src/components/completeAlbum/index';
 import Settings from './src/components/Settings/index';
 import SignUp from './src/components/signUp/index';
 import Login from './src/components/login/index';
-import { store } from './src/store';
 
 
 export const InnerStack = StackNavigator({
@@ -18,7 +17,10 @@ export const InnerStack = StackNavigator({
     }
   },
   library: {
-    screen: Library
+    screen: Library,
+    navigationOptions: {
+      gesturesEnabled: false,
+    }
   },
   newAlbum: {
     screen: NewAlbum
@@ -55,7 +57,7 @@ const rootNavigator = StackNavigator({
 },
 {
   // initialRouteName: 'mainScreens',
-  initialRouteName: 'titleScreen',
+  initialRouteName: 'login',
   headerMode: 'none'
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
+import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
 import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
@@ -94,12 +95,24 @@ export default class completedAlbum extends React.Component {
   };
 
   render(){
-    // console.log(this.state.pics);
-    const { pics } = this.state;
-    const { navigation: { goBack, navigate }, token } = this.props;
+    const { navigation: { goBack, navigate }, token, activeAlbum } = this.props;
+    const { pics } = activeAlbum;
     // const {height, width} = Dimensions.get('window');
     return(
       <View>
+
+        <Header style={styles.header}>
+          <Left>
+            <Button transparent onPress={()=>goBack()}>
+              <Ionicons name="ios-arrow-back" size={32} color="white" />
+            </Button>
+          </Left>
+          <Body>
+            <Title style={styles.title}> {activeAlbum.name} </Title>
+          </Body>
+          <Right></Right>
+        </Header>
+
         <Button onPress={ this.saveToPhone } title="Save to CameraRoll"></Button>
         <ScrollView
           contentContainerStyle={styles.scroll}
@@ -109,13 +122,14 @@ export default class completedAlbum extends React.Component {
 
             pics.map((album, i) => {
               return(
-                      <Image
-                        style={styles.pic}
-                        key={i}
-                        source={{uri: pics[i]}}
-                      />
+                <Image
+                style={styles.pic}
+                key={i}
+                source={{uri: pics[i].uri}}
+                />
               )
             })
+
           }
         </ScrollView>
       </View>

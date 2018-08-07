@@ -9,38 +9,8 @@ const ROOT_URL = `http://${api}`;
 export const ADD_ALBUM = 'ADD_ALBUM';
 export const DELETE_ALBUM = 'DELETE_ALBUM';
 export const ACTIVE_ALBUM = 'ACTIVE_ALBUM';
-export const SAVE_PHOTO = 'SAVE_PHOTO';
 export const ALBUM_LIST = 'ALBUM_LIST';
 export const ALBUM_SAVE = 'ALBUM_SAVE';
-
-// export const addAlbum = (name, idx) => {
-//   const newAlbum = {
-//     pics: [],
-//     capacity: 4,
-//     idx,
-//     name
-//   }
-//   return {
-//     type: ADD_ALBUM,
-//     newAlbum
-//   }
-// }
-
-
-// const { dispatch, getState } = store;
-// const { values } = getState().form.register;
-// values.email = values.email.toLowerCase();
-// if (canNavToNext(values, validate)) {
-
-// if (!res.data.success) {
-//   dispatch(userHasErrored(true, "Failed to create user."));
-//   alert('An unknown error occurred. Please try again.')
-// }
-// if (res.data.success) {
-//   dispatch(userHasErrored(false, ""))
-//   dispatch(authenticateUser(validate, values));
-// }
-
 
 export const addAlbum = (token, name, cap) => {
   const { dispatch } = store;
@@ -110,16 +80,6 @@ export const deleteAlbum = (token, albIdx) => {
   }
 }
 
-export const savePhoto = (key, exif) => {
-  const data = {
-    key: key,
-    exif: exif
-  }
-  return {
-    type: SAVE_PHOTO,
-    data
-  }
-}
 
 export const activeAlbum = (idx) => {
   return {

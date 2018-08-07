@@ -1,4 +1,7 @@
-import { store } from '../index.js'
+import { store } from '../index.js';
+import { NavigationActions } from 'react-navigation';
+import {navigatorRef} from '../../components/camera/cameraView.js';
+
 import axios from 'axios';
 const { manifest } = Expo.Constants;
 const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts.dev
@@ -24,8 +27,7 @@ export const savePicToAPI = (values) => {
   return () => {
     axios.post(`${ROOT_URL}/api/pics`, { values }).then(res => {
       // dispatch(saveAlbumList(res.data));
-      console.log(res.data);
-
+      console.log(res.data, navigatorRef);
     }).catch(err=>console.log(err));
   }
 

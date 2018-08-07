@@ -75,13 +75,9 @@ export default class NewAlbumView extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={styles.title} >New Album</Title>
+            <Title style={styles.title} >Create Roll</Title>
           </Body>
-          <Right>
-            <TouchableOpacity>
-              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => navigate('newAlbum') } />
-            </TouchableOpacity>
-          </Right>
+          <Right></Right>
         </Header>
         <Swipeout style={styles.container}>
           <TextInput
@@ -114,7 +110,7 @@ export default class NewAlbumView extends Component {
 
 
           <Button block style={styles.button} onPress={()=>this.createAlbum()}>
-            <Text style={styles.btnText} >Add New Album</Text>
+            <Text style={styles.btnText} >Add New Roll</Text>
           </Button>
         </Swipeout>
       </View>

@@ -48,6 +48,8 @@ export default class LibraryView extends Component {
   }
 
   render() {
+    const { navigation: { navigate }, albums } = this.props;
+
     const self = this;
     const swipeBtns = [{
       text: 'Delete',
@@ -55,17 +57,22 @@ export default class LibraryView extends Component {
       underlayColor: 'transparent',
       onPress: () => this.deleteAndUpdate()
     }];
-    const { albums } = this.props;
     return(
       <View style={styles.container}>
         <Header style={styles.header}>
-          <Left></Left>
+          <Left>
+          <TouchableOpacity size={32} onPress={ () => navigate('settings') } underlayColor='white'>
+            <Ionicons name="ios-settings-outline" size={32} color="white" />
+          </TouchableOpacity>
+          </Left>
           <Body>
-            <Title style={styles.title} >Library</Title>
+            <View style={styles.directions}>
+              <Text style={styles.title}>Select Roll</Text>
+            </View>
           </Body>
           <Right>
             <TouchableOpacity>
-              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => this.props.navigation.navigate('newAlbum') } />
+              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => navigate('newAlbum') } />
             </TouchableOpacity>
           </Right>
         </Header>

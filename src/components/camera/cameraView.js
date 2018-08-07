@@ -32,18 +32,19 @@ export default class CameraDiv extends React.Component {
 
   savePhoto = async (data) => {
 
-    const { savePhoto, activeAlbum: { name, pics }, savePicToAPI, token, isConnected } = this.props;
+    const { savePhoto, activeAlbum: { name, pics }, savePicToAPI, token, isConnected, navigation: { navigate } } = this.props;
 
-    const { exif } = data;
+    const { exif, uri } = data;
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
     // fall_2016:0
     // console.log(this.props.activeAlbum);
     if (isConnected){
-      savePicToAPI({user_id: token, name, exif})
+      savePicToAPI({user_id: token, name, exif, uri});
+      // this.props.navigation.navigate('library')
     } else {
       // if not connected to internet, saves pic to cache for later saving to api.
       try {
-        await AsyncStorage.setItem(key, data.uri);
+        await AsyncStorage.setItem(key, uri);
       } catch (error) {
         Alert.alert('Error. Try Again');
       } finally {
@@ -106,19 +107,18 @@ export default class CameraDiv extends React.Component {
       return (
         <View>
 
-        <View style={styles.topBanner}>
-          <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
-            <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
-              </TouchableOpacity>
-                <TouchableOpacity onPress={ () => navigate('library') } underlayColor='white'>
-                  <Text style={styles.text} >{ name } &nbsp;
-                    <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
-                  </Text>
-                </TouchableOpacity>
-              <TouchableOpacity style={styles.icon} onPress={ () => navigate('settings') } underlayColor='white'>
-            <Ionicons name="ios-settings" size={32} color="white" />
-          </TouchableOpacity>
-        </View>
+          <View style={styles.topBanner}>
+            <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
+              <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={ () => navigate('library') } underlayColor='white'>
+              <Text style={styles.text} >{ name } &nbsp;
+                <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
+              </Text>
+            </TouchableOpacity>
+            <View></View>
+          </View>
+
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
             <Camera style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
               <View style={styles.filmCircle}>
@@ -136,6 +136,7 @@ export default class CameraDiv extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
+
         </View>
       );
     }

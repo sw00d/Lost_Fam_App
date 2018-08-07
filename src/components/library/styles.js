@@ -4,14 +4,10 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
-  btnFont: {
-    color: 'white',
-    fontSize: 20,
-  },
-  success: {
-    borderBottomColor: 'blue',
-    borderBottomWidth: 1,
-    borderStyle: 'solid'
+  directions: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: width
   },
   header: {
     height: height/10,
@@ -44,8 +40,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontSize: 25,
-    fontWeight: '700',
+    fontSize: 19,
+    fontWeight: '700'
   },
   row: {
     backgroundColor: 'transparent',
