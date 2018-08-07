@@ -94,10 +94,12 @@ export default class completedAlbum extends React.Component {
   ),
   };
 
+
+
+  // LOOK INTO REPLACES SCROLLVIEW WITH FLATLIST
   render(){
     const { navigation: { goBack, navigate }, token, activeAlbum } = this.props;
     const { pics } = activeAlbum;
-    // const {height, width} = Dimensions.get('window');
     return(
       <View>
 

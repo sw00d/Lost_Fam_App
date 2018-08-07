@@ -4,6 +4,12 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  pic: {
+    marginBottom: 10,
+    marginTop: 10,
+    height: height/10,                   
+    width: width/10
+  },
   directions: {
     justifyContent: 'center',
     alignItems: 'center',

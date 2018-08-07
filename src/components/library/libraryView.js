@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RefreshControl, ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
+import { Image, RefreshControl, ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
@@ -49,7 +49,6 @@ export default class LibraryView extends Component {
 
   render() {
     const { navigation: { navigate }, albums } = this.props;
-
     const self = this;
     const swipeBtns = [{
       text: 'Delete',
@@ -93,7 +92,15 @@ export default class LibraryView extends Component {
                   <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
                     <TouchableOpacity activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
                       <Text style={styles.albText}>{ name }</Text>
-                      <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text>
+                      {
+                        pics.length < capacity ?
+                        <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text> :
+                        <Image
+                          style={styles.pic}
+                          key={i}
+                          source={{uri: pics[0].uri}}
+                        />
+                      }
                     </TouchableOpacity>
                   </Swipeout>
                 )

@@ -4,7 +4,7 @@ const bottomBannerHeight = height/8;
 const topBannerHeight = height/9;
 const circleDiam = height/10;
 
-
+console.log(width, width/5, (width-((width/5)*3))/3);
 export default StyleSheet.create({
   header: {
     height: height/10,
@@ -13,11 +13,12 @@ export default StyleSheet.create({
   },
   title: {
     color: "white",
-    width
+    width,
+    fontSize: 20
   },
   topBanner: {
     height: topBannerHeight,
-    width: width,
+    width,
     backgroundColor: '#C95656',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -27,20 +28,16 @@ export default StyleSheet.create({
   },
   scroll: {
     flexDirection: 'row',
-    backgroundColor: 'gainsboro',
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
     flexWrap: 'wrap',
-    marginBottom: 50,
   },
   pic: {
-    margin: 10,
-    height: height/5,
-    width: width/5
+    marginBottom: 10,
+    marginLeft: (width-((width/5)*4))/5, //4 is photos per row
+    height: height/5,                   // and the 5 accounts
+    width: width/5                       // for all marigns.
   },
-  title: {
-    color: 'white',
-    fontSize: 25,
-    fontWeight: '700',
+  lastPic: {
+    position: 'absolute',
+    left: '-10px'
   },
 });
