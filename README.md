@@ -1,37 +1,36 @@
-# Lost Fam map
+# Lost Fam App
+By Sam Wood and Chadwick Platt-Kuhn
 
 
-### Original idea proposed by Kent Johns and Micahel Graeff
-
-
-
-## URL:
-exp://j2-w8v.samuelote.lostfam.exp.direct:80
+### Original idea proposed by Kent Johns and Michael Graeff
+This is an attempt to recreate the expirience that comes with shooting film. The user creates albums with a fixed length. The photos you take under that album cannot be reproduced until the whole album is finished. All the photos in said album are "developed" and viewed all at once.
 
 ## todos
 
-6: fix scrollview for albums
-7: send emails with order information
-8: order forms (address ect.)
-9: figure out height/width of pics for dwnld.
-10: integrate navigation headers instead of custom headers https://reactnavigation.org/docs/headers.html
+1: add photo filter options
+2: send emails with order information
+3: order forms (address ect.)
+4: figure out height/width of pics for dwnld.
+5: stylize library view with sorted albums.
+6: Save the roll locally to a new album  
+7: Cache login information
 
 
-## schema
+## ALBUM schema
   {
     ablums: [
       {
-        photos: [
+        pics: [
           {
             uri: string,
-            width: int,
-            height: int,
             exif: object,
             orientation: 'string'
           }
         ],
-        length: int
-        completion: int
+        name: str,
+        capacity: int,
+        user: str,
+        date_created: DATE
       }
     ]
   }
