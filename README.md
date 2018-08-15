@@ -8,16 +8,23 @@ This is an attempt to recreate the expirience that comes with shooting film. The
 
 ## CURRENT TO DO LIST
 
+
 1: add photo filter options
-2: send emails with order information
-3: order forms (address ect.)
+
+2: add stripe https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
+
 4: figure out height/width of pics for dwnld.
-5: stylize library view with sorted albums.
+
 6: Save the roll locally to a new album  
+
 7: Cache login information
+
 8: Bundle App
+
 9: SET up fire base
+
 10: orient photos correctly
+
 11: disable landscape mode
 
 
