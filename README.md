@@ -9,13 +9,13 @@ This is an attempt to recreate the expirience that comes with shooting film. The
 ## CURRENT TO DO LIST
 
 
-1: add photo filter options
+1: add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
 
 2: add stripe https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
 4: figure out height/width of pics for dwnld.
 
-6: Save the roll locally to a new album  
+6: Save the roll locally to a new album https://www.npmjs.com/package/react-native-photos-framework
 
 7: Cache login information
 
