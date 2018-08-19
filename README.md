@@ -30,21 +30,3 @@ This is an attempt to recreate the expirience that comes with shooting film. The
 - disable landscape mode
 
 
-## ALBUM schema
-  {
-    ablums: [
-      {
-        pics: [
-          {
-            uri: string,
-            exif: object,
-            orientation: 'string'
-          }
-        ],
-        name: str,
-        capacity: int,
-        user: str,
-        date_created: DATE
-      }
-    ]
-  }
