@@ -9,25 +9,25 @@ This is an attempt to recreate the expirience that comes with shooting film. The
 ## CURRENT TO DO LIST
 
 
-1: add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
+- add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
 
-2: add stripe https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
+- add stripe https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
-3: ENSURE CAMERA IS CORPPED TO VIEW SIZE
+- ENSURE CAMERA IS CORPPED TO VIEW SIZE
 
-4: figure out height/width of pics for dwnld.
+- figure out height/width of pics for dwnld.
 
-6: Save the roll locally to a new album https://www.npmjs.com/package/react-native-photos-framework
+- Save the roll locally to a new album https://www.npmjs.com/package/react-native-photos-framework
 
-7: Cache login information
+- Cache login information
 
-8: Bundle App
+- Bundle App
 
-9: SET up fire base
+- SET up fire base
 
-10: orient photos correctly
+- orient photos correctly
 
-11: disable landscape mode
+- disable landscape mode
 
 
 ## ALBUM schema
