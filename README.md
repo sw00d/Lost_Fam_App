@@ -10,6 +10,7 @@ This is an attempt to recreate the expirience that comes with shooting film. The
 
 
 - add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
+https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 
 - add stripe https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
