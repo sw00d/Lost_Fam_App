@@ -28,6 +28,6 @@ https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 
 - orient photos correctly
 
-- disable landscape mode
+- disable landscape mode https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
 
 
