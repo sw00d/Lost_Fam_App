@@ -12,22 +12,27 @@ This is an attempt to recreate the expirience that comes with shooting film. The
 - add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
 https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 
-- add stripe https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
+- add stripe 
+  - https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
-- ENSURE CAMERA IS CORPPED TO VIEW SIZE
+- ENSURE CAMERA IS CROPPED TO VIEW SIZE
 
 - figure out height/width of pics for dwnld.
 
-- Save the roll locally to a new album https://www.npmjs.com/package/react-native-photos-framework
+- Save the roll locally to a new album 
+  - https://www.npmjs.com/package/react-native-photos-framework
 
 - Cache login information
 
-- Bundle App
+- Create offline app bundle
+ - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
 
 - SET up fire base
 
 - orient photos correctly
 
-- disable landscape mode https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
+- disable landscape mode 
+   - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
+   - https://www.npmjs.com/package/react-native-orientation-locker
 
 
