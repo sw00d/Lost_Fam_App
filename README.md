@@ -25,7 +25,7 @@ https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 - Cache login information
 
 - Create offline app bundle
- - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
+  - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
 
 - SET up fire base
 
