@@ -1,37 +1,38 @@
-# Lost Fam map
+# Lost Fam App
+By Sam Wood and Chadwick Platt-Kuhn
 
 
-### Original idea proposed by Kent Johns and Micahel Graeff
+Original idea proposed by Kent Johns and Michael Graeff
+
+This is an attempt to recreate the experience that comes with shooting film. The user creates rolls with a fixed length. The photos you take under that roll cannot be reproduced/viewed until the whole roll is finished. All the photos in said album are "developed" and viewed all at once. Roll can then be saved and ordered.
+
+## CURRENT TO DO LIST
 
 
+- add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
+https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 
-## URL:
-exp://j2-w8v.samuelote.lostfam.exp.direct:80
+- add stripe 
+  - https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
-## todos
+- ENSURE CAMERA IS CROPPED TO VIEW SIZE
 
-6: fix scrollview for albums
-7: send emails with order information
-8: order forms (address ect.)
-9: figure out height/width of pics for dwnld.
-10: integrate navigation headers instead of custom headers https://reactnavigation.org/docs/headers.html
+- figure out height/width of pics for dwnld.
+
+- Save the roll locally to a new album 
+  - https://www.npmjs.com/package/react-native-photos-framework
+
+- Cache login information
+
+- Create offline app bundle
+  - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
+
+- SET up fire base
+
+- orient photos correctly
+
+- disable landscape mode 
+   - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
+   - https://www.npmjs.com/package/react-native-orientation-locker
 
 
-## schema
-  {
-    ablums: [
-      {
-        photos: [
-          {
-            uri: string,
-            width: int,
-            height: int,
-            exif: object,
-            orientation: 'string'
-          }
-        ],
-        length: int
-        completion: int
-      }
-    ]
-  }
