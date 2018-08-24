@@ -116,6 +116,9 @@ export default class completedAlbum extends React.Component {
         </Header>
 
         <Button onPress={ this.saveToPhone } title="Save to CameraRoll"></Button>
+        <Button style={styles.btn} onPress={ ()=>navigate('orderForm') } title="Order Prints">
+          <Text style={styles.btnFont}>Order Prints</Text>
+        </Button>
         <ScrollView
           contentContainerStyle={styles.scroll}
           ref={ref => this.scrollView = ref}

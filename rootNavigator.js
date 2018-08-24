@@ -7,8 +7,28 @@ import FinishedAlbumView from './src/components/completeAlbum/index';
 import Settings from './src/components/Settings/index';
 import SignUp from './src/components/signUp/index';
 import Login from './src/components/login/index';
+import orderMain from './src/components/orderMain/index';
 
 
+
+// Order screens
+export const orderForm = StackNavigator({
+  main: {
+    screen: orderMain
+  },
+  address: {
+    screen: FinishedAlbumView
+  },
+  stripe: {
+    screen: Settings
+  },
+},
+{
+  initialRouteName: 'main',
+  headerMode: 'none'
+});
+
+// main screens
 export const InnerStack = StackNavigator({
   camera: {
     screen: Camera,
@@ -30,6 +50,9 @@ export const InnerStack = StackNavigator({
   },
   settings: {
     screen: Settings
+  },
+  orderForm: {
+    screen: orderForm
   }
 },
 {
@@ -37,6 +60,8 @@ export const InnerStack = StackNavigator({
   headerMode: 'none'
 });
 
+
+// login/signup screens
 const rootNavigator = StackNavigator({
   titleScreen: {
     screen: TitleScreen,
@@ -56,7 +81,6 @@ const rootNavigator = StackNavigator({
   }
 },
 {
-  // initialRouteName: 'mainScreens',
   initialRouteName: 'login',
   headerMode: 'none'
 });

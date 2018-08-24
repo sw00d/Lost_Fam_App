@@ -40,4 +40,12 @@ export default StyleSheet.create({
     position: 'absolute',
     left: '-10px'
   },
+  btn: {
+    backgroundColor: 'transparent',
+    borderColor: '#C95656',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    width: width/1.3,
+    height: topBannerHeight,
+  }
 });
