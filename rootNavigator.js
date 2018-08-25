@@ -8,6 +8,7 @@ import Settings from './src/components/Settings/index';
 import SignUp from './src/components/signUp/index';
 import Login from './src/components/login/index';
 import orderMain from './src/components/orderMain/index';
+import address from './src/components/address/index';
 
 
 
@@ -17,7 +18,7 @@ export const orderForm = StackNavigator({
     screen: orderMain
   },
   address: {
-    screen: FinishedAlbumView
+    screen: address
   },
   stripe: {
     screen: Settings
