@@ -15,22 +15,14 @@ https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 - add stripe 
   - https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
-- ENSURE CAMERA IS CROPPED TO VIEW SIZE
-
-- figure out height/width of pics for dwnld.
-
 - Save the roll locally to a new album 
   - https://www.npmjs.com/package/react-native-photos-framework
-
-- Cache login information
 
 - Create offline app bundle
   - https://docs.expo.io/versions/latest/guides/publishing.html#deploying-to-the-app-store-and-play-store
   - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
 
 - SET up fire base
-
-- orient photos correctly
 
 - disable landscape mode 
    - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
