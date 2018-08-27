@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import {reduxForm} from 'redux-form';
 import addressView from './addressView';
 
 const mapStateToProps = state => {
@@ -11,10 +12,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-
-const address = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(addressView);
-
-export default address;
+export default reduxForm({
+  destroyOnUnmount: false,
+  form: 'address'
+})(addressView);

@@ -30,22 +30,39 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  scrollContainer: {
+    height: height-topBannerHeight
+  },
   pic: {
     marginBottom: 10,
-    marginLeft: (width-((width/5)*4))/5, //4 is photos per row
-    height: height/5,                   // and the 5 accounts
-    width: width/5                       // for all marigns.
+    //marginLeft: (width-((width/5)*4))/5, //4 is photos per row
+                                        // and the 5 accounts
+                                        // for all marigns.
+    height: '100%',
+    width: '100%'
   },
-  lastPic: {
-    position: 'absolute',
-    left: '-10px'
-  },
-  btn: {
-    backgroundColor: 'transparent',
-    borderColor: '#C95656',
+  picContainer: {
+    borderColor: 'white',
     borderWidth: 2,
-    borderStyle: 'solid',
-    width: width/1.3,
-    height: topBannerHeight,
+    width: width/3,
+    height: height/5,
+  },
+  Btn: {
+    backgroundColor: '#C95656',
+    width: '45%',
+    marginTop: height/30,
+    marginBottom: height/30,
+    height: height/10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnContainer: {
+    width,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  btnFont: {
+    color: 'white',
+    fontSize: 20,
   }
 });

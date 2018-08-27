@@ -41,7 +41,7 @@ export default class OrderMain extends React.Component {
         </View>
 
         <View style={styles.body}>
-          <TouchableOpacity activeOpacity={.5} style={styles.row}>
+          <TouchableOpacity activeOpacity={.5} style={styles.row} onPress={()=>navigate('stripe')}>
             <Text style={styles.section}>Card Info</Text>
             <Text style={styles.detail}>Visa ****2199</Text>
           </TouchableOpacity>

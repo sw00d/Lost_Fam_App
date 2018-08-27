@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {Field, reduxForm} from 'redux-form';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title } from 'native-base';
 import { Text, View, TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles'
 
-export default class addressView extends React.Component {
+
+class RenderField extends Component {
+  render() {
+    const { meta: { touched, error, active, visited } } = this.props;
+      return (
+        <View style={!visited ? null : (visited && error) || (error && active) ? styles.hasDanger : styles.success}>
+          <Item floatingLabel>
+            <Label>{error && touched && !active ? error : this.props.label}</Label>
+            <Input
+              onFocus={this.props.input.onFocus}
+              onBlur={this.props.input.onBlur}
+              onChange={this.props.input.onChange}
+              keyboardType={this.props.input.name === 'email' ? 'email-address' : 'default' }
+              secureTextEntry={this.props.input.name === 'confirmPass' || this.props.input.name === 'password' ? true : false }
+            />
+          </Item>
+        </View>
+      );
+  }
+}
+
+export default class AddressView extends React.Component {
   componentWillMount() {
     const {navigation:{navigate}, token} = this.props;
     if (!token) navigate('titleScreen');
@@ -27,12 +49,12 @@ export default class addressView extends React.Component {
           <Right></Right>
         </Header>
 
-        <View style={styles.body}>
-          <TouchableOpacity activeOpacity={.5} style={styles.row} onPress={()=>navigate('finishedAlbum')}>
-            <Text style={styles.section}>Form Here</Text>
-            <Text style={styles.detail}>{pics.length} photos from {name}</Text>
-          </TouchableOpacity>
-        </View>
+        <Content style={styles.content}>
+          <Form>
+              <Field name="email" label="Email" component={RenderField} />
+              <Field name="password" label="Password" component={RenderField} />
+          </Form>
+        </Content>
 
       </View>
     );

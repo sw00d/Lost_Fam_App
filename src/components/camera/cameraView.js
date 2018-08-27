@@ -1,6 +1,6 @@
 import React from 'react';
 import { NetInfo, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
-import { Camera, Permissions, FileSystem } from 'expo';
+import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
 import styles from './styles';
@@ -39,6 +39,7 @@ export default class CameraDiv extends React.Component {
     // fall_2016:0
     // console.log(this.props.activeAlbum);
     if (isConnected){
+      console.log(exif.Orientation);
       savePicToAPI({user_id: token, name, exif, uri});
       // this.props.navigation.navigate('library')
     } else {
@@ -53,11 +54,25 @@ export default class CameraDiv extends React.Component {
     }
   }
 
+  _rotate = async (uri) =>{
+
+    const manipResult = await ImageManipulator.manipulate(
+      uri,
+      [{ rotate: 180}],
+        { format: 'png' }
+      );
+      console.log('here', manipResult);
+      return manipResult
+  }
   _shoot = async () => {
     if (this.camera) {
       this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {
-        const uri = data.uri;
-        CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
+        let uri = data.uri;
+        if (data.exif.Orientation === 90) {
+          uri = this._rotate(uri);
+        }
+
+        // CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
 
         this.savePhoto(data);
 

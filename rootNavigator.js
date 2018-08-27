@@ -9,6 +9,7 @@ import SignUp from './src/components/signUp/index';
 import Login from './src/components/login/index';
 import orderMain from './src/components/orderMain/index';
 import address from './src/components/address/index';
+import stripe from './src/components/stripe/index';
 
 
 
@@ -21,8 +22,8 @@ export const orderForm = StackNavigator({
     screen: address
   },
   stripe: {
-    screen: Settings
-  },
+    screen: stripe
+  }
 },
 {
   initialRouteName: 'main',

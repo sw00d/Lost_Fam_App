@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
     submitBtn: {
       marginTop: height/30,
-      width: width,
+      width,
       height: height/10,
       backgroundColor: "#C95656",
       justifyContent: 'center',

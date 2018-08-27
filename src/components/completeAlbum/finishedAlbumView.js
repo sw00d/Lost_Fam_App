@@ -3,6 +3,7 @@ import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Bod
 import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
 import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
 import {Ionicons} from '@expo/vector-icons';
+import ImageView from 'react-native-image-view';
 import styles from './styles';
 
 
@@ -12,7 +13,10 @@ export default class completedAlbum extends React.Component {
     this.state = {
       pics: [],
       height: Dimensions.get('window').height,
-      width: Dimensions.get('window').width
+      width: Dimensions.get('window').width,
+      images: [],
+      visible: false,
+      idx: 0
     }
   }
 
@@ -27,6 +31,7 @@ export default class completedAlbum extends React.Component {
     for (let i in fotos){
       this.fetchPhoto(fotos[i].key, fotos[i].exif)
     }
+    this.mapToImages();
   }
   fetchPhoto = async (key, exif) => {
     const {height, width} = Dimensions.get('window')
@@ -94,12 +99,32 @@ export default class completedAlbum extends React.Component {
   ),
   };
 
+ mapToImages(){
+   const { activeAlbum: { pics }, activeAlbum } = this.props;
+   const arr = [];
+   for (i in pics){
+     const { PixelXDimension, PixelYDimension, } = pics[i].exif;
+     arr.push(
+       {
+         source: { uri: pics[i].uri},
+         title: activeAlbum.name,
+         width: PixelYDimension/2.5,
+         height: PixelXDimension/2.5
+       }
+     );
+     this.setState({images: arr});
+   }
+ }
 
+ imageView(key){
+   key ? this.setState({idx: key}) : null;
+   this.setState({visible: !this.state.visible});
+ }
 
   // LOOK INTO REPLACES SCROLLVIEW WITH FLATLIST
   render(){
-    const { navigation: { goBack, navigate }, token, activeAlbum } = this.props;
-    const { pics } = activeAlbum;
+    const { navigation: { goBack, navigate }, token, activeAlbum, activeAlbum: { pics } } = this.props;
+
     return(
       <View>
 
@@ -115,28 +140,49 @@ export default class completedAlbum extends React.Component {
           <Right></Right>
         </Header>
 
-        <Button onPress={ this.saveToPhone } title="Save to CameraRoll"></Button>
-        <Button style={styles.btn} onPress={ ()=>navigate('orderForm') } title="Order Prints">
-          <Text style={styles.btnFont}>Order Prints</Text>
-        </Button>
-        <ScrollView
+        {
+          (this.state.images.length > 1) ?
+          <ImageView
+            images={this.state.images}
+            imageIndex={this.state.idx}
+            isVisible={this.state.visible}
+            animationType='slide'
+            onClose={()=>this.imageView()}
+            renderFooter={(currentImage) => (<View><Text>{activeAlbum.name}</Text></View>)}
+          /> : null
+      }
+        <View style={styles.scrollContainer}>
+          <ScrollView
           contentContainerStyle={styles.scroll}
           ref={ref => this.scrollView = ref}
           onContentSizeChange={(contentWidth, contentHeight)=>{}}>
+
+            <View style={styles.btnContainer}>
+              <Button style={styles.Btn} onPress={ this.saveToPhone } title="Save to CameraRoll">
+                <Text style={styles.btnFont}>Save Roll</Text>
+              </Button>
+              <Button style={styles.Btn} onPress={ ()=>navigate('orderForm') } title="Order Prints">
+                <Text style={styles.btnFont}>Order Prints</Text>
+              </Button>
+            </View>
+
           {
 
             pics.map((album, i) => {
               return(
-                <Image
-                style={styles.pic}
-                key={i}
-                source={{uri: pics[i].uri}}
-                />
+                <TouchableOpacity onPress={()=>this.imageView(i)}style={styles.picContainer} key={i*1.1}>
+                  <Image
+                    style={styles.pic}
+                    key={i}
+                    source={{uri: pics[i].uri}}
+                  />
+                </TouchableOpacity>
               )
             })
 
           }
-        </ScrollView>
+          </ScrollView>
+        </View>
       </View>
     )
   }
