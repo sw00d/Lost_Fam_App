@@ -30,12 +30,12 @@ class RenderField extends Component {
 export default class LoginView extends Component {
   componentWillMount(){
     const { navigation:{navigate}, token, validate, authenticateUser } = this.props;
-    const me ={
-      email: 'sam@gmail.com',
-      password: 'pomcer',
-      name: 'sam'
-    }
-    authenticateUser(validate, me);
+    // const me ={
+    //   email: 'sam@gmail.com',
+    //   password: 'pomcer',
+    //   name: 'sam'
+    // }
+    // authenticateUser(validate, me);
 
   }
   componentDidUpdate(){
@@ -45,7 +45,8 @@ export default class LoginView extends Component {
   submit() {
     const { validate, syncErrors, authenticateUser } = this.props;
     if (!syncErrors || syncErrors === ''){
-      authenticateUser(validate);
+      console.log(validate());
+      // authenticateUser(validate);
     }
     else {
       alert(`Please fill out both your password and email.`)

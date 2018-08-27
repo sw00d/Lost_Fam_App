@@ -5,12 +5,12 @@ import picsReducer from './pics_reducer';
 import generalReducer from './general_reducer';
 import { reducer as formReducer } from 'redux-form';
 
-const rootReducer = combineReducers({
+const rootReducer = {
   albums: albumReducer,
   form: formReducer,
   app: generalReducer,
   user: userReducer,
   pics: picsReducer
-});
+};
 
 export default rootReducer;

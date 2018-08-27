@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { canNavToNext } from '../../utils';
 import Expo from 'expo';
-import { store } from '../index.js'
+// import { store } from '../index.js'
+import { AsyncStorage } from "react-native"
+import configureStore from '../index.js';
+
+
+
 
 export const CREATE_USER = 'CREATE_USER';
 export const USER_HAS_ERRORED = 'USER_ERROR';
@@ -15,6 +20,9 @@ const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts
 const ROOT_URL = `http://${api}`;
 
 export const createUser = (validate) => {
+  const { persistor, store } = configureStore();
+
+  console.log(store);
   return () =>{
     const { dispatch, getState } = store;
     const { values } = getState().form.register;
@@ -35,9 +43,12 @@ export const createUser = (validate) => {
 }
 
 export const authenticateUser = (validate, uAndP) => {
+  const { persistor, store } = configureStore();
+  console.log(validate);
   return () => {
     const { dispatch, getState } = store;
     const { email, password } = !uAndP ? getState().form.login.values : uAndP;
+
     if (canNavToNext({ email, password }, validate)) {
       axios.post(`${ROOT_URL}/api/authenticate`, { email, password }).then(res => {
         if (!res.data.success){
@@ -46,6 +57,7 @@ export const authenticateUser = (validate, uAndP) => {
         }
 
         if (res.data.success) {
+          console.log('here');
           dispatch(userHasErrored(false, ""))
           dispatch(saveToken(res.data.token));
         }
@@ -55,7 +67,7 @@ export const authenticateUser = (validate, uAndP) => {
 }
 
 export const saveToken = token => {
-  // console.log('token', token);
+
   return {
     type: SAVE_TOKEN,
     token

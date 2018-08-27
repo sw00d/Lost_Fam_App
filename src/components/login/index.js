@@ -5,6 +5,7 @@ import { testPassword, checkForWhiteSpace } from '../../utils';
 import { authenticateUser } from '../../store/actions/user_actions';
 
 const validate = (values, field) => {
+  console.log(values, field);
   const errors = {};
   if (!values.email) errors.email = "Enter your Email";
   if (!values.password ) errors.password = "Enter your password";
@@ -22,7 +23,7 @@ const mapStateToProps = (state) => {
 const Login = connect(mapStateToProps, { authenticateUser })(LoginView);
 
 export default reduxForm({
-  validate: validate,
+  validate,
   destroyOnUnmount: true,
   form: 'login'
 })(Login);

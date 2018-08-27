@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { FadeInView, TextBlink } from '../../animationComponents/fadeIn';
 import { Background } from '../../animationComponents/titleScreenBackground';
 import { BlurView } from 'expo';
+import { AsyncStorage } from "react-native"
+
+
 
 const { height, width } = Dimensions.get('window');
 const styles = TitleStyles(height, width);
@@ -14,6 +17,9 @@ export default class TitleView extends Component {
     const {navigation:{navigate}, token} = this.props;
     if (!!token) navigate('mainScreens');
   }
+
+
+
 
   render() {
     const { navigation:{navigate} } = this.props;

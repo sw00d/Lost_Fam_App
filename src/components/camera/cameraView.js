@@ -39,7 +39,6 @@ export default class CameraDiv extends React.Component {
     // fall_2016:0
     // console.log(this.props.activeAlbum);
     if (isConnected){
-      console.log(exif.Orientation);
       savePicToAPI({user_id: token, name, exif, uri});
       // this.props.navigation.navigate('library')
     } else {
@@ -61,18 +60,20 @@ export default class CameraDiv extends React.Component {
       [{ rotate: 180}],
         { format: 'png' }
       );
-      console.log('here', manipResult);
       return manipResult
   }
+
   _shoot = async () => {
     if (this.camera) {
       this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {
         let uri = data.uri;
+        CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
+
+        // Rotation occurs if pic is upside down. Don't cache pic after this fires.
         if (data.exif.Orientation === 90) {
           uri = this._rotate(uri);
         }
 
-        // CacheManager.cache(uri, newURI => this.setState({ uri: newURI }));
 
         this.savePhoto(data);
 

@@ -12,7 +12,6 @@ import address from './src/components/address/index';
 import stripe from './src/components/stripe/index';
 
 
-
 // Order screens
 export const orderForm = StackNavigator({
   main: {
@@ -83,7 +82,7 @@ const rootNavigator = StackNavigator({
   }
 },
 {
-  initialRouteName: 'login',
+  initialRouteName: 'titleScreen',
   headerMode: 'none'
 });
 

@@ -7,7 +7,7 @@ import Swipeout from 'react-native-swipeout';
 import { InputGroup, Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import {Ionicons} from '@expo/vector-icons';
 import { BlurView } from 'expo';
-import { store } from '../../store/index.js'
+import configureStore from '../../store/index.js'
 
 const { height, width } = Dimensions.get('window');
 
@@ -53,6 +53,7 @@ export default class SignUpView extends Component {
   }
 
   enableBtn(){
+    const { persistor, store } = configureStore();
     const { syncErrors } = store.getState().form.register;
     if (!syncErrors || syncErrors === ""){
       return true;
