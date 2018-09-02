@@ -1,11 +1,8 @@
 import axios from 'axios';
 import { canNavToNext } from '../../utils';
 import Expo from 'expo';
-// import { store } from '../index.js'
+import { store } from '../index.js'
 import { AsyncStorage } from "react-native"
-import configureStore from '../index.js';
-
-
 
 
 export const CREATE_USER = 'CREATE_USER';
@@ -20,9 +17,6 @@ const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts
 const ROOT_URL = `http://${api}`;
 
 export const createUser = (validate) => {
-  const { persistor, store } = configureStore();
-
-  console.log(store);
   return () =>{
     const { dispatch, getState } = store;
     const { values } = getState().form.register;
@@ -43,9 +37,9 @@ export const createUser = (validate) => {
 }
 
 export const authenticateUser = (validate, uAndP) => {
-  const { persistor, store } = configureStore();
-  console.log(validate);
+  console.log('fired');
   return () => {
+    console.log('pomc')
     const { dispatch, getState } = store;
     const { email, password } = !uAndP ? getState().form.login.values : uAndP;
 
@@ -57,7 +51,6 @@ export const authenticateUser = (validate, uAndP) => {
         }
 
         if (res.data.success) {
-          console.log('here');
           dispatch(userHasErrored(false, ""))
           dispatch(saveToken(res.data.token));
         }
@@ -66,8 +59,15 @@ export const authenticateUser = (validate, uAndP) => {
   }
 }
 
-export const saveToken = token => {
 
+export const saveToken = token => {
+  console.log('Save token fired');
+  try {
+    AsyncStorage.setItem("id_token", token);
+    // console.log('saved token to async');
+  } catch (error) {
+    console.error('AsyncStorage error: ' + error.message);
+  }
   return {
     type: SAVE_TOKEN,
     token

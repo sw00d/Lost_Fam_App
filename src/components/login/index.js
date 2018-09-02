@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 import LoginView from './loginView';
 import {reduxForm} from 'redux-form';
 import { testPassword, checkForWhiteSpace } from '../../utils';
-import { authenticateUser } from '../../store/actions/user_actions';
+import { authenticateUser, saveToken } from '../../store/actions/user_actions';
 
 const validate = (values, field) => {
-  console.log(values, field);
+  // console.log(values);
   const errors = {};
   if (!values.email) errors.email = "Enter your Email";
   if (!values.password ) errors.password = "Enter your password";
@@ -15,9 +15,16 @@ const validate = (values, field) => {
 }
 
 const mapStateToProps = (state) => {
-  const syncErrors = state.form.login.syncErrors;
-  const token = state.user.token;
+  const { syncErrors } = state.form.login;
+  const { token } = state.user;
   return { validate, syncErrors, token }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    authenticateUser: ()=> dispatch(authenticateUser()),
+    saveToken: () => dispatch(saveToken())
+  }
 }
 
 const Login = connect(mapStateToProps, { authenticateUser })(LoginView);

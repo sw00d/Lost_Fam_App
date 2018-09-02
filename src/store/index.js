@@ -7,26 +7,28 @@ import promise from 'redux-promise';
 import Logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
+export const store = applyMiddleware(thunk, promise)(createStore)(rootReducer);
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
-// console.log(persistStore());
-
-const persistedReducer = persistCombineReducers(persistConfig, rootReducer);
+// This is for redux persist...
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   blackList: ['form']
+// };
 
 
-export default function configureStore() {
-  let store = applyMiddleware(thunk, promise)(createStore)(persistedReducer);
-  let persistor = persistStore(store);
+// const persistedReducer = persistCombineReducers(persistConfig, rootReducer);
+//
+//
+// export default function configureStore() {
+//   let store = applyMiddleware(thunk, promise)(createStore)(persistedReducer);
+//   let persistor = persistStore(store);
 
 
 // uncomment this line to purge all state.
   // persistor.purge();
 
+  // return { persistor, store }
 
-  return { persistor, store };
-}
+// }
 // export const persistor = persistStore(store);

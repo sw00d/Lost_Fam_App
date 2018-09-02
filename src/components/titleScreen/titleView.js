@@ -14,8 +14,17 @@ const styles = TitleStyles(height, width);
 
 export default class TitleView extends Component {
   componentWillMount() {
-    const {navigation:{navigate}, token} = this.props;
+    const {navigation:{navigate}, token, saveToken} = this.props;
+    AsyncStorage.getItem('id_token').then((token) => {
+      console.log('Token Received from storage');
+      saveToken(token)
+    });
+  }
+  componentDidUpdate(){
+    const {navigation:{navigate}, token, saveToken} = this.props;
+
     if (!!token) navigate('mainScreens');
+
   }
 
 
