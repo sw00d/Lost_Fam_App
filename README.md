@@ -25,7 +25,7 @@ https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 
 - SET up fire base
 
--THIS IS DONE BUT IT ERRORS SOMETIMES
+-THIS IS DONE BUT IT ERRORS OUT SOMETIMES
   - disable landscape mode 
      - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
      - https://www.npmjs.com/package/react-native-orientation-locker
