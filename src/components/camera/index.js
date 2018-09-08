@@ -4,6 +4,7 @@ import { savePhoto, savePicToAPI } from '../../store/actions/pics_actions';
 import { updateConnection } from '../../store/actions/general_actions';
 
 const mapStateToProps = state => {
+  console.log(state.app);
   const { albums: {activeAlbum}, user: {token}, app: { isConnected } } = state;
   return { activeAlbum, token, isConnected };
 }

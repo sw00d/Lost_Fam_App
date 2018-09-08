@@ -1,4 +1,4 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 import Camera from './src/components/camera/index';
 import TitleScreen from './src/components/titleScreen/index';
 import Library from './src/components/library/index';
@@ -13,7 +13,7 @@ import stripe from './src/components/stripe/index';
 
 
 // Order screens
-export const orderForm = StackNavigator({
+export const orderForm = createStackNavigator({
   main: {
     screen: orderMain
   },
@@ -30,12 +30,9 @@ export const orderForm = StackNavigator({
 });
 
 // main screens
-export const InnerStack = StackNavigator({
+export const InnerStack = createStackNavigator({
   camera: {
     screen: Camera,
-    navigationOptions: {
-      gesturesEnabled: false,
-    }
   },
   library: {
     screen: Library,
@@ -58,12 +55,15 @@ export const InnerStack = StackNavigator({
 },
 {
   initialRouteName: 'library',
-  headerMode: 'none'
+  headerMode: 'none',
+  navigationOptions: {
+   gestureResponseDistance: {horizontal: 500} // default is 25
+  }
 });
 
 
 // login/signup screens
-const rootNavigator = StackNavigator({
+const rootNavigator = createStackNavigator({
   titleScreen: {
     screen: TitleScreen,
   },

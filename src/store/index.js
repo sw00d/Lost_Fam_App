@@ -1,7 +1,4 @@
 import { compose, createStore, applyMiddleware } from 'redux';
-import { persistStore, persistCombineReducers } from 'redux-persist';
-import storage from 'redux-persist/es/storage';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import rootReducer from './reducers/index';
 import promise from 'redux-promise';
 import Logger from 'redux-logger';

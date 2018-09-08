@@ -64,5 +64,8 @@ export default StyleSheet.create({
   btnFont: {
     color: 'white',
     fontSize: 20,
+  },
+  backBtn: {
+    width: 100,
   }
 });

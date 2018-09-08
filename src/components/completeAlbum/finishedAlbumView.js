@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
-import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
-import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
+import { Linking, Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
+import { MediaLibrary, Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
+import Expo from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import ImageView from 'react-native-image-view';
 import styles from './styles';
@@ -32,6 +33,7 @@ export default class completedAlbum extends React.Component {
       this.fetchPhoto(fotos[i].key, fotos[i].exif)
     }
     this.mapToImages();
+
   }
   fetchPhoto = async (key, exif) => {
     const {height, width} = Dimensions.get('window')
@@ -65,18 +67,27 @@ export default class completedAlbum extends React.Component {
 
   }
   saveToPhone = async () => {
-    const uri = this.state.pics;
-     const promise = CameraRoll.saveToCameraRoll(uri[0]);
-     CameraRoll.saveToCameraRoll(uri[1]);
-     CameraRoll.saveToCameraRoll(uri[2]);
-     CameraRoll.saveToCameraRoll(uri[3]);
+    const { activeAlbum, activeAlbum: { pics } } = this.props;
 
-    promise.then(function(result) {
-      console.log('save succeeded ' + result);
-    }).catch(function(error) {
-      console.log('save failed ' + error);
+    const assetArr = [];
+
+
+    for (let i in pics){
+      const asset = await MediaLibrary.createAssetAsync(pics[i].uri);
+      assetArr.push(asset);
+
+    }
+    // I ask permissions
+    let { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    this.setState({ permissionsGranted: status === 'granted' }, this.getAlbums);
+
+    // if permissions granted
+    const album = await MediaLibrary.createAlbumAsync(activeAlbum.name);
+    await MediaLibrary.addAssetsToAlbumAsync(assetArr, album.id).then(()=>{
+      Linking.openURL('photos-redirect://app')
+
     });
-  }
+  };
 
   static navigationOptions = {
     title: 'Album Title',
@@ -130,9 +141,9 @@ export default class completedAlbum extends React.Component {
 
         <Header style={styles.header}>
           <Left>
-            <Button transparent onPress={()=>goBack()}>
+            <TouchableOpacity style={styles.backBtn} transparent onPress={()=>goBack()}>
               <Ionicons name="ios-arrow-back" size={32} color="white" />
-            </Button>
+            </TouchableOpacity>
           </Left>
           <Body>
             <Title style={styles.title}> {activeAlbum.name} </Title>

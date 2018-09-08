@@ -8,7 +8,8 @@ import { reducer as formReducer } from 'redux-form'
 const rootReducer = combineReducers({
   albums: albumReducer,
   form: formReducer,
-  user: userReducer
+  user: userReducer,
+  app: generalReducer
 });
 
 export default rootReducer;
