@@ -8,8 +8,10 @@ import Settings from './src/components/Settings/index';
 import SignUp from './src/components/signUp/index';
 import Login from './src/components/login/index';
 import orderMain from './src/components/orderMain/index';
+import Splash from './src/components/splashScreen/index';
 import address from './src/components/address/index';
 import stripe from './src/components/stripe/index';
+import { AsyncStorage } from "react-native"
 
 
 // Order screens
@@ -29,16 +31,18 @@ export const orderForm = createStackNavigator({
   headerMode: 'none'
 });
 
+
+
 // main screens
 export const InnerStack = createStackNavigator({
-  camera: {
-    screen: Camera,
-  },
   library: {
     screen: Library,
     navigationOptions: {
       gesturesEnabled: false,
     }
+  },
+  camera: {
+    screen: Camera,
   },
   newAlbum: {
     screen: NewAlbum
@@ -73,6 +77,9 @@ const rootNavigator = createStackNavigator({
   signUp: {
       screen: SignUp
   },
+  splash: {
+      screen: Splash
+  },
   mainScreens: {
     screen: InnerStack,
     navigationOptions: {
@@ -82,7 +89,7 @@ const rootNavigator = createStackNavigator({
   }
 },
 {
-  initialRouteName: 'titleScreen',
+  initialRouteName: 'splash',
   headerMode: 'none'
 });
 

@@ -71,11 +71,10 @@ export default class completedAlbum extends React.Component {
 
     const assetArr = [];
 
-
+    //Creates assets from URI's
     for (let i in pics){
       const asset = await MediaLibrary.createAssetAsync(pics[i].uri);
       assetArr.push(asset);
-
     }
     // I ask permissions
     let { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);

@@ -15,6 +15,18 @@ export default class Settings extends React.Component {
     // if (!token) navigate('titleScreen');
   }
 
+  // logout = async () => {
+  //   const {navigation:{navigate}, token} = this.props;
+  //
+  //   console.log('logout');
+  //   try {
+  //     // await AsyncStorage.removeItem(token);
+  //     alert('logged out')
+  //   } catch (error) {
+  //     console.error('Error logging out: ' + error.message);
+  //   }
+  // }
+
   render() {
     return (
       <View style={styles.container}>
@@ -36,6 +48,10 @@ export default class Settings extends React.Component {
 
         <TouchableOpacity style={styles.option}>
           <Text style={styles.font}>Preferences</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.option} onPress={()=>this.logout()}>
+          <Text style={styles.font}>Log Out</Text>
         </TouchableOpacity>
       </View>
     )

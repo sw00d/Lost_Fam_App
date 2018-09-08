@@ -124,15 +124,10 @@ export default class CameraDiv extends React.Component {
         <View>
 
           <View style={styles.topBanner}>
-            <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
-              <Ionicons name="ios-reverse-camera-outline" size={32} color="white" />
+            <TouchableOpacity style={styles.titleContainer} onPress={ () => navigate('library') } underlayColor='white'>
+              <Text style={styles.text} >{ name } &nbsp;</Text>
+              <Ionicons style={styles.iconTop} name="ios-arrow-down-outline" size={32} color="white" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={ () => navigate('library') } underlayColor='white'>
-              <Text style={styles.text} >{ name } &nbsp;
-                <Ionicons name="ios-arrow-down-outline" size={32} color="white" />
-              </Text>
-            </TouchableOpacity>
-            <View></View>
           </View>
 
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
@@ -151,6 +146,9 @@ export default class CameraDiv extends React.Component {
                 <View style={styles.miniCircle}></View>
               </TouchableOpacity>
             </View>
+            <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
+              <Ionicons name="ios-reverse-camera-outline" size={48} color="white" />
+            </TouchableOpacity>
           </View>
 
         </View>

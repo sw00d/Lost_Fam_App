@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Image, View, Text, TouchableOpacity, Dimensions, TouchableHighlight } from 'react-native';
+import { AsyncStorage, Image, View, Text, TouchableOpacity, Dimensions, TouchableHighlight } from 'react-native';
 import TitleStyles from './styles';
 import PropTypes from 'prop-types';
 import { FadeInView, TextBlink } from '../../animationComponents/fadeIn';
 import { Background } from '../../animationComponents/titleScreenBackground';
 import { BlurView } from 'expo';
-import { AsyncStorage } from "react-native"
 
 
 
@@ -13,25 +12,18 @@ const { height, width } = Dimensions.get('window');
 const styles = TitleStyles(height, width);
 
 export default class TitleView extends Component {
-  componentWillMount() {
-    const {navigation:{navigate}, token, saveToken} = this.props;
-    AsyncStorage.getItem('id_token').then((token) => {
-      console.log('Token Received from storage');
-      saveToken(token)
-    });
-  }
+
   componentDidUpdate(){
-    const {navigation:{navigate}, token, saveToken} = this.props;
+    const {navigation:{navigate}, token} = this.props;
 
     if (!!token) navigate('mainScreens');
-
   }
 
 
 
 
   render() {
-    const { navigation:{navigate} } = this.props;
+    const { navigation:{navigate}, token } = this.props;
     return(
       <View style={styles.body}>
         <Background style={{width: width, height: height, position: 'absolute'}} />

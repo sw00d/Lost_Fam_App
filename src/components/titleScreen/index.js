@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import TitleView from './titleView';
-import { saveToken } from '../../store/actions/user_actions'
 
 const mapStateToProps = state => {
   const { token } = state.user;
@@ -10,7 +9,6 @@ const mapStateToProps = state => {
 
 const TitleScreen = connect(
   mapStateToProps,
-  { saveToken }
 )(TitleView);
 
 export default TitleScreen;

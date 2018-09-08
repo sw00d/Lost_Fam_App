@@ -39,11 +39,23 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   icon: {
-    paddingTop: height/50
+    paddingTop: height/50,
+    position: 'absolute',
+    right: 30,
+    top: '7%'
+  },
+  iconTop: {
+    paddingTop: height/85,
+  },
+  titleContainer: {
+    width,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   topBanner: {
     height: topBannerHeight,
-    width: width,
+    width,
     backgroundColor: '#E9C189',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -58,7 +70,8 @@ export default StyleSheet.create({
     width: width,
     backgroundColor: '#E9C189',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
   text: {
     color: 'white',
