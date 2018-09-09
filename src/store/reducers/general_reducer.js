@@ -1,4 +1,4 @@
-import { CONNECTION_UPDATE } from '../actions/general_actions';
+import { CONNECTION_UPDATE, USER_LOGOUT } from '../actions/general_actions';
 
 export default (state = {}, action) => {
   switch(action.type) {
@@ -8,6 +8,7 @@ export default (state = {}, action) => {
           ...state,
           isConnected: bool
         }
+
     default:
       return state;
   }

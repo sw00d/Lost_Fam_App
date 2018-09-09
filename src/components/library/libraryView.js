@@ -61,7 +61,7 @@ export default class LibraryView extends Component {
         <Header style={styles.header}>
           <Left>
           <TouchableOpacity size={32} onPress={ () => navigate('settings') } underlayColor='white'>
-            <Ionicons name="ios-settings-outline" size={32} color="white" />
+            <Ionicons name="ios-settings-outline" size={35} color="white" />
           </TouchableOpacity>
           </Left>
           <Body>

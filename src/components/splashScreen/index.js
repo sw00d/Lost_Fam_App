@@ -9,6 +9,11 @@ const mapStateToProps = (state) => {
   return { token }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // saveToken: ()=>dispatch(saveToken())
+  }
+}
 
 export default connect(
   mapStateToProps,

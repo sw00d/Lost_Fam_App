@@ -20,12 +20,12 @@ const mapStateToProps = (state) => {
   return { validate, syncErrors, token }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    authenticateUser: ()=> dispatch(authenticateUser()),
-    saveToken: () => dispatch(saveToken())
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     authenticateUser: ()=> dispatch(authenticateUser()),
+//     saveToken: () => dispatch(saveToken())
+//   }
+// }
 
 const Login = connect(mapStateToProps, { authenticateUser })(LoginView);
 

@@ -15,17 +15,20 @@ export default class Settings extends React.Component {
     // if (!token) navigate('titleScreen');
   }
 
-  // logout = async () => {
-  //   const {navigation:{navigate}, token} = this.props;
-  //
-  //   console.log('logout');
-  //   try {
-  //     // await AsyncStorage.removeItem(token);
-  //     alert('logged out')
-  //   } catch (error) {
-  //     console.error('Error logging out: ' + error.message);
-  //   }
-  // }
+  logout = async () => {
+    const {navigation:{navigate}, token, logout} = this.props;
+    try {
+      AsyncStorage.clear().then((e)=>{
+        console.log('logging out and cleared all AsyncStorage');
+        navigate('titleScreen');
+      });
+
+    } catch (error) {
+      console.error('Error logging out: ' + error.message);
+    }
+    logout();
+  }
+
 
   render() {
     return (

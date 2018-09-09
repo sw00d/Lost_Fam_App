@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import settingsView from './settingsView';
+import { logout } from '../../store/actions/general_actions'
 
 const mapStateToProps = state => {
   const { albums: {activeAlbum}, user:{token} } = state;
@@ -7,7 +8,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
- return {}
+
+ return { logout: () => dispatch(logout()) }
 }
 
 

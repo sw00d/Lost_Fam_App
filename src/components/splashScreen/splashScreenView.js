@@ -8,15 +8,20 @@ const { height, width } = Dimensions.get('window');
 
 export default class SplashScreen extends Component {
 
-  componentWillMount() {
-    const {navigation:{navigate}, token, saveToken} = this.props;
+  componentDidMount() {
+    const {navigation:{navigate}, saveToken} = this.props;
+    // navigate('titleScreen');
     AsyncStorage.getItem('id_token').then((token) => {
-      console.log('Token Received from storage');
-      saveToken(token)
+      if (token){
+        console.log('Token Received from storage');
+        saveToken(token)
+        navigate('library');
+      } else navigate('titleScreen');
     }).catch(()=>{
-      navigate('titleScreen')
+      console.log('no token found in storage. Login');
     });
   }
+
   componentDidUpdate(){
     const {navigation:{navigate}, token, saveToken} = this.props;
 

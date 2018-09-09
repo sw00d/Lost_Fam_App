@@ -37,9 +37,7 @@ export const createUser = (validate) => {
 }
 
 export const authenticateUser = (validate, uAndP) => {
-  console.log('fired');
   return () => {
-    console.log('pomc')
     const { dispatch, getState } = store;
     const { email, password } = !uAndP ? getState().form.login.values : uAndP;
 
@@ -63,8 +61,8 @@ export const authenticateUser = (validate, uAndP) => {
 export const saveToken = token => {
   console.log('Save token fired');
   try {
+    console.log('Token saved to phones local storage');
     AsyncStorage.setItem("id_token", token);
-    // console.log('saved token to async');
   } catch (error) {
     console.error('AsyncStorage error: ' + error.message);
   }

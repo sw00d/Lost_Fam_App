@@ -71,6 +71,13 @@ const rootNavigator = createStackNavigator({
   titleScreen: {
     screen: TitleScreen,
   },
+  mainScreens: {
+    screen: InnerStack,
+    navigationOptions: {
+      gesturesEnabled: false,
+      headerLeft: null
+    }
+  },
   login:{
     screen: Login
   },
@@ -79,13 +86,6 @@ const rootNavigator = createStackNavigator({
   },
   splash: {
       screen: Splash
-  },
-  mainScreens: {
-    screen: InnerStack,
-    navigationOptions: {
-      gesturesEnabled: false,
-      headerLeft: null
-    }
   }
 },
 {
