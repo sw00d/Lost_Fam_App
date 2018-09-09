@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Image, RefreshControl, ScrollView, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage} from 'react-native';
+import { Image, RefreshControl, ScrollView, Text, View, TouchableOpacity, Dimensions, AsyncStorage} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
-import Swipeout from 'react-native-swipeout';
 import { canNavToNext } from '../../utils';
-import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+import { SwipeRow, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 
 export default class LibraryView extends Component {
   constructor(props) {
@@ -50,19 +49,16 @@ export default class LibraryView extends Component {
   render() {
     const { navigation: { navigate }, albums } = this.props;
     const self = this;
-    const swipeBtns = [{
-      text: 'Delete',
-      backgroundColor: 'red',
-      underlayColor: 'transparent',
-      onPress: () => this.deleteAndUpdate()
-    }];
+    const swipeBtns = {
+
+    };
     return(
       <View style={styles.container}>
         <Header style={styles.header}>
           <Left>
-          <TouchableOpacity size={32} onPress={ () => navigate('settings') } underlayColor='white'>
-            <Ionicons name="ios-settings-outline" size={35} color="white" />
-          </TouchableOpacity>
+            <TouchableOpacity onPress={ () => navigate('settings') } underlayColor='white'>
+              <Ionicons name="ios-settings-outline" size={32} color="white" />
+            </TouchableOpacity>
           </Left>
           <Body>
             <View style={styles.directions}>
@@ -89,20 +85,35 @@ export default class LibraryView extends Component {
               albums.map((album, i) => {
                 const { capacity, name, pics } = album;
                 return(
-                  <Swipeout onOpen={() => this.setState({selectedAlb: i})} style={styles.swipeCont} right={swipeBtns} autoClose={true} key={name}>
-                    <TouchableOpacity activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
+                  <SwipeRow
+                    rightOpenValue={-75}
+                    disableRightSwipe={true}
+                    onRowOpen={() => this.setState({selectedAlb: i})}
+                    style={styles.swipeCont}
+                    right={
+                      <Button danger onPress={() => this.deleteAndUpdate()}>
+                        <Ionicons name="ios-trash-outline" size={32} color="white"/>
+                      </Button>
+                    }
+                    autoClose={true}
+                    key={name}
+                    body={
+
+                      <TouchableOpacity activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
                       <Text style={styles.albText}>{ name }</Text>
                       {
                         pics.length < capacity ?
                         <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text> :
                         <Image
-                          style={styles.pic}
-                          key={i}
-                          source={{uri: pics[0].uri}}
+                        style={styles.pic}
+                        key={i}
+                        source={{uri: pics[0].uri}}
                         />
                       }
-                    </TouchableOpacity>
-                  </Swipeout>
+                      </TouchableOpacity>
+                    }
+                  >
+                  </SwipeRow>
                 )
               })
              : null

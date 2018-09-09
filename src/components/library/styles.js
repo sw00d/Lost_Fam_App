@@ -7,38 +7,39 @@ const styles = StyleSheet.create({
   pic: {
     marginBottom: 10,
     marginTop: 10,
-    height: height/10,                   
+    height: height/10,
     width: width/10
   },
   directions: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: width
+    width
   },
   header: {
     height: height/10,
-    width: width,
+    width,
     backgroundColor: '#C95656',
   },
   swipeCont: {
-    width: width,
-    backgroundColor: 'transparent',
+    width,
+    backgroundColor: '#E9E7EF',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: 'transparent'
   },
   icon: {
     paddingTop: height/50,
     paddingRight: width/15
   },
   container: {
-    height: height,
-    width: width,
+    height,
+    width,
     alignItems: 'center',
   },
   topBanner: {
     top: 0,
     height: topBannerHeight,
-    width: width,
+    width,
     backgroundColor: '#C95656',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gainsboro',
     borderBottomWidth: 1,
     height: topBannerHeight*1.5,
-    width: width /1.2,
+    width: width/1.2,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
