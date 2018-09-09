@@ -31,12 +31,12 @@ This is an attempt to recreate the experience that comes with shooting film. The
 - add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
 https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 
+-Fancy Credit Card Input:
+https://github.com/classpass/react-native-credit-card-input
+
 - NEED TO LINK THESE LIBRARIES
   - add stripe 
     -https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
-
-  - Save the roll locally to a new album 
-    -https://www.npmjs.com/package/react-native-photos-framework
 
 - Create offline app bundle
   - https://docs.expo.io/versions/latest/guides/publishing.html#deploying-to-the-app-store-and-play-store
