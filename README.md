@@ -1,5 +1,5 @@
 # Lost Fam App
-By Sam Wood and Chadwick Platt-Kuhn
+By Sam Wood and @chdwck
 
 
 Original idea proposed by Kent Johns and Michael Graeff
@@ -17,14 +17,12 @@ This is an attempt to recreate the experience that comes with shooting film. The
   <img src="https://github.com/Samuelote/Lost_Fam_App/blob/master/assets/IMG-2779.JPG" width="175" title="Completed Roll" alt="completed roll">
 </p>
 
-
+- - - -
 <br />
 <br />
 <br />
 <br />
 <br />
-
-
 
 
 ## CURRENT TO DO LIST
