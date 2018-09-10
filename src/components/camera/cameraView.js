@@ -14,7 +14,8 @@ export default class CameraDiv extends React.Component {
   state = {
     hasCameraPermission: true,
     type: Camera.Constants.Type.back,
-    dblClick: false
+    dblClick: false,
+    blink: false
   };
 
 
@@ -64,6 +65,12 @@ export default class CameraDiv extends React.Component {
   }
 
   _shoot = async () => {
+
+    //this add flash effect to camera
+    const self = this;
+    this.setState({hasCameraPermission: false});
+    setTimeout(()=>self.setState({hasCameraPermission: true}), 0);
+
     if (this.camera) {
       this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {
         let uri = data.uri;
@@ -108,17 +115,12 @@ export default class CameraDiv extends React.Component {
   render() {
     const { hasCameraPermission } = this.state;
     const {height, width} = Dimensions.get('window');
-    const type = this.state.type;
-    const camHeight = styles.camHeight;
+    const {type, blink} = this.state;
 
 
-    if (hasCameraPermission === null) {
-      return <View />;
-    }
-    else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    }
-    else{
+    if (hasCameraPermission === null) return <View />;
+    else if (hasCameraPermission === false) return <Text>No access to camera</Text>;
+    else {
       const { activeAlbum: {name}, navigation: {navigate} } = this.props;
       return (
         <View>
@@ -131,11 +133,10 @@ export default class CameraDiv extends React.Component {
           </View>
 
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
-            <Camera style={styles.camHeight} type={this.state.type} ref={(camera) => { this.camera = camera; }}>
+            <Camera style={styles.camStyle} type={type} ref={(camera) => { this.camera = camera; }}>
               <View style={styles.filmCircle}>
                 <View style={styles.miniTopHalf}></View>
                 <View style={styles.miniBottomHalf}></View>
-
               </View>
             </Camera>
           </TouchableHighlight>

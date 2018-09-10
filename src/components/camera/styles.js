@@ -32,11 +32,18 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  camHeight: {
+  camStyle: {
     height: camHeight,
-    width: width,
+    width,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  blink: {
+    height,
+    width,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   icon: {
     paddingTop: height/50,
