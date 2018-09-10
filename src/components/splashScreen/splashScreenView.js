@@ -3,18 +3,22 @@ import { Dimensions, Text, View, AsyncStorage } from 'react-native';
 import { Container, Header, Content, Spinner } from 'native-base';
 import styles from './styles';
 
-
 const { height, width } = Dimensions.get('window');
 
 export default class SplashScreen extends Component {
-
+  constructor(){
+    super();
+    this.state = {
+      token: false
+    }
+  }
   componentDidMount() {
     const {navigation:{navigate}, saveToken} = this.props;
-    // navigate('titleScreen');
     AsyncStorage.getItem('id_token').then((token) => {
       if (token){
         console.log('Token Received from storage');
         saveToken(token)
+        console.log(token);
         navigate('library');
       } else navigate('titleScreen');
     }).catch(()=>{

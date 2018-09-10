@@ -78,15 +78,19 @@ export default class completedAlbum extends React.Component {
     }
     // I ask permissions
     let { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    this.setState({ permissionsGranted: status === 'granted' }, this.getAlbums);
+    this.setState({ permissionsGranted: status === 'granted' }, ()=>this.savePhotosToAlbum(assetArr));
 
-    // if permissions granted
+  };
+
+  // if permissions granted
+  savePhotosToAlbum = async (assetArr) =>{
+    const { activeAlbum } = this.props;
+
     const album = await MediaLibrary.createAlbumAsync(activeAlbum.name);
     await MediaLibrary.addAssetsToAlbumAsync(assetArr, album.id).then(()=>{
-      Linking.openURL('photos-redirect://app')
-
+      Linking.openURL('photos-redirect://app');
     });
-  };
+  }
 
   static navigationOptions = {
     title: 'Album Title',
@@ -134,7 +138,7 @@ export default class completedAlbum extends React.Component {
   // LOOK INTO REPLACES SCROLLVIEW WITH FLATLIST
   render(){
     const { navigation: { goBack, navigate }, token, activeAlbum, activeAlbum: { pics } } = this.props;
-
+    const { images, idx, visible } = this.state;
     return(
       <View>
 
@@ -151,16 +155,17 @@ export default class completedAlbum extends React.Component {
         </Header>
 
         {
-          (this.state.images.length > 1) ?
+          // this is for the full size image;
+          (images.length > 1) ?
           <ImageView
-            images={this.state.images}
-            imageIndex={this.state.idx}
-            isVisible={this.state.visible}
+            images={images}
+            imageIndex={idx}
+            isVisible={visible}
             animationType='slide'
             onClose={()=>this.imageView()}
             renderFooter={(currentImage) => (<View><Text>{activeAlbum.name}</Text></View>)}
           /> : null
-      }
+        }
         <View style={styles.scrollContainer}>
           <ScrollView
           contentContainerStyle={styles.scroll}
@@ -178,13 +183,13 @@ export default class completedAlbum extends React.Component {
 
           {
 
-            pics.map((album, i) => {
+            images.map((album, i) => {
               return(
                 <TouchableOpacity onPress={()=>this.imageView(i)}style={styles.picContainer} key={i*1.1}>
                   <Image
                     style={styles.pic}
                     key={i}
-                    source={{uri: pics[i].uri}}
+                    source={{uri: images[i].source.uri}}
                   />
                 </TouchableOpacity>
               )
