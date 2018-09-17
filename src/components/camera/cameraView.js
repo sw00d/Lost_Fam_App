@@ -65,11 +65,11 @@ export default class CameraDiv extends React.Component {
   }
 
   _shoot = async () => {
-
+    console.log('fire');
     //this add flash effect to camera
-    const self = this;
-    this.setState({hasCameraPermission: false});
-    setTimeout(()=>self.setState({hasCameraPermission: true}), 0);
+    // const self = this;
+    // this.setState({hasCameraPermission: false});
+    // setTimeout(()=>self.setState({hasCameraPermission: true}), 0);
 
     if (this.camera) {
       this.camera.takePictureAsync({ quality: 1, exif: true }).then(data => {

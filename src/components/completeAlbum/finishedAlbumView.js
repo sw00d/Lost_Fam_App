@@ -22,50 +22,77 @@ export default class completedAlbum extends React.Component {
   }
 
   componentWillMount() {
-    const {navigation:{navigate}, token} = this.props;
+    const {navigation:{ navigate }, token} = this.props;
     if (!token) navigate('titleScreen');
   }
 
   componentDidMount(){
-    const fotos = this.props.activeAlbum.pics;
-
-    for (let i in fotos){
-      this.fetchPhoto(fotos[i].key, fotos[i].exif)
+    const { pics } = this.props.activeAlbum;
+    for (let i in pics){
+      this.rotatePhoto(pics[i].uri, pics[i].exif.Orientation, i == pics.length-1);
     }
-    this.mapToImages();
-
   }
-  fetchPhoto = async (key, exif) => {
-    const {height, width} = Dimensions.get('window')
+
+  mapToImages(){
+    //This crafts the image object for the ImageView component
+    const { activeAlbum } = this.props;
+    const { pics } = this.state;
+    const arr = [];
+    for (let i in pics){
+      const { width, height, uri } = pics[i];
+      arr.push(
+        {
+          source: { uri },
+          title: activeAlbum.name,
+          width: width,
+          height: height
+        }
+      );
+      this.setState({images: arr});
+    }
+  }
 
 
-    const int = 360-parseInt(exif);
+  rotatePhoto = async (uri, orientation, lastPic) => {
+    const {height, width} = Dimensions.get('window');
+    //Determines rotation amount.
+    const int = 360-parseInt(orientation);
+    let h;
+    let w;
     try {
-      const value = await AsyncStorage.getItem(key); // format is album title + : + number in roll
-      // console.log(value)
-      if (value !== null){
-        if (exif == 90 || exif == -90){
-          this.setState({width: height});
-          this.setState({height: width});
+      if (uri !== null){
+        if (orientation == 90 || orientation == -90){
+          h = height;
+          w = width;
         }
         else {
-          this.setState({width: width});
-          this.setState({height: height});
-
+          w = height;
+          h = width;
         }
-        const rotate = await ImageManipulator.manipulate(value, [{ rotate: int },{ resize: {height: this.state.height, width: this.state.width}} ]);
-        this.setState({pomc:'pomc'});
-        const joined = this.state.pics.concat(rotate.uri);
-        this.setState({ pics: joined })
+        const rotate = await ImageManipulator.manipulate(
+                        uri,
+                        [
+                          { rotate: int },
+                          { resize: {height: h, width: w}}
+                        ]
+                      );
+        const joined = this.state.pics.concat(rotate);
+        if (lastPic) this.setState({ pics: joined }, ()=>this.mapToImages());
+        else this.setState({ pics: joined });
+
       }
     } catch (error) {
-      Alert.alert('Error fetching photo');
+      console.log(error);
     }
 
 
 
 
   }
+
+
+
+  //This deals with saving the pictures locally to your phone.
   saveToPhone = async () => {
     const { activeAlbum, activeAlbum: { pics } } = this.props;
 
@@ -81,8 +108,6 @@ export default class completedAlbum extends React.Component {
     this.setState({ permissionsGranted: status === 'granted' }, ()=>this.savePhotosToAlbum(assetArr));
 
   };
-
-  // if permissions granted
   savePhotosToAlbum = async (assetArr) =>{
     const { activeAlbum } = this.props;
 
@@ -92,44 +117,8 @@ export default class completedAlbum extends React.Component {
     });
   }
 
-  static navigationOptions = {
-    title: 'Album Title',
-    headerRight: (
-      <TouchableOpacity onPress= { () => {
-        Share.share({
-            message: 'SHARE THAT SHIT AROUND',
-            title: 'f**k ME TITLE'
-          }, {
-            // Android only:
-            dialogTitle: 'Share goodness',
-            // iOS only:
-            excludedActivityTypes: [
-              'com.apple.UIKit.activity.PostToTwitter'
-            ]
-          })
-      }}>
-        <Ionicons name="ios-share-alt" size={32} color="white"/>
-      </TouchableOpacity>
-  ),
-  };
 
- mapToImages(){
-   const { activeAlbum: { pics }, activeAlbum } = this.props;
-   const arr = [];
-   for (i in pics){
-     const { PixelXDimension, PixelYDimension, } = pics[i].exif;
-     arr.push(
-       {
-         source: { uri: pics[i].uri},
-         title: activeAlbum.name,
-         width: PixelYDimension/2.5,
-         height: PixelXDimension/2.5
-       }
-     );
-     this.setState({images: arr});
-   }
- }
-
+ // Specifically for opening and closing imageView component. Called from render
  imageView(key){
    key ? this.setState({idx: key}) : null;
    this.setState({visible: !this.state.visible});
@@ -155,7 +144,7 @@ export default class completedAlbum extends React.Component {
         </Header>
 
         {
-          // this is for the full size image;
+          // This is for the expanding to full size image onclick
           (images.length > 1) ?
           <ImageView
             images={images}
@@ -183,7 +172,7 @@ export default class completedAlbum extends React.Component {
 
           {
 
-            images.map((album, i) => {
+            images.map((x, i) => {
               return(
                 <TouchableOpacity onPress={()=>this.imageView(i)}style={styles.picContainer} key={i*1.1}>
                   <Image
