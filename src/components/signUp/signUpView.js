@@ -7,7 +7,7 @@ import Swipeout from 'react-native-swipeout';
 import { InputGroup, Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
 import {Ionicons} from '@expo/vector-icons';
 import { BlurView } from 'expo';
-import configureStore from '../../store/index.js'
+import { store } from '../../store/index.js'
 
 const { height, width } = Dimensions.get('window');
 
@@ -43,17 +43,15 @@ class RenderField extends Component {
 export default class SignUpView extends Component {
   submit() {
     // disables button functionality if any errors are in form.
+    const { validate, navigation:{ navigate }, createUser } = this.props;
     if (this.enableBtn() === true){
-      const { validate, navigation:{navigate}, createUser } = this.props;
       const inst = createUser(validate);
       inst();
-
-    } else {alert(this.enableBtn())}
-    // navigate('titleScreen');
+    }
+    navigate('titleScreen');
   }
 
   enableBtn(){
-    const { persistor, store } = configureStore();
     const { syncErrors } = store.getState().form.register;
     if (!syncErrors || syncErrors === ""){
       return true;

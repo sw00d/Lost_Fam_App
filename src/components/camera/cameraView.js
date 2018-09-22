@@ -6,17 +6,21 @@ import {CacheManager} from "react-native-expo-image-cache";
 import styles from './styles';
 
 export default class CameraDiv extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      hasCameraPermission: true,
+      type: Camera.Constants.Type.back,
+      dblClick: false,
+      blink: false,
+      btnDisable: false
+    };
+  }
   componentDidMount(){
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
-    // if (!!token && (!activeAlbum || !activeAlbum.name)) navigate('library');
+    this.setState({ btnDisable: false });
   }
-  state = {
-    hasCameraPermission: true,
-    type: Camera.Constants.Type.back,
-    dblClick: false,
-    blink: false
-  };
 
 
   componentWillMount() {
@@ -69,6 +73,9 @@ export default class CameraDiv extends React.Component {
   }
 
   _shoot = async () => {
+    //disables button from being clicked twice
+    this.setState({ btnDisable: true });
+
     //this add flash effect to camera
     // const self = this;
     // this.setState({hasCameraPermission: false});
@@ -146,7 +153,7 @@ export default class CameraDiv extends React.Component {
 
           <View style={styles.bottomBanner}>
             <View style={styles.circle}>
-              <TouchableOpacity onPress={() => this._shoot()} underlayColor="white">
+              <TouchableOpacity disabled={ this.state.btnDisable } onPress={() => this._shoot()} underlayColor="white">
                 <View style={styles.miniCircle}></View>
               </TouchableOpacity>
             </View>

@@ -9,16 +9,20 @@ import { Ionicons } from '@expo/vector-icons';
 export default class NewAlbumView extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       text: '',
-      cap: 7
+      cap: 7,
+      btnDisable: false
     };
+
     this.timer = null;
 
   }
 
   componentWillMount() {
     const {navigation:{navigate}, token} = this.props;
+    this.setState({ btnDisable: false });
     if (!token) navigate('titleScreen');
   }
   componentDidUpdate(){
@@ -55,6 +59,7 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum() {
+    this.setState({btnDisable: true});
     const { addAlbum, token, navigation } = this.props;
     const { cap, text } = this.state;
     if (this.checkDuplicate(text)) {
@@ -111,9 +116,9 @@ export default class NewAlbumView extends Component {
           </View>
 
 
-          <Button block style={styles.button} onPress={()=>this.createAlbum()}>
+          <TouchableOpacity style={styles.button} disabled={ this.state.btnDisable } onPress={()=>this.createAlbum()}>
             <Text style={styles.btnText} >Add New Roll</Text>
-          </Button>
+          </TouchableOpacity>
         </Swipeout>
       </View>
     );

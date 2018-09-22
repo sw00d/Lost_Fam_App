@@ -11,8 +11,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white",
-    // fontSize: 25,
-    // fontWeight: '700'
   },
   container: {
     height: height,
@@ -36,6 +34,10 @@ const styles = StyleSheet.create({
   button: {
     marginTop: height/15,
     backgroundColor: '#c95656',
+    borderRadius: 5,
+    height: height/15,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   row2: {
     marginTop: height/15,
