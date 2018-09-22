@@ -30,18 +30,22 @@ export default class CameraDiv extends React.Component {
     // this.setState({ hasCameraPermission: status === 'granted' });
   }
 
-
+  componentDidUpdate(){
+    const { picSaved, navigation:{ navigate }, navigation} = this.props;
+    if (picSaved) {
+      navigation.state.params.item();
+      navigate('library');
+    }
+  }
   savePhoto = async (data) => {
 
-    const { savePhoto, activeAlbum: { name, pics }, savePicToAPI, token, isConnected, navigation: { navigate } } = this.props;
+    const { savePhoto, activeAlbum: { name, pics }, savePicToAPI, token, isConnected, navigation: { navigate }, navigation } = this.props;
 
     const { exif, uri } = data;
     const key = `@${name.replace(/\s/, '_').toLowerCase()}:${pics.length}`
-    // fall_2016:0
-    // console.log(this.props.activeAlbum);
+
     if (isConnected){
       savePicToAPI({user_id: token, name, exif, uri});
-      // this.props.navigation.navigate('library')
     } else {
       // if not connected to internet, saves pic to cache for later saving to api.
       try {
@@ -65,7 +69,6 @@ export default class CameraDiv extends React.Component {
   }
 
   _shoot = async () => {
-    console.log('fire');
     //this add flash effect to camera
     // const self = this;
     // this.setState({hasCameraPermission: false});

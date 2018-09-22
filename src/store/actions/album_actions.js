@@ -21,9 +21,8 @@ export const addAlbum = (token, name, cap) => {
   }
   return (dispatch)=>{
     axios.post(`${ROOT_URL}/api/users/albums`, { values }).then((res)=>{
-      console.log(res.data);
       dispatch(albumSaved(true))
-      setTimeout(()=>dispatch(albumSaved(false)))
+      setTimeout(()=>dispatch(albumSaved(false)), 1000)
     });
   }
 }
@@ -35,12 +34,9 @@ export const getAlbums = (token) => {
     user_id: token,
     albIdx: 0
   }
-
   return () => {
     axios.get(`${ROOT_URL}/api/users/albums`, { params }).then(res => {
       dispatch(saveAlbumList(res.data));
-      // console.log(res.data);
-      return 'pomc'
 
     }).catch(err=>console.log(err));
   }

@@ -22,8 +22,11 @@ export default class NewAlbumView extends Component {
     if (!token) navigate('titleScreen');
   }
   componentDidUpdate(){
-    const {navigation:{ navigate }} = this.props;
-    if (this.props.albumSaved) navigate('library');
+    const {navigation:{ navigate }, navigation, albumSaved} = this.props;
+    if (albumSaved) {
+      navigation.state.params.item();
+      navigate('library');
+    }
   }
 
   checkDuplicate(text) {
@@ -52,12 +55,11 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum() {
-    const { addAlbum, token, navigation: { navigate } } = this.props;
+    const { addAlbum, token, navigation } = this.props;
     const { cap, text } = this.state;
     if (this.checkDuplicate(text)) {
-      // addAlbum(token, text, cap).then();
-      addAlbum(token, text, cap)
-    } else alert('You already have an roll with that name. Try Again.')
+      addAlbum(token, text, cap);
+    } else alert('You already have an roll with that name. Try Again.');
   }
 
   static navigationOptions = {

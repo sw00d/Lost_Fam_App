@@ -23,18 +23,18 @@ export default class LibraryView extends Component {
   }
 
   onRefresh = () => {
+    const { token, getAlbums } = this.props;
     const self = this;
     this.setState({refreshing: true});
-    const { token, getAlbums } = this.props;
     setTimeout(()=>self.setState({refreshing: false}),1000)
-    getAlbums(token)
+    getAlbums(token);
   }
 
 
   updateActiveAlbum(idx) {
     const { navigation: { navigate }, activeAlbum, albums } = this.props;
     activeAlbum(idx);
-    if (albums[idx].pics.length < albums[idx].capacity) navigate('camera');
+    if (albums[idx].pics.length < albums[idx].capacity) navigate('camera', {item: ()=>this.onRefresh()});
     else navigate('finishedAlbum');
   }
 
@@ -43,6 +43,13 @@ export default class LibraryView extends Component {
     const { selectedAlb } = this.state;
     this.props.deleteAlbum(token, selectedAlb);
     this.forceUpdate();
+
+  }
+
+  fire(){
+    //not updating
+    this.onRefresh();
+
 
   }
 
@@ -67,7 +74,7 @@ export default class LibraryView extends Component {
           </Body>
           <Right>
             <TouchableOpacity>
-              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => navigate('newAlbum') } />
+              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => navigate('newAlbum', {item: ()=>this.onRefresh()}) } />
             </TouchableOpacity>
           </Right>
         </Header>

@@ -10,6 +10,14 @@ const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts
 const ROOT_URL = `http://${api}`;
 
 export const SAVE_PHOTO = 'SAVE_PHOTO';
+export const PIC_SAVED = 'PIC_SAVED';
+
+export const picSaved = (bool) => {
+    return {
+      type: PIC_SAVED,
+      bool
+    }
+}
 
 export const savePhoto = (key, exif) => {
   const data = {
@@ -27,7 +35,9 @@ export const savePicToAPI = (values) => {
   return () => {
     axios.post(`${ROOT_URL}/api/pics`, { values }).then(res => {
       // dispatch(saveAlbumList(res.data));
-      console.log(res.data, navigatorRef);
+      dispatch(picSaved(true));
+      setTimeout(()=>dispatch(picSaved(false)), 1000)
+
     }).catch(err=>console.log(err));
   }
 

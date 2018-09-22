@@ -10,7 +10,8 @@ const appReducer = combineReducers({
   albums: albumReducer,
   form: formReducer,
   user: userReducer,
-  app: generalReducer
+  app: generalReducer,
+  pics: picsReducer
 });
 
 const rootReducer = (state, action) => {
