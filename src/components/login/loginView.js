@@ -29,7 +29,7 @@ class RenderField extends Component {
 
 export default class LoginView extends Component {
   componentDidUpdate(){
-    const { navigation:{navigate}, token } = this.props;
+    const { navigation:{ navigate }, token } = this.props;
     if (token) navigate('library');
   }
   submit() {

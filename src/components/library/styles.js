@@ -4,6 +4,16 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  refreshBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height/3,
+    flexDirection: 'column',
+    width: width/1.2
+  },
+  refreshTxt: {
+    color: 'lightgrey'
+  },
   pic: {
     marginBottom: 10,
     marginTop: 10,

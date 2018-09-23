@@ -61,16 +61,14 @@ export default class LibraryView extends Component {
     };
     return(
       <View style={styles.container}>
-        <Header style={styles.header}>
+        <Header style={ styles.header }>
           <Left>
-            <TouchableOpacity onPress={ () => navigate('settings') } underlayColor='white'>
-              <Ionicons name="ios-settings-outline" size={32} color="white" />
+            <TouchableOpacity>
+              <Ionicons name="ios-settings-outline"  onPress={ () => navigate('settings') } size={32} color="white" />
             </TouchableOpacity>
           </Left>
-          <Body>
-            <View style={styles.directions}>
-              <Text style={styles.title}>Select Roll</Text>
-            </View>
+          <Body style={styles.directions}>
+            <Text style={styles.title}>Select Roll</Text>
           </Body>
           <Right>
             <TouchableOpacity>
@@ -88,7 +86,7 @@ export default class LibraryView extends Component {
             />
           }
         >
-          { (albums) ?
+          { (albums.length > 0) ?
               albums.map((album, i) => {
                 const { capacity, name, pics } = album;
                 return(
@@ -107,23 +105,27 @@ export default class LibraryView extends Component {
                     body={
 
                       <TouchableOpacity activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
-                      <Text style={styles.albText}>{ name }</Text>
-                      {
-                        pics.length < capacity ?
-                        <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text> :
-                        <Image
-                        style={styles.pic}
-                        key={i}
-                        source={{uri: pics[0].uri}}
-                        />
-                      }
+                        <Text style={styles.albText}>{ name }</Text>
+                        {
+                          pics.length < capacity ?
+                          <Text style={styles.albText}>{ `${pics.length} / ${capacity}` }</Text> :
+                          <Image
+                          style={styles.pic}
+                          key={i}
+                          source={{uri: pics[0].uri}}
+                          />
+                        }
                       </TouchableOpacity>
                     }
                   >
                   </SwipeRow>
                 )
               })
-             : null
+             :
+             <TouchableOpacity activeOpacity={.1} style={styles.refreshBtn} onPress={ () => this.onRefresh()}>
+               <Text style={styles.refreshTxt}>Refresh</Text>
+               <Ionicons name="ios-arrow-down" size={ 40 } color="gainsboro"/>
+             </TouchableOpacity>
           }
         </ScrollView>
       </View>
