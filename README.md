@@ -47,6 +47,5 @@ https://github.com/classpass/react-native-credit-card-input
 -THIS IS DONE BUT IT ERRORS OUT SOMETIMES
   - disable landscape mode 
      - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
-     - https://www.npmjs.com/package/react-native-orientation-locker
 
 
