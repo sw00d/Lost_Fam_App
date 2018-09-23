@@ -63,16 +63,16 @@ export default class LibraryView extends Component {
       <View style={styles.container}>
         <Header style={ styles.header }>
           <Left>
-            <TouchableOpacity>
-              <Ionicons name="ios-settings-outline"  onPress={ () => navigate('settings') } size={32} color="white" />
+            <TouchableOpacity onPress={ () => navigate('settings') } >
+              <Ionicons name="ios-settings-outline"size={32} color="white" />
             </TouchableOpacity>
           </Left>
           <Body style={styles.directions}>
             <Text style={styles.title}>Select Roll</Text>
           </Body>
           <Right>
-            <TouchableOpacity>
-              <Ionicons name="ios-add-circle-outline" size={32} color="white"  onPress={ () => navigate('newAlbum', {item: ()=>this.onRefresh()}) } />
+            <TouchableOpacity  disabled={ this.state.refreshing } onPress={ () => navigate('newAlbum', {item: ()=>this.onRefresh()}) }>
+              <Ionicons name="ios-add-circle-outline" size={32} color="white" />
             </TouchableOpacity>
           </Right>
         </Header>
@@ -104,7 +104,7 @@ export default class LibraryView extends Component {
                     key={name}
                     body={
 
-                      <TouchableOpacity activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
+                      <TouchableOpacity disabled={ this.state.refreshing } activeOpacity={.1} style={styles.row} onPress={ () => this.updateActiveAlbum(i) }>
                         <Text style={styles.albText}>{ name }</Text>
                         {
                           pics.length < capacity ?
@@ -124,7 +124,7 @@ export default class LibraryView extends Component {
              :
              <TouchableOpacity activeOpacity={.1} style={styles.refreshBtn} onPress={ () => this.onRefresh()}>
                <Text style={styles.refreshTxt}>Refresh</Text>
-               <Ionicons name="ios-arrow-down" size={ 40 } color="gainsboro"/>
+               <Ionicons name="ios-refresh" size={ 40 } color="gainsboro"/>
              </TouchableOpacity>
           }
         </ScrollView>

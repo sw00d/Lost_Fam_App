@@ -48,6 +48,7 @@ export default class Settings extends React.Component {
       </Header>
         <TouchableOpacity style={styles.option} onPress={()=>this.logout()}>
           <Text style={styles.font}>Log Out</Text>
+          <Ionicons name="ios-log-out" size={32} color="black" />
         </TouchableOpacity>
       </View>
     )

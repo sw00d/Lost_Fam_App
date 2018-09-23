@@ -35,7 +35,7 @@ export default class NewAlbumView extends Component {
 
   checkDuplicate(text) {
     const { albums } = this.props;
-    if (text.length < 3 || !albums) return false;
+    if (!albums) return false;
     let nonDup = true;
     albums.forEach(album => {
       if (album.name === text) nonDup = false;
@@ -46,9 +46,9 @@ export default class NewAlbumView extends Component {
   updateCap(e){
     const { cap } = this.state
     const self = this;
-    if (e && cap < 32){
+    if (e && cap < 36){
       this.setState({cap: cap+1})
-    } else if (!e && cap >= 1) {
+    } else if (!e && cap > 7) {
       this.setState({cap: cap-1})
     }
     this.timer = setTimeout(()=>self.updateCap(e), 100);
@@ -64,12 +64,10 @@ export default class NewAlbumView extends Component {
     const { cap, text } = this.state;
     if (this.checkDuplicate(text)) {
       addAlbum(token, text, cap);
+    } else if (text.length < 3){
+      alert("Roll name is too short");
     } else alert('You already have an roll with that name. Try Again.');
   }
-
-  static navigationOptions = {
-    title: 'New Roll',
-  };
 
   render() {
     const { navigation: { navigate, goBack}} = this.props;
