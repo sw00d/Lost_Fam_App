@@ -1,6 +1,7 @@
 import React from 'react';
-import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
+import { Share, ScrollView, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
 import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
+import { Header, Button, Left, Body, Right, Title, } from 'native-base';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
 
@@ -31,28 +32,20 @@ export default class Settings extends React.Component {
 
 
   render() {
+    const { goBack } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.font}>Account</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.font}>Payment Info</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.font}>Full Version</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.font}>About</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.font}>Preferences</Text>
-        </TouchableOpacity>
-
+      <Header style={styles.header}>
+        <Left>
+          <TouchableOpacity>
+            <Ionicons name="ios-arrow-back"  onPress={ () => goBack() } size={32} color="white" />
+          </TouchableOpacity>
+        </Left>
+        <Body>
+          <Title style={styles.title} >Settings</Title>
+        </Body>
+        <Right></Right>
+      </Header>
         <TouchableOpacity style={styles.option} onPress={()=>this.logout()}>
           <Text style={styles.font}>Log Out</Text>
         </TouchableOpacity>

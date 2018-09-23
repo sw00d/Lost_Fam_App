@@ -4,6 +4,14 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  header: {
+    height: height/10,
+    width: width,
+    backgroundColor: '#C95656',
+  },
+  title: {
+    color: "white",
+  },
   container: {
     width: width,
     height: height,
