@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import LoginView from './loginView';
 import {reduxForm} from 'redux-form';
-import { testPassword, checkForWhiteSpace } from '../../utils';
 import { authenticateUser, saveToken } from '../../store/actions/user_actions';
+import { testEmail, checkForWhiteSpace } from '../../utils';
 
 const validate = (values, field) => {
   // console.log(values);
   const errors = {};
-  if (!values.email) errors.email = "Enter your Email";
-  if (!values.password ) errors.password = "Enter your password";
+  if (!values.email || !testEmail(values.email)) errors.email = "Enter your Email";
+  if (!values.password) errors.password = "Enter your password";
   if (checkForWhiteSpace(values.password)) errors.password = "Password cannot have whitespace";
   if (checkForWhiteSpace(values.email)) errors.email = "Email cannot have whitespace";
   return errors;

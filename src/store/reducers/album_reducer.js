@@ -7,12 +7,6 @@ export default (state = {
   activeAlbum: {}
 }, action) => {
   switch(action.type) {
-    case ALBUM_SAVE:
-      const { bool } = action;
-      return {
-        ...state,
-        albumSaved: bool
-      }
     case ALBUM_LIST:
       state.albums = action.list;
       return { ...state }

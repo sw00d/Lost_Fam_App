@@ -28,17 +28,30 @@ class RenderField extends Component {
 }
 
 export default class LoginView extends Component {
+
+  state={
+    disabled: false
+  }
   componentDidUpdate(){
     const { navigation:{ navigate }, token } = this.props;
     if (token) navigate('library');
   }
   submit() {
     const { validate, syncErrors, authenticateUser, token } = this.props;
+    this.setState({ disabled: true });
+    const self = this;
     if (!syncErrors || syncErrors === ''){
-      authenticateUser(validate);
+      authenticateUser(validate).then(e=>{
+        if (e) {
+          alert(e);
+          self.setState({disabled: false});
+        }
+      });
     }
     else {
       alert(`Please fill out both your password and email.`)
+      this.setState({ disabled: false });
+
     }
   }
 
@@ -59,12 +72,14 @@ export default class LoginView extends Component {
           </Header>
         <Content style={styles.content}>
           <Form>
-              <Field name="email" label="Email" component={RenderField} />
-              <Field name="password" label="Password" component={RenderField} />
+              <Field name="email" label="Email" component={ RenderField } />
+              <Field name="password" label="Password" component={ RenderField } />
           </Form>
-          <Button style={styles.submitBtn} onPress={() => this.submit()}>
+          <View style={ styles.btnContainer }>
+          <TouchableOpacity disabled={this.state.disabled} style={styles.submitBtn} onPress={() => this.submit()}>
             <Text style={styles.btnFont}>Login</Text>
-          </Button>
+          </TouchableOpacity>
+          </View>
         </Content>
       </View>
     );

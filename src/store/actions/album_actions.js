@@ -20,9 +20,10 @@ export const addAlbum = (token, name, cap) => {
     user_id: token
   }
   return (dispatch)=>{
-    axios.post(`${ROOT_URL}/api/users/albums`, { values }).then((res)=>{
-      dispatch(albumSaved(true))
-      setTimeout(()=>dispatch(albumSaved(false)), 1000)
+    return axios.post(`${ROOT_URL}/api/users/albums`, { values }).then((res)=>{
+      if (res.data.success) return true;
+      // dispatch(albumSaved(true))
+      // setTimeout(()=>dispatch(albumSaved(false)), 1000)
     });
   }
 }
@@ -50,12 +51,6 @@ export const saveAlbumList = (list) => {
     }
 }
 
-export const albumSaved = (bool) => {
-    return {
-      type: ALBUM_SAVE,
-      bool
-    }
-}
 
 export const deleteAlbum = (token, albIdx) => {
   const { dispatch } = store;

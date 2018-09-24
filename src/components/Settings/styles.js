@@ -18,13 +18,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   option: {
+    marginTop: height/10,
     backgroundColor: 'transparent',
     borderBottomColor: 'gainsboro',
     borderBottomWidth: 1,
+    borderTopColor: 'gainsboro',
+    borderTopWidth: 1,
     height: topBannerHeight*1.5,
     width: width /1.2,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   font: {

@@ -4,6 +4,10 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  spinner: {
+    height: height/2,
+    width: width/1.2,
+  },
   header: {
     height: height/10,
     width: width,

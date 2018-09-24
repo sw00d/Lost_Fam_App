@@ -47,15 +47,15 @@ export default class SignUpView extends Component {
     if (this.enableBtn() === true){
       const inst = createUser(validate);
       inst();
-    }
-    navigate('titleScreen');
+      navigate('titleScreen');
+    } else alert(this.enableBtn());
   }
 
   enableBtn(){
     const { syncErrors } = store.getState().form.register;
     if (!syncErrors || syncErrors === ""){
       return true;
-    } else return "Please fix any errors within the form."
+    } else return "Please fix any errors within the form.";
   }
 
   render() {

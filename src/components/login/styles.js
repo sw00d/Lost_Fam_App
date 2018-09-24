@@ -21,10 +21,15 @@ export default StyleSheet.create({
       justifyContent: 'space-between',
       backgroundColor: 'gainsboro'
     },
+    btnContainer: {
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
     submitBtn: {
-      marginTop: height/30,
-      width,
+      marginTop: height/10,
+      width: width/1.2,
       height: height/10,
+      borderRadius: 10,
       backgroundColor: "#C95656",
       justifyContent: 'center',
       alignItems: 'center',

@@ -40,15 +40,13 @@ export const authenticateUser = (validate, uAndP) => {
   return () => {
     const { dispatch, getState } = store;
     const { email, password } = !uAndP ? getState().form.login.values : uAndP;
-
     if (canNavToNext({ email, password }, validate)) {
-      axios.post(`${ROOT_URL}/api/authenticate`, { email, password }).then(res => {
+      return axios.post(`${ROOT_URL}/api/authenticate`, { email, password }).then(res => {
         if (!res.data.success){
           dispatch(userHasErrored(true, "Failed to authenticate."));
-          alert('Invalid Login. Try again.');
+          return res.data.message;
         }
-
-        if (res.data.success) {
+        else if (res.data.success) {
           dispatch(userHasErrored(false, ""))
           dispatch(saveToken(res.data.token));
         }
@@ -59,9 +57,7 @@ export const authenticateUser = (validate, uAndP) => {
 
 
 export const saveToken = token => {
-  console.log('Save token fired');
   try {
-    console.log('Token saved to phones local storage');
     AsyncStorage.setItem("id_token", token);
   } catch (error) {
     console.error('AsyncStorage error: ' + error.message);

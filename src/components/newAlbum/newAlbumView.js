@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, TextInput } from 'react-native';
-import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, } from 'native-base';
+import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, Spinner } from 'native-base';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
 import { Ionicons } from '@expo/vector-icons';
@@ -24,13 +24,6 @@ export default class NewAlbumView extends Component {
     const {navigation:{navigate}, token} = this.props;
     this.setState({ btnDisable: false });
     if (!token) navigate('titleScreen');
-  }
-  componentDidUpdate(){
-    const {navigation:{ navigate }, navigation, albumSaved} = this.props;
-    if (albumSaved) {
-      navigation.state.params.item();
-      navigate('library');
-    }
   }
 
   checkDuplicate(text) {
@@ -59,14 +52,27 @@ export default class NewAlbumView extends Component {
   }
 
   createAlbum() {
-    this.setState({btnDisable: true});
-    const { addAlbum, token, navigation } = this.props;
+    const { addAlbum, token, navigation: { navigate, state } } = this.props;
+    const self = this;
     const { cap, text } = this.state;
-    if (this.checkDuplicate(text)) {
-      addAlbum(token, text, cap);
-    } else if (text.length < 3){
-      alert("Roll name is too short");
+    this.setState({btnDisable: true});
+    let txt = text;
+    if (text[text.length-1] === ' ') {
+      txt = txt.substring(0,txt.length-1);
+    }
+    else if (text[0] === ' ') {
+      txt = txt.substring(1,txt.length);
+    }
+    if (txt.length < 2 || !txt.length) alert("Roll name too short");
+    else if (this.checkDuplicate(txt)) {
+      addAlbum(token, txt, cap).then((e)=>{
+        if (e) {
+          state.params.item();
+          navigate('library');
+        }
+      });
     } else alert('You already have an roll with that name. Try Again.');
+    self.setState({btnDisable: false});
   }
 
   render() {
@@ -100,23 +106,29 @@ export default class NewAlbumView extends Component {
               <View style={styles.container2}>
                 <Text style={styles.h2}>Roll Length</Text>
               </View>
-              <Text style={styles.cap}>{ this.state.cap } days</Text>
+              <Text style={styles.cap}>{ this.state.cap } shots</Text>
             </View>
             <View style={styles.divider}></View>
             <View>
               <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(true) }}>
-                <Ionicons name="ios-arrow-up" size={42} color="grey" />
+                <Ionicons name="ios-arrow-up" size={42} color={ this.state.cap === 36 ? "lightgrey" : "grey"}/>
               </TouchableOpacity>
               <TouchableOpacity onPressOut = {()=>this.stopTimer()}onPressIn={()=>{ this.updateCap(false) }}>
-                <Ionicons name="ios-arrow-down" size={42} color="grey" />
+                <Ionicons name="ios-arrow-down" size={42} color={ this.state.cap === 7 ? "lightgrey" : "grey"} />
               </TouchableOpacity>
             </View>
           </View>
 
+          {
+            !this.state.btnDisable ?
+              <TouchableOpacity style={styles.button} disabled={ this.state.btnDisable } onPress={()=>this.createAlbum()}>
+                <Text style={styles.btnText} >Add New Roll</Text>
+              </TouchableOpacity> :
+              <Content style={styles.spinner}>
+                <Spinner color='#C95656' />
+              </Content>
+          }
 
-          <TouchableOpacity style={styles.button} disabled={ this.state.btnDisable } onPress={()=>this.createAlbum()}>
-            <Text style={styles.btnText} >Add New Roll</Text>
-          </TouchableOpacity>
         </Swipeout>
       </View>
     );
