@@ -27,6 +27,8 @@ This is an attempt to recreate the experience that comes with shooting film. The
 
 ## CURRENT TO DO LIST
 
+- add navigation on promise resolve...
+- add algorithm to get rid of whitespace in newAlbumView...
 
 - add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
 https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
