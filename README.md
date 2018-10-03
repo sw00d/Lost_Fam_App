@@ -27,6 +27,7 @@ This is an attempt to recreate the experience that comes with shooting film. The
 
 ## CURRENT TO DO LIST
 
+- add flash effect on photo taken
 - add navigation on promise resolve...
 - add algorithm to get rid of whitespace in newAlbumView...
 
