@@ -4,8 +4,11 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
-  spinner: {
-    height: height/2,
+  backBtn: {
+    paddingLeft: 5
+  },
+  spinnerContainer: {
+    height: height/5,
     width: width/1.2,
   },
   header: {

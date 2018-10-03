@@ -37,8 +37,8 @@ export default class Settings extends React.Component {
       <View style={styles.container}>
       <Header style={styles.header}>
         <Left>
-          <TouchableOpacity>
-            <Ionicons name="ios-arrow-back"  onPress={ () => goBack() } size={32} color="white" />
+          <TouchableOpacity onPress={ () => goBack() }>
+            <Ionicons name="ios-arrow-back" size={32} style={styles.backBtn}color="white" />
           </TouchableOpacity>
         </Left>
         <Body>

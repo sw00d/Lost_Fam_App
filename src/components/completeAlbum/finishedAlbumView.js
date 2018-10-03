@@ -134,12 +134,12 @@ export default class completedAlbum extends React.Component {
 
         <Header style={styles.header}>
           <Left>
-            <TouchableOpacity style={styles.backBtn} transparent onPress={()=>goBack()}>
-              <Ionicons name="ios-arrow-back" size={32} color="white" />
-            </TouchableOpacity>
+            <Button transparent onPress={()=>goBack()}>
+              <Ionicons style={styles.backBtn} name="ios-arrow-back" size={32} color="white" />
+            </Button>
           </Left>
           <Body>
-            <Title style={styles.title}> {activeAlbum.name} </Title>
+            <Title style={styles.title}> { activeAlbum.name }</Title>
           </Body>
           <Right></Right>
         </Header>

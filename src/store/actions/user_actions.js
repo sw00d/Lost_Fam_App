@@ -57,6 +57,7 @@ export const authenticateUser = (validate, uAndP) => {
 
 
 export const saveToken = token => {
+
   try {
     AsyncStorage.setItem("id_token", token);
   } catch (error) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, RefreshControl, ScrollView, Text, View, TouchableOpacity, Dimensions, AsyncStorage} from 'react-native';
+import { Image, RefreshControl, ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import styles from './styles';
 import { canNavToNext } from '../../utils';
@@ -43,13 +43,6 @@ export default class LibraryView extends Component {
     const { selectedAlb } = this.state;
     this.props.deleteAlbum(token, selectedAlb);
     this.forceUpdate();
-
-  }
-
-  fire(){
-    //not updating
-    this.onRefresh();
-
 
   }
 

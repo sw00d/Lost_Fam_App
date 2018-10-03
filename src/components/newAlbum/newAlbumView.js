@@ -55,24 +55,27 @@ export default class NewAlbumView extends Component {
     const { addAlbum, token, navigation: { navigate, state } } = this.props;
     const self = this;
     const { cap, text } = this.state;
-    this.setState({btnDisable: true});
     let txt = text;
     if (text[text.length-1] === ' ') {
       txt = txt.substring(0,txt.length-1);
     }
     else if (text[0] === ' ') {
-      txt = txt.substring(1,txt.length);
+      txt = txt.substring(1 ,txt.length);
     }
+
+
     if (txt.length < 2 || !txt.length) alert("Roll name too short");
     else if (this.checkDuplicate(txt)) {
+      this.setState({ btnDisable: true });
       addAlbum(token, txt, cap).then((e)=>{
         if (e) {
           state.params.item();
           navigate('library');
         }
       });
-    } else alert('You already have an roll with that name. Try Again.');
-    self.setState({btnDisable: false});
+    }
+    else alert('You already have an roll with that name. Try Again.');
+
   }
 
   render() {
@@ -82,7 +85,7 @@ export default class NewAlbumView extends Component {
         <Header style={styles.header}>
           <Left>
             <Button transparent onPress={()=>goBack()}>
-              <Ionicons name="ios-arrow-back" size={32} color="white" />
+              <Ionicons style={styles.backBtn} name="ios-arrow-back" size={32} color="white" />
             </Button>
           </Left>
           <Body>
@@ -124,7 +127,7 @@ export default class NewAlbumView extends Component {
               <TouchableOpacity style={styles.button} disabled={ this.state.btnDisable } onPress={()=>this.createAlbum()}>
                 <Text style={styles.btnText} >Add New Roll</Text>
               </TouchableOpacity> :
-              <Content style={styles.spinner}>
+              <Content style={styles.spinnerContainer}>
                 <Spinner color='#C95656' />
               </Content>
           }

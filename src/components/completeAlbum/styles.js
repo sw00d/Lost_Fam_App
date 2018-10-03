@@ -66,6 +66,6 @@ export default StyleSheet.create({
     fontSize: 20,
   },
   backBtn: {
-    width: 100,
+    paddingLeft: 5
   }
 });

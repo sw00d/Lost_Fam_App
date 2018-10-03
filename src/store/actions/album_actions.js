@@ -22,8 +22,6 @@ export const addAlbum = (token, name, cap) => {
   return (dispatch)=>{
     return axios.post(`${ROOT_URL}/api/users/albums`, { values }).then((res)=>{
       if (res.data.success) return true;
-      // dispatch(albumSaved(true))
-      // setTimeout(()=>dispatch(albumSaved(false)), 1000)
     });
   }
 }

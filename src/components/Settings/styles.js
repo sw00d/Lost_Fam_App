@@ -4,6 +4,9 @@ const {height, width} = Dimensions.get('window');
 const topBannerHeight = height/10;
 
 const styles = StyleSheet.create({
+  backBtn: {
+    paddingLeft: 5
+  },
   header: {
     height: height/10,
     width: width,
