@@ -1,6 +1,8 @@
 import React from 'react';
 import { NetInfo, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
 import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
+import { Container, Header, Content, Spinner } from 'native-base';
+
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
 import styles from './styles';
@@ -125,7 +127,7 @@ export default class CameraDiv extends React.Component {
   render() {
     const { hasCameraPermission } = this.state;
     const {height, width} = Dimensions.get('window');
-    const {type, blink} = this.state;
+    const {type, blink, btnDisable} = this.state;
 
 
     if (hasCameraPermission === null) return <View />;
@@ -144,16 +146,22 @@ export default class CameraDiv extends React.Component {
 
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
             <Camera style={styles.camStyle} type={type} ref={(camera) => { this.camera = camera; }}>
-              <View style={styles.filmCircle}>
-                <View style={styles.miniTopHalf}></View>
-                <View style={styles.miniBottomHalf}></View>
-              </View>
+              {
+                btnDisable ?
+                  <View style={styles.flash}>
+                      <Spinner color='#fff' />
+                  </View> :
+                <View style={styles.filmCircle}>
+                  <View style={styles.miniTopHalf}></View>
+                  <View style={styles.miniBottomHalf}></View>
+                </View>
+              }
             </Camera>
           </TouchableHighlight>
 
           <View style={styles.bottomBanner}>
             <View style={styles.circle}>
-              <TouchableOpacity disabled={ this.state.btnDisable } onPress={() => this._shoot()} underlayColor="white">
+              <TouchableOpacity disabled={ btnDisable } onPress={() => this._shoot()} underlayColor="white">
                 <View style={styles.miniCircle}></View>
               </TouchableOpacity>
             </View>

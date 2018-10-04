@@ -10,6 +10,14 @@ const fCircleDiam = height/16;
 const fCircleHeight = height/32;
 
 export default StyleSheet.create({
+  flash: {
+    position: 'absolute',
+    height: camHeight,
+    width,
+    backgroundColor: 'rgba(0,0,0,.9)',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   miniTopHalf: {
     height: fCircleHeight,
     width: fCircleDiam,

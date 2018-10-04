@@ -4,7 +4,6 @@ const bottomBannerHeight = height/8;
 const topBannerHeight = height/9;
 const circleDiam = height/10;
 
-console.log(width, width/5, (width-((width/5)*3))/3);
 export default StyleSheet.create({
   header: {
     height: height/10,
