@@ -166,7 +166,7 @@ export default class completedAlbum extends React.Component {
               <Button style={styles.Btn} onPress={ this.saveToPhone } title="Save to CameraRoll">
                 <Text style={styles.btnFont}>Save Roll</Text>
               </Button>
-              <Button style={styles.Btn} onPress={ ()=>navigate('orderForm') } title="Order Prints">
+              <Button style={styles.Btn} onPress={ ()=>Alert.alert("Roll order coming soon!") } title="Order Prints">
                 <Text style={styles.btnFont}>Order Prints</Text>
               </Button>
             </View>

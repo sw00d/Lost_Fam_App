@@ -27,7 +27,8 @@ This is an attempt to recreate the experience that comes with shooting film. The
 
 ## CURRENT TO DO LIST
 
-- add navigation on promise resolve...
+- Login after sign up
+- send email on sign up
 - add algorithm to get rid of whitespace in newAlbumView...
 
 - add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
@@ -37,7 +38,7 @@ https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
 https://github.com/classpass/react-native-credit-card-input
 
 - NEED TO LINK THESE LIBRARIES
-  - add stripe 
+  - add stripe
     -https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 
 - Create offline app bundle
@@ -47,7 +48,5 @@ https://github.com/classpass/react-native-credit-card-input
 - SET up fire base
 
 -THIS IS DONE BUT IT ERRORS OUT SOMETIMES
-  - disable landscape mode 
+  - disable landscape mode
      - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
-
-

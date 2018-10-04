@@ -15,13 +15,13 @@ export default class CameraDiv extends React.Component {
       type: Camera.Constants.Type.back,
       dblClick: false,
       blink: false,
-      btnDisable: false
+      photoTaken: false
     };
   }
   componentDidMount(){
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
-    this.setState({ btnDisable: false });
+    this.setState({ photoTaken: false });
   }
 
 
@@ -76,7 +76,7 @@ export default class CameraDiv extends React.Component {
 
   _shoot = async () => {
     //disables button from being clicked twice
-    this.setState({ btnDisable: true });
+    this.setState({ photoTaken: true });
 
     //this add flash effect to camera
     // const self = this;
@@ -127,7 +127,7 @@ export default class CameraDiv extends React.Component {
   render() {
     const { hasCameraPermission } = this.state;
     const {height, width} = Dimensions.get('window');
-    const {type, blink, btnDisable} = this.state;
+    const {type, blink, photoTaken} = this.state;
 
 
     if (hasCameraPermission === null) return <View />;
@@ -147,7 +147,7 @@ export default class CameraDiv extends React.Component {
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
             <Camera style={styles.camStyle} type={type} ref={(camera) => { this.camera = camera; }}>
               {
-                btnDisable ?
+                photoTaken ?
                   <View style={styles.flash}>
                       <Spinner color='#fff' />
                   </View> :
@@ -161,7 +161,7 @@ export default class CameraDiv extends React.Component {
 
           <View style={styles.bottomBanner}>
             <View style={styles.circle}>
-              <TouchableOpacity disabled={ btnDisable } onPress={() => this._shoot()} underlayColor="white">
+              <TouchableOpacity disabled={ photoTaken } onPress={() => this._shoot()} underlayColor="white">
                 <View style={styles.miniCircle}></View>
               </TouchableOpacity>
             </View>

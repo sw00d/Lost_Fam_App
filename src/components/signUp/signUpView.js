@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, TextInput, ScrollView, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Dimensions, Alert, TextInput, ScrollView, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import styles from './styles';
 import {Field, reduxForm} from 'redux-form';
 import { canNavToNext } from '../../utils';
@@ -44,14 +44,14 @@ export default class SignUpView extends Component {
   submit() {
     // disables button functionality if any errors are in form.
     const { validate, navigation:{ navigate }, createUser } = this.props;
-    if (this.enableBtn() === true){
+    if (this.checkForErrors() === true){
       const inst = createUser(validate);
       inst();
       navigate('titleScreen');
-    } else alert(this.enableBtn());
+    } else Alert.alert(this.checkForErrors());
   }
 
-  enableBtn(){
+  checkForErrors(){
     const { syncErrors } = store.getState().form.register;
     if (!syncErrors || syncErrors === ""){
       return true;

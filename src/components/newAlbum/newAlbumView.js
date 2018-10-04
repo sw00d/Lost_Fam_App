@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, Alert, View, TouchableOpacity, TextInput } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Body, Right, Icon, Title, Spinner } from 'native-base';
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
@@ -64,7 +64,7 @@ export default class NewAlbumView extends Component {
     }
 
 
-    if (txt.length < 2 || !txt.length) alert("Roll name too short");
+    if (txt.length < 2 || !txt.length) Alert.alert("Roll name too short");
     else if (this.checkDuplicate(txt)) {
       this.setState({ btnDisable: true });
       addAlbum(token, txt, cap).then((e)=>{
@@ -74,7 +74,7 @@ export default class NewAlbumView extends Component {
         }
       });
     }
-    else alert('You already have an roll with that name. Try Again.');
+    else Alert.alert('You already have an roll with that name. Try Again.');
 
   }
 

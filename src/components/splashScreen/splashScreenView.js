@@ -3,7 +3,7 @@ import { Dimensions, Text, View, AsyncStorage } from 'react-native';
 import { Container, Header, Content, Spinner } from 'native-base';
 import styles from './styles';
 
-const { height, width } = Dimensions.get('window');
+
 
 export default class SplashScreen extends Component {
   constructor(){
@@ -16,13 +16,12 @@ export default class SplashScreen extends Component {
     const {navigation:{navigate}, saveToken} = this.props;
     AsyncStorage.getItem('id_token').then((token) => {
       if (token){
-        console.log('Token Received from storage');
         saveToken(token)
         console.log(token);
         navigate('library');
       } else navigate('titleScreen');
     }).catch(()=>{
-      console.log('no token found in storage. Login');
+      Alert.alert('no token found in storage. Login Please');
     });
   }
 
@@ -33,6 +32,7 @@ export default class SplashScreen extends Component {
   }
 
   render(){
+    console.log(this.props.navigation);
     return (
       <View style={styles.container}>
         <Content style={styles.content}>
