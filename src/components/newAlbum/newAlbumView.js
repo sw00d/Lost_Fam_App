@@ -4,6 +4,7 @@ import { Container, Header, Content, Form, Item, Input, Label, Button, Left, Bod
 import styles from './styles';
 import Swipeout from 'react-native-swipeout';
 import { Ionicons } from '@expo/vector-icons';
+import { trimString } from '../../utils.js'
 
 
 export default class NewAlbumView extends Component {
@@ -55,13 +56,7 @@ export default class NewAlbumView extends Component {
     const { addAlbum, token, navigation: { navigate, state } } = this.props;
     const self = this;
     const { cap, text } = this.state;
-    let txt = text;
-    if (text[text.length-1] === ' ') {
-      txt = txt.substring(0,txt.length-1);
-    }
-    else if (text[0] === ' ') {
-      txt = txt.substring(1 ,txt.length);
-    }
+    let txt = trimString(text);
 
 
     if (txt.length < 2 || !txt.length) Alert.alert("Roll name too short");
