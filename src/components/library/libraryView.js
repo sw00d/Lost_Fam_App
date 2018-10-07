@@ -9,8 +9,8 @@ export default class LibraryView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedAlb: '',
-      refreshing: false
+      refreshing: false,
+      btnDisable: false
     }
   }
   componentDidMount(){
@@ -26,6 +26,7 @@ export default class LibraryView extends Component {
     const { token, getAlbums } = this.props;
     const self = this;
     this.setState({refreshing: true});
+    this.setState({btnDisable: false});
     setTimeout(()=>self.setState({refreshing: false}),1000)
     getAlbums(token);
   }
@@ -38,20 +39,19 @@ export default class LibraryView extends Component {
     else navigate('finishedAlbum');
   }
 
-  deleteAndUpdate() {
-    const { token } = this.props;
-    const { selectedAlb } = this.state;
-    this.props.deleteAlbum(token, selectedAlb);
-    this.forceUpdate();
+  deleteAndUpdate(idx) {
+    const { token, deleteAlbum } = this.props;
+    this.setState({ btnDisable: true }, ()=>{
+      deleteAlbum(token, idx).then(()=>{
+        this.onRefresh();
+      });
+    });
 
   }
 
   render() {
     const { navigation: { navigate }, albums } = this.props;
     const self = this;
-    const swipeBtns = {
-
-    };
     return(
       <View style={styles.container}>
         <Header style={ styles.header }>
@@ -86,10 +86,9 @@ export default class LibraryView extends Component {
                   <SwipeRow
                     rightOpenValue={-75}
                     disableRightSwipe={true}
-                    onRowOpen={() => this.setState({selectedAlb: i})}
                     style={styles.swipeCont}
                     right={
-                      <Button danger onPress={() => this.deleteAndUpdate()}>
+                      <Button disabled={ this.state.btnDisable } danger onPress={() => this.deleteAndUpdate(i)}>
                         <Ionicons name="ios-trash-outline" size={32} color="white"/>
                       </Button>
                     }

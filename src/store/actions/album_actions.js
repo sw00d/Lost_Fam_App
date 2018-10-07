@@ -62,7 +62,7 @@ export const deleteAlbum = (token, albIdx) => {
 
   return () => {
 
-    axios.delete(`${ROOT_URL}/api/users/albums`, { params }).then((res)=>{
+    return axios.delete(`${ROOT_URL}/api/users/albums`, { params }).then((res)=>{
       if (res.data.success){
         dispatch(saveAlbumList(res.data.albums))
       } else alert('Unknown Error. Try Again.');
