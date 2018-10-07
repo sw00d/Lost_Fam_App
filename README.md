@@ -32,7 +32,6 @@ This is an attempt to recreate the experience that comes with shooting film. The
 ### For Beta:
 - Login after sign up
 - Send email on sign up
-- Add algorithm to get rid of whitespace in newAlbumView...
 - Create offline app bundle
   - https://docs.expo.io/versions/latest/guides/publishing.html#deploying-to-the-app-store-and-play-store
   - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
