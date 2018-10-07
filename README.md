@@ -29,26 +29,24 @@ This is an attempt to recreate the experience that comes with shooting film. The
 
 ## CURRENT TO DO LIST
 
+### For Beta:
 - Login after sign up
-- send email on sign up
-- add algorithm to get rid of whitespace in newAlbumView...
-
-- add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
-https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
-
--Fancy Credit Card Input:
-https://github.com/classpass/react-native-credit-card-input
-
-- NEED TO LINK THESE LIBRARIES
-  - add stripe
-    -https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
-
+- Send email on sign up
+- Add algorithm to get rid of whitespace in newAlbumView...
 - Create offline app bundle
   - https://docs.expo.io/versions/latest/guides/publishing.html#deploying-to-the-app-store-and-play-store
   - https://medium.com/the-react-native-log/first-time-deploying-with-react-native-f524eb3e705d
 
-- SET up fire base
+<hr>
 
+### For Future Updates:
+
+- add photo filter options. https://github.com/gre/gl-react/blob/master/README.md
+https://youtu.be/AMAJLgafs6U start at 8:30. (also pixi is an option)
+
+- NEED TO LINK THESE LIBRARIES
+  - add stripe
+    -https://medium.com/code-well-live-forever/credit-cards-with-stripe-and-react-native-1bfe9afcbb42
 -THIS IS DONE BUT IT ERRORS OUT SOMETIMES
   - disable landscape mode
      - https://stackoverflow.com/questions/32176548/how-to-disable-rotation-in-react-native
