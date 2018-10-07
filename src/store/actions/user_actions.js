@@ -11,10 +11,11 @@ export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const CHECK_FOR_ERRORS = 'CHECK_FOR_ERRORS';
 
 const { manifest } = Expo.Constants;
-const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts.dev
-  ? manifest.debuggerHost.split(`:`).shift().concat(`:8080`)
-  : `api.example.com`;
-const ROOT_URL = `http://${api}`;
+// const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts.dev
+//   ? manifest.debuggerHost.split(`:`).shift().concat(`:8080`)
+//   : `api.example.com`;
+// const ROOT_URL = `http://${api}`;
+const ROOT_URL = `http://159.89.225.16:8080`;
 
 export const createUser = (validate) => {
   return () =>{
