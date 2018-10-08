@@ -32,6 +32,7 @@ This is an attempt to recreate the experience that comes with shooting film. The
 ### For Beta:
 - Login after sign up
 - Send email on sign up
+- Battle Test Flash
 - Fix backend deprication warnings
 - Create offline app bundle
   - https://docs.expo.io/versions/latest/guides/publishing.html#deploying-to-the-app-store-and-play-store
