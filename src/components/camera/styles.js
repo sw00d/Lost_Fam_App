@@ -54,10 +54,10 @@ export default StyleSheet.create({
     backgroundColor: 'black',
   },
   icon: {
-    paddingTop: height/50,
-    position: 'absolute',
-    right: 30,
-    top: '7%'
+    // paddingTop: height/50,
+    // position: 'absolute',
+    // right: 30,
+    // top: '7%'
   },
   iconTop: {
     paddingTop: height/85,
@@ -85,7 +85,7 @@ export default StyleSheet.create({
     width: width,
     backgroundColor: '#E9C189',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row'
   },
   text: {

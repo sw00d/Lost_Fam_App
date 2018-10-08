@@ -1,8 +1,7 @@
 import React from 'react';
-import { NetInfo, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
-import { Camera, Permissions, FileSystem, ImageManipulator } from 'expo';
+import { PanResponder, NetInfo, TouchableHighlight, Image, Alert, CameraRoll, Vibration, Button, Text, View, TouchableOpacity, Dimensions, StyleSheet, AsyncStorage } from 'react-native';
+import { Camera, Permissions, FileSystem, Font, ImageManipulator } from 'expo';
 import { Container, Header, Content, Spinner } from 'native-base';
-
 import {Ionicons} from '@expo/vector-icons';
 import {CacheManager} from "react-native-expo-image-cache";
 import styles from './styles';
@@ -14,14 +13,20 @@ export default class CameraDiv extends React.Component {
       hasCameraPermission: true,
       type: Camera.Constants.Type.back,
       dblClick: false,
+      btnDisable: false,
       blink: false,
-      photoTaken: false
+      photoTaken: false,
+      iconFlash: "ios-flash-outline",
+      iconCamera: "ios-reverse-camera-outline",
+      flashMode: Camera.Constants.FlashMode.off
     };
   }
   componentDidMount(){
     const { activeAlbum, navigation: {navigate}, token } = this.props;
     if (!token) navigate('titleScreen');
     this.setState({ photoTaken: false });
+    this.setState({ btnDisable: false });
+
   }
 
 
@@ -76,7 +81,7 @@ export default class CameraDiv extends React.Component {
 
   _shoot = async () => {
     //disables button from being clicked twice
-    this.setState({ photoTaken: true });
+    this.setState({ btnDisable: true });
 
     //this add flash effect to camera
     // const self = this;
@@ -93,7 +98,7 @@ export default class CameraDiv extends React.Component {
           uri = this._rotate(uri);
         }
 
-
+        this.setState({ photoTaken: true });
         this.savePhoto(data);
 
       });
@@ -119,15 +124,34 @@ export default class CameraDiv extends React.Component {
    }
 
   typeConfig() {
-    if (this.state.type === Camera.Constants.Type.back) this.setState({type: Camera.Constants.Type.front});
-    else this.setState({type: Camera.Constants.Type.back});
+    if (this.state.type === Camera.Constants.Type.back) {
+      this.setState({type: Camera.Constants.Type.front});
+      this.setState({iconCamera: "ios-reverse-camera"});
+    }
+    else {
+      this.setState({type: Camera.Constants.Type.back});
+      this.setState({iconCamera: "ios-reverse-camera-outline"});
+
+    }
    }
+
+  flashConfig() {
+    if (this.state.flashMode === Camera.Constants.FlashMode.on) {
+      this.setState({flashMode: Camera.Constants.FlashMode.off});
+      this.setState({iconFlash: "ios-flash-outline"});
+    }
+    else {
+      this.setState({flashMode: Camera.Constants.FlashMode.on});
+      this.setState({iconFlash: "ios-flash"});
+
+    }
+  }
 
 
   render() {
     const { hasCameraPermission } = this.state;
     const {height, width} = Dimensions.get('window');
-    const {type, blink, photoTaken} = this.state;
+    const {type, blink, photoTaken, flashMode, zoom, btnDisable, iconFlash, iconCamera} = this.state;
 
 
     if (hasCameraPermission === null) return <View />;
@@ -136,7 +160,6 @@ export default class CameraDiv extends React.Component {
       const { activeAlbum: {name}, navigation: {navigate} } = this.props;
       return (
         <View>
-
           <View style={styles.topBanner}>
             <TouchableOpacity style={styles.titleContainer} onPress={ () => navigate('library') } underlayColor='white'>
               <Text style={styles.text} >{ name } &nbsp;</Text>
@@ -145,7 +168,12 @@ export default class CameraDiv extends React.Component {
           </View>
 
           <TouchableHighlight onPress={this.dblClick.bind(this)} activeOpacity={1}>
-            <Camera style={styles.camStyle} type={type} ref={(camera) => { this.camera = camera; }}>
+            <Camera
+              style={styles.camStyle}
+              flashMode={flashMode}
+              type={type}
+              autofocus={"on"}
+              ref={(camera) => { this.camera = camera; }}>
               {
                 photoTaken ?
                   <View style={styles.flash}>
@@ -160,13 +188,18 @@ export default class CameraDiv extends React.Component {
           </TouchableHighlight>
 
           <View style={styles.bottomBanner}>
+            <TouchableOpacity onPress={this.flashConfig.bind(this)} style={styles.icon} underlayColor='white'>
+              <Ionicons name={iconFlash} size={48} color="white" />
+            </TouchableOpacity>
+
             <View style={styles.circle}>
-              <TouchableOpacity disabled={ photoTaken } onPress={() => this._shoot()} underlayColor="white">
+              <TouchableOpacity disabled={ btnDisable } onPress={() => this._shoot()} underlayColor="white">
                 <View style={styles.miniCircle}></View>
               </TouchableOpacity>
             </View>
+
             <TouchableOpacity onPress={this.typeConfig.bind(this)} style={styles.icon} underlayColor='white'>
-              <Ionicons name="ios-reverse-camera-outline" size={48} color="white" />
+              <Ionicons name={iconCamera} size={48} color="white" />
             </TouchableOpacity>
           </View>
 
