@@ -28,7 +28,10 @@ export const orderForm = createStackNavigator({
 },
 {
   initialRouteName: 'main',
-  headerMode: 'none'
+  headerMode: 'none',
+  navigationOptions: {
+   gestureResponseDistance: {horizontal: 500} // default is 25
+  }
 });
 
 
@@ -90,7 +93,10 @@ const rootNavigator = createStackNavigator({
 },
 {
   initialRouteName: 'splash',
-  headerMode: 'none'
+  headerMode: 'none',
+  navigationOptions: {
+   gestureResponseDistance: {horizontal: 500} // default is 25
+  }
 });
 
 export default rootNavigator;

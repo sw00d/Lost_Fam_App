@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#C95656',
   },
   title: {
-    color: "white",
+    color: 'white',
+    fontSize: 19,
+    fontWeight: '700'
   },
   container: {
     height: height,
@@ -25,8 +27,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnText: {
-    color: 'white',
-    fontSize: height/50
+    color: '#fff',
+    fontSize: height / 40,
+    fontWeight: '600'
   },
   input: {
     marginTop: height/15,
@@ -40,11 +43,14 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: height/15,
-    backgroundColor: '#c95656',
-    borderRadius: 5,
-    height: height/15,
+    height: height / 9,
+    width: width / 1.2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: 'transparent',
+    borderRadius: 10,
+    borderWidth: 2,
+    backgroundColor: '#C95656',
   },
   row2: {
     marginTop: height/15,

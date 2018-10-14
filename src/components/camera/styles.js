@@ -53,12 +53,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'black',
   },
-  icon: {
-    // paddingTop: height/50,
-    // position: 'absolute',
-    // right: 30,
-    // top: '7%'
-  },
+
   iconTop: {
     paddingTop: height/85,
   },
