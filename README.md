@@ -4,7 +4,7 @@ By Sam Wood and @chdwck
 
 Original idea proposed by Kent Johns and Michael Graeff.
 
-Beta planned to be released soon.
+### Beta hosted on expo here: https://expo.io/@samuelote/A-film-app
 
 This is an attempt to recreate the experience that comes with shooting film. The user creates rolls with a fixed length. The photos you take under that roll cannot be reproduced/viewed until the whole roll is finished. All the photos in said roll are "developed" and viewed all at once. The roll can then be saved and ordered.
 <br />
