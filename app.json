@@ -1,6 +1,12 @@
 {
   "expo": {
     "sdkVersion": "28.0.0",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "icon": "./assets/app.png",
+
+    "slug": "A-film-app",
+    "ios": {
+      "bundleIdentifier": "com.sam.lostFamApp"
+    },
   },
 }

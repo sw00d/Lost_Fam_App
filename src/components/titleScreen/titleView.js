@@ -11,15 +11,6 @@ const styles = TitleStyles(height, width);
 
 export default class TitleView extends Component {
 
-  componentDidUpdate(){
-    const {navigation:{navigate}, token} = this.props;
-
-    if (!!token) navigate('mainScreens');
-  }
-
-
-
-
   render() {
     const { navigation:{navigate}, token } = this.props;
     return(
