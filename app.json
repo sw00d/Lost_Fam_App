@@ -4,7 +4,7 @@
     "orientation": "portrait",
     "icon": "./assets/app.png",
 
-    "slug": "A-film-app",
+    "slug": "lost-fam-app",
     "ios": {
       "bundleIdentifier": "com.sam.lostFamApp"
     },
