@@ -11,10 +11,9 @@ This is an attempt to recreate the experience that comes with shooting film. The
 <br />
 <br />
 <br />
-<br />
-
 ### Beta hosted on expo here (private for ios): https://expo.io/@samuelote/A-film-app
-
+<br />
+<br />
 
 <p align="center">
   <img src="https://github.com/Samuelote/Lost_Fam_App/blob/master/assets/IMG-2780.JPG" width="175" title="Login Page" alt="login page">
