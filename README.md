@@ -33,8 +33,6 @@ This is an attempt to recreate the experience that comes with shooting film. The
 ## CURRENT TO DO LIST
 
 ### For Beta:
-- Login after sign up
-- Send email on sign up
 - Fix backend deprication warnings
 -  Over-the-air deployment
   - https://docs.monaca.io/en/products_guide/monaca_ide/deploy/non_market_deploy/
