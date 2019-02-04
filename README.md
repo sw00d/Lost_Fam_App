@@ -32,7 +32,7 @@ This is an attempt to recreate the experience that comes with shooting film. The
 -  Over-the-air deployment
   - https://docs.monaca.io/en/products_guide/monaca_ide/deploy/non_market_deploy/
 - download .ipa here:
-  - https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/ios/%40samuelote/A-film-app-446644f4-7bd8-432c-9222-147b5951701a-     simulator.tar.gz
+  - https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/ios/%40samuelote/A-film-app-446644f4-7bd8-432c-9222-147b5951701a-simulator.tar.gz
 <hr>
 
 ### For Future Updates:
