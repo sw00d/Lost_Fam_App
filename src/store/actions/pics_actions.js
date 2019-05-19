@@ -1,6 +1,6 @@
 import { store } from '../index.js';
 import { NavigationActions } from 'react-navigation';
-import {navigatorRef} from '../../components/camera/cameraView.js';
+import {navigatorRef} from '../../screens/camera/cameraView.js';
 
 import axios from 'axios';
 const { manifest } = Expo.Constants;

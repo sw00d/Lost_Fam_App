@@ -125,7 +125,6 @@ export default class completedAlbum extends React.Component {
    this.setState({visible: !this.state.visible});
  }
 
-  // LOOK INTO REPLACES SCROLLVIEW WITH FLATLIST
   render(){
     const { navigation: { goBack, navigate }, token, activeAlbum, activeAlbum: { pics } } = this.props;
     const { images, idx, visible } = this.state;
@@ -173,8 +172,7 @@ export default class completedAlbum extends React.Component {
 
           {
 
-            images.map((x, i) => {
-              return(
+            images.map((x, i) => (
                 <TouchableOpacity onPress={()=>this.imageView(i)}style={styles.picContainer} key={i*1.1}>
                   <Image
                     style={styles.pic}
@@ -183,7 +181,7 @@ export default class completedAlbum extends React.Component {
                   />
                 </TouchableOpacity>
               )
-            })
+            )
 
           }
           </ScrollView>

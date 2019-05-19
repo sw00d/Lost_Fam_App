@@ -1,16 +1,16 @@
 import { createStackNavigator } from "react-navigation";
-import Camera from './src/components/camera/index';
-import TitleScreen from './src/components/titleScreen/index';
-import Library from './src/components/library/index';
-import NewAlbum from './src/components/newAlbum/index';
-import FinishedAlbumView from './src/components/completeAlbum/index';
-import Settings from './src/components/Settings/index';
-import SignUp from './src/components/signUp/index';
-import Login from './src/components/login/index';
-import orderMain from './src/components/orderMain/index';
-import Splash from './src/components/splashScreen/index';
-import address from './src/components/address/index';
-import stripe from './src/components/stripe/index';
+import Camera from './src/screens/camera/index';
+import TitleScreen from './src/screens/titleScreen/index';
+import Library from './src/screens/library/index';
+import NewAlbum from './src/screens/newAlbum/index';
+import FinishedAlbumView from './src/screens/completeAlbum/index';
+import Settings from './src/screens/Settings/index';
+import SignUp from './src/screens/signUp/index';
+import Login from './src/screens/login/index';
+import orderMain from './src/screens/orderMain/index';
+import Splash from './src/screens/splashScreen/index';
+import address from './src/screens/address/index';
+import stripe from './src/screens/stripe/index';
 import { AsyncStorage } from "react-native"
 
 
